@@ -1,55 +1,70 @@
-# Mintlify Starter Kit
+# OpenFinance Mintlify Docs
 
-Use the starter kit to get your docs deployed and ready to customize.
+Documentation site for OpenFinance MCP, built with [Mintlify](https://mintlify.com).
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Local preview
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+Install the Mintlify CLI:
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Run the dev server from the docs root:
 
-```
+```bash
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Visit `http://localhost:3000` to preview.
 
-## Publishing changes
+## Deploy
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+1. Sign up at [mintlify.com](https://mintlify.com) and create a new project.
+2. Connect this repo (GitHub, GitLab, or Bitbucket).
+3. Point Mintlify at the docs folder. It will read `docs.json` automatically.
+4. Every push to `main` triggers a redeploy.
 
-## Need help?
+## Structure
 
-### Troubleshooting
+```
+.
+├── docs.json                 ← Navigation and theme config
+├── introduction.mdx          ← Landing page
+├── getting-started/
+│   ├── quick-install.mdx
+│   ├── skills-vs-mcp.mdx
+│   ├── api-keys.mdx
+│   └── installing-skills.mdx
+├── installation/
+│   ├── coding-agents/
+│   │   ├── claude-code.mdx
+│   │   ├── codex.mdx
+│   │   ├── cursor.mdx
+│   │   ├── vscode.mdx
+│   │   ├── windsurf.mdx
+│   │   ├── cline.mdx
+│   │   ├── openclaw.mdx
+│   │   └── hermes.mdx
+│   └── chat-clients/
+│       ├── claude-desktop-macos.mdx
+│       ├── claude-desktop-windows.mdx
+│       ├── claude-ai-web.mdx
+│       ├── chatgpt.mdx
+│       └── manus.mdx
+└── reference/
+    ├── verifying-connection.mdx
+    └── troubleshooting.mdx
+```
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Editing
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+All pages are MDX, frontmatter at the top sets the title and description. Mintlify components used:
+
+- `<Steps>` / `<Step>` for sequential instructions
+- `<Tabs>` / `<Tab>` for variant configurations (public vs wallet)
+- `<CardGroup>` / `<Card>` for navigation tiles
+- `<Note>`, `<Warning>`, `<Tip>` for callouts
+- `<AccordionGroup>` / `<Accordion>` for collapsible sections
+
+Full component reference: [mintlify.com/docs](https://mintlify.com/docs).

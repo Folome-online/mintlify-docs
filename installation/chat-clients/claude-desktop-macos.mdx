@@ -1,0 +1,59 @@
+---
+title: 'Claude Desktop (macOS)'
+description: 'Add OpenFinance to Claude Desktop on macOS'
+---
+
+Claude Desktop supports remote MCP servers either through the Connectors UI or by editing the config file directly. The config file approach is shown here for parity with other editors.
+
+<Steps>
+  <Step title="Open Developer settings">
+    Open Claude Desktop → **Settings** → **Developer**.
+  </Step>
+  <Step title="Edit config">
+    Click **Edit Config**. Find `claude_desktop_config.json` and open it with a text editor.
+  </Step>
+  <Step title="Add the server">
+    You will see something like this:
+
+    ```json
+    {
+      "preferences": {
+        "coworkScheduledTasksEnabled": true,
+        "sidebarMode": "task"
+      }
+    }
+    ```
+
+    Add a comma after the `preferences` closing brace, then paste the `mcpServers` block:
+
+    ```json
+    {
+      "preferences": {
+        "coworkScheduledTasksEnabled": true,
+        "sidebarMode": "task"
+      },
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    If you only need public tools, drop the `headers` object entirely.
+  </Step>
+  <Step title="Quit Claude fully">
+    Click **Claude** in the menu bar → **Quit Claude** (or press Cmd+Q).
+  </Step>
+  <Step title="Reopen and verify">
+    Reopen Claude Desktop. Start a new conversation, you should see a hammer icon in the chat input area.
+  </Step>
+</Steps>
+
+<Warning>
+Closing the window is not enough, you must fully quit the app for Claude Desktop to pick up the new config.
+</Warning>

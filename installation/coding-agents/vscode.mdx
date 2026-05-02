@@ -1,0 +1,47 @@
+---
+title: 'VS Code'
+description: 'Set up OpenFinance MCP with GitHub Copilot in Agent mode'
+---
+
+Requires the GitHub Copilot extension installed and an active Copilot subscription.
+
+<Steps>
+  <Step title="Open Command Palette">
+    Press **Cmd+Shift+P** (Mac) or **Ctrl+Shift+P** (Windows).
+  </Step>
+  <Step title="Add MCP server">
+    Type `MCP` and select **MCP: Add Server**.
+  </Step>
+  <Step title="Choose scope">
+    Choose **Workspace** (adds to this project) or **Global** (available in all projects).
+  </Step>
+  <Step title="Edit config">
+    This creates or opens an `mcp.json` file. Add the OpenFinance server inside the `servers` object:
+
+    ```json
+    {
+      "servers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Start the server">
+    Save the file. A **Start** button appears at the top, click it.
+  </Step>
+  <Step title="Use it">
+    Open Copilot Chat (Ctrl+Alt+I / Cmd+Ctrl+I), select **Agent** mode, and OpenFinance tools are available.
+  </Step>
+</Steps>
+
+<Warning>
+VS Code uses `"servers"`, not `"mcpServers"`. This is different from Claude.
+</Warning>

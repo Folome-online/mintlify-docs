@@ -1,0 +1,69 @@
+---
+title: 'Claude Code'
+description: 'Manual MCP setup for Claude Code'
+---
+
+If you skipped the [Quick Install](/getting-started/quick-install), you can wire the MCP server up by hand. Choose one of the two options below.
+
+## Option A, Project-level
+
+Available in one project only.
+
+<Steps>
+  <Step title="Navigate to your project">
+    `cd` into your project folder.
+  </Step>
+  <Step title="Create config file">
+    Create `.mcp.json` in the project root.
+  </Step>
+</Steps>
+
+## Option B, Global
+
+Available in all projects.
+
+<Steps>
+  <Step title="Edit global config">
+    Edit `~/.claude.json` (create it if it does not exist).
+  </Step>
+</Steps>
+
+## Configuration
+
+Then paste this block.
+
+<Tabs>
+  <Tab title="Public-only">
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp"
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="With wallet tools">
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+If `~/.claude.json` already has a `mcpServers` object, add the `"openfinance-tech": { ... }` entry inside it rather than replacing the whole file.
+</Note>
+
+Restart Claude Code, OpenFinance tools are now available.

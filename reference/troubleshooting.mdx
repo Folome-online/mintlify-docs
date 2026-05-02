@@ -1,0 +1,30 @@
+---
+title: 'Troubleshooting'
+description: 'Common errors and how to fix them'
+---
+
+<AccordionGroup>
+  <Accordion title="401 Unauthorized" icon="lock">
+    A wallet-scoped tool was called without a valid `x-api-key` header. Either you forgot the header, or the key is wrong. Re-copy from the dashboard and make sure the value starts with `open_`.
+
+    <Note>
+    Public market-data tools should never return 401. If they do, check the request URL.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Tools do not appear after editing config" icon="rotate">
+    Most clients only read the MCP config on startup. Fully quit and relaunch the app, or use the client's "Reload MCP servers" command.
+  </Accordion>
+
+  <Accordion title="Skills do not appear after `npx skills add`" icon="book">
+    Run `npx skills list` to confirm the install location. If installed globally, restart your editor. If installed to a project, make sure you opened that project root.
+  </Accordion>
+
+  <Accordion title="429 Too Many Requests" icon="gauge-high">
+    You hit the rate limit. Public tools have a per-IP limit, wallet tools have a per-key limit. Throttle your agent or request a higher tier from the dashboard.
+  </Accordion>
+</AccordionGroup>
+
+## Still stuck?
+
+Full tool reference and changelog: [docs.openfinance.tech](https://docs.openfinance.tech).

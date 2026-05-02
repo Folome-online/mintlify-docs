@@ -1,0 +1,42 @@
+---
+title: 'Cline'
+description: 'Add OpenFinance to the Cline VS Code extension'
+---
+
+<Steps>
+  <Step title="Open Cline">
+    Open VS Code with the Cline extension installed. Click the **Cline** icon in the sidebar.
+  </Step>
+  <Step title="Open MCP settings">
+    Click the **MCP Servers** button (gear icon) in the Cline panel, then **Configure MCP Servers**.
+  </Step>
+  <Step title="Add the server">
+    Add the OpenFinance server:
+
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "streamableHttp",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Enable">
+    Save the file. Back in the Cline MCP panel, OpenFinance should appear, toggle it on if needed.
+  </Step>
+  <Step title="Use it">
+    OpenFinance tools are now available in Cline conversations.
+  </Step>
+</Steps>
+
+<Note>
+Cline uses `streamableHttp` as the transport type, not `http`.
+</Note>

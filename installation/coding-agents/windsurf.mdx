@@ -1,0 +1,41 @@
+---
+title: 'Windsurf'
+description: 'Add OpenFinance through the Cascade panel'
+---
+
+<Steps>
+  <Step title="Open Cascade">
+    Click the **Cascade** icon (the AI assistant panel).
+  </Step>
+  <Step title="Open MCP config">
+    Click the **hammer icon** at the top of the Cascade panel, then click **Configure**.
+  </Step>
+  <Step title="Add the server">
+    Add the OpenFinance server inside the `mcpServers` object:
+
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "serverUrl": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Refresh">
+    Save the file. Click the **Refresh** button next to the MCP server list, or restart Windsurf.
+  </Step>
+  <Step title="Verify">
+    OpenFinance should appear in the server list as connected.
+  </Step>
+</Steps>
+
+<Note>
+Windsurf uses `serverUrl` instead of `url`. This is different from most other clients.
+</Note>

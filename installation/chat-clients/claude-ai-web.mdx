@@ -1,0 +1,27 @@
+---
+title: 'Claude.ai (Web)'
+description: 'Add OpenFinance as a custom connector on Claude.ai'
+---
+
+Because OpenFinance MCP runs over Streamable HTTP, it works directly with Claude.ai's custom connectors.
+
+<Steps>
+  <Step title="Open Connectors settings">
+    Open Claude.ai → **Settings** → **Connectors**.
+  </Step>
+  <Step title="Add custom connector">
+    Click **Add custom connector**.
+  </Step>
+  <Step title="Fill in the details">
+    - **Name**: `OpenFinance`
+    - **URL**: `https://api.openfinance.tech/agent/mcp`
+    - **Custom header** (only if you need wallet tools): name `x-api-key`, value `open_xxxxx`
+  </Step>
+  <Step title="Save and enable">
+    Click **Add**. Open any chat and click the **tools menu**. OpenFinance should appear, toggle it on for the conversation.
+  </Step>
+</Steps>
+
+<Note>
+Custom connectors are available on Pro, Max, Team, and Enterprise plans. Skills installed via `npx skills add` only apply to local editors, not Claude.ai web.
+</Note>

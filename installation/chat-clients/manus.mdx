@@ -1,0 +1,64 @@
+---
+title: 'Manus'
+description: 'Add OpenFinance as a custom MCP connector in Manus'
+---
+
+Manus supports custom MCP connectors directly through its UI. Because OpenFinance runs over Streamable HTTP, you can add it without any local wrapper.
+
+## Option 1, Direct Configuration (URL)
+
+<Steps>
+  <Step title="Open Connectors">
+    In Manus, go to **Settings → Connectors** from the sidebar.
+  </Step>
+  <Step title="Add custom MCP">
+    Click **+ Add Connectors**, switch to the **Custom MCP** tab, then click **+ Add Custom MCP** → **Direct Configuration**.
+  </Step>
+  <Step title="Fill in the fields">
+    - **Name**: `OpenFinance`
+    - **Transport**: `Streamable HTTP`
+    - **Server URL**: `https://api.openfinance.tech/agent/mcp`
+    - **Headers** (only if you need wallet tools): `x-api-key: open_xxxxx`
+  </Step>
+  <Step title="Save">
+    Click **Save**.
+  </Step>
+</Steps>
+
+## Option 2, Import by JSON
+
+<Steps>
+  <Step title="Open Connectors">
+    Go to **Settings → Connectors** → **+ Add Connectors** → **Custom MCP** tab.
+  </Step>
+  <Step title="Import by JSON">
+    Click **+ Add Custom MCP** and select **Import by JSON**.
+  </Step>
+  <Step title="Paste the config">
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Save">
+    Click **Save**.
+  </Step>
+</Steps>
+
+<Note>
+Once saved, OpenFinance is available to the Manus agent across all your tasks. You can ask the agent to use it by name, for example "Use OpenFinance to check Hyperliquid funding rates".
+</Note>
+
+## Verify
+
+Start a new task and ask the agent to list available connectors, or invoke an OpenFinance tool directly. Manus will surface a connector authorization step the first time wallet tools are called.

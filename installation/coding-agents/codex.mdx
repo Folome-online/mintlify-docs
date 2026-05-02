@@ -1,0 +1,57 @@
+---
+title: 'Codex'
+description: 'CLI and IDE extension share the same configuration'
+---
+
+Codex supports MCP servers in both the CLI and the IDE extension. Configuration is shared between them, so you only set it up once.
+
+## Option A, CLI
+
+Run from your terminal:
+
+```bash
+codex mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
+```
+
+Verify it is configured:
+
+```bash
+codex mcp list
+```
+
+## Option B, edit `config.toml`
+
+Open `~/.codex/config.toml` (or a project-scoped `.codex/config.toml` in trusted projects) and add:
+
+<Tabs>
+  <Tab title="Public-only">
+    ```toml
+    [mcp_servers.openfinance-tech]
+    url = "https://api.openfinance.tech/agent/mcp"
+    ```
+  </Tab>
+  <Tab title="With wallet tools">
+    ```toml
+    [mcp_servers.openfinance-tech]
+    url = "https://api.openfinance.tech/agent/mcp"
+    http_headers = { "x-api-key" = "open_xxxxx" }
+    ```
+  </Tab>
+</Tabs>
+
+<Warning>
+Codex uses TOML, not JSON. The header block is a TOML inline table, note the `=` instead of `:`.
+</Warning>
+
+## First-time MCP users
+
+If this is your first MCP server in Codex, you may need to enable the rmcp client. Add the following to `~/.codex/config.toml`:
+
+```toml
+[features]
+experimental_use_rmcp_client = true
+```
+
+## Verify
+
+After starting Codex (CLI or IDE), run `/mcp` in the TUI or open the IDE MCP panel. `openfinance-tech` should appear with its tools listed.

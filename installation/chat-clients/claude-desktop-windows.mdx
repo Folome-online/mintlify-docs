@@ -1,0 +1,57 @@
+---
+title: 'Claude Desktop (Windows)'
+description: 'Add OpenFinance to Claude Desktop on Windows'
+---
+
+<Steps>
+  <Step title="Open Developer settings">
+    Open Claude Desktop → **Settings** → **Developer**.
+  </Step>
+  <Step title="Edit config">
+    Click **Edit Config**. Find `claude_desktop_config.json` and open it with Notepad or any text editor.
+  </Step>
+  <Step title="Add the server">
+    You will see something like this:
+
+    ```json
+    {
+      "preferences": {
+        "coworkScheduledTasksEnabled": true,
+        "sidebarMode": "task"
+      }
+    }
+    ```
+
+    Add a comma after the `preferences` closing brace, then paste the `mcpServers` block:
+
+    ```json
+    {
+      "preferences": {
+        "coworkScheduledTasksEnabled": true,
+        "sidebarMode": "task"
+      },
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    If you only need public tools, drop the `headers` object entirely.
+  </Step>
+  <Step title="Close Claude fully">
+    Right-click Claude Desktop in the taskbar → **Close window**, or press Alt+F4.
+  </Step>
+  <Step title="Reopen and verify">
+    Reopen Claude Desktop. Start a new conversation, you should see a hammer icon in the chat input area.
+  </Step>
+</Steps>
+
+<Warning>
+Make sure the app is fully closed, not just minimized.
+</Warning>

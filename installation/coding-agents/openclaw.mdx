@@ -1,0 +1,57 @@
+---
+title: 'OpenClaw'
+description: 'Add OpenFinance to OpenClaw via config or CLI'
+---
+
+OpenClaw supports MCP servers natively. Remote streamable HTTP endpoints like OpenFinance can be added to OpenClaw's config and invoked through any of its interfaces (TUI, messaging channels, or sub-agents).
+
+## Option A, edit `openclaw.json`
+
+<Steps>
+  <Step title="Open the config">
+    Open `~/.openclaw/openclaw.json` (create it if it does not exist).
+  </Step>
+  <Step title="Add the server">
+    Add OpenFinance inside the `mcp.servers` object:
+
+    ```json
+    {
+      "mcp": {
+        "servers": {
+          "openfinance-tech": {
+            "url": "https://api.openfinance.tech/agent/mcp",
+            "headers": {
+              "x-api-key": "open_xxxxx"
+            }
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Restart">
+    Restart OpenClaw, or run the reload command to refresh MCP connections.
+  </Step>
+</Steps>
+
+<Note>
+OpenClaw uses `mcp.servers`, nested under a top-level `mcp` key. This is different from Claude's flat `mcpServers` structure.
+</Note>
+
+## Option B, CLI
+
+```bash
+openclaw mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
+```
+
+For wallet tools, set the header during registration as documented in the OpenClaw CLI reference for your version.
+
+## Verify
+
+```bash
+openclaw mcp list
+```
+
+`openfinance-tech` should appear in the output with a connected status.

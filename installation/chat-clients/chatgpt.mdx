@@ -1,0 +1,27 @@
+---
+title: 'ChatGPT'
+description: 'Add OpenFinance as a custom connector on ChatGPT'
+---
+
+ChatGPT supports remote MCP servers, so OpenFinance works here too.
+
+<Steps>
+  <Step title="Open Connectors settings">
+    Open ChatGPT → **Settings** → **Connectors**.
+  </Step>
+  <Step title="Create a custom connector">
+    Click **Create** under custom connectors.
+  </Step>
+  <Step title="Fill in the details">
+    - **Name**: `OpenFinance`
+    - **MCP Server URL**: `https://api.openfinance.tech/agent/mcp`
+    - **Authentication** (only if you need wallet tools): Custom header → name `x-api-key`, value `open_xxxxx`
+  </Step>
+  <Step title="Save and enable">
+    Save and enable the connector. In a new chat, select **OpenFinance** from the connector picker.
+  </Step>
+</Steps>
+
+<Note>
+Custom MCP connectors require a ChatGPT Plus, Pro, Business, or Enterprise plan.
+</Note>

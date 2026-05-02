@@ -1,0 +1,71 @@
+---
+title: 'Hermes'
+description: 'Add OpenFinance to Hermes Agent via CLI or YAML config'
+---
+
+Hermes Agent (from Nous Research) speaks MCP natively. You can add OpenFinance either through the CLI or by editing the config file directly.
+
+## Option A, CLI
+
+```bash
+hermes mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
+```
+
+Verify it is configured:
+
+```bash
+hermes mcp list
+```
+
+Test the connection:
+
+```bash
+hermes mcp test openfinance-tech
+```
+
+## Option B, edit `config.yaml`
+
+Open `~/.hermes/config.yaml` and add the OpenFinance server under `mcp_servers`:
+
+<Tabs>
+  <Tab title="Public-only">
+    ```yaml
+    mcp_servers:
+      openfinance-tech:
+        url: "https://api.openfinance.tech/agent/mcp"
+    ```
+  </Tab>
+  <Tab title="With wallet tools">
+    ```yaml
+    mcp_servers:
+      openfinance-tech:
+        url: "https://api.openfinance.tech/agent/mcp"
+        headers:
+          x-api-key: "open_xxxxx"
+    ```
+  </Tab>
+</Tabs>
+
+<Warning>
+Hermes uses YAML, not JSON. Indentation matters, use two spaces and avoid tabs.
+</Warning>
+
+## Tool filtering (optional)
+
+Hermes recommends a least-privilege approach. You can restrict which OpenFinance tools the agent sees with an `include` whitelist:
+
+```yaml
+mcp_servers:
+  openfinance-tech:
+    url: "https://api.openfinance.tech/agent/mcp"
+    headers:
+      x-api-key: "open_xxxxx"
+    tools:
+      include: [getFundingRates, getPositions, previewTrade]
+```
+
+This is a good pattern when you only want the agent to read data and preview trades, but never build or submit transactions.
+
+## Reload
+
+Run `/reload-mcp` inside Hermes, or restart the agent. OpenFinance tools will appear alongside Hermes's built-in tools.

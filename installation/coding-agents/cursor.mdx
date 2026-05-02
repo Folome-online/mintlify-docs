@@ -1,0 +1,38 @@
+---
+title: 'Cursor'
+description: 'Add OpenFinance to Cursor through the Command Palette'
+---
+
+<Steps>
+  <Step title="Open Command Palette">
+    Press **Cmd+Shift+P** (Mac) or **Ctrl+Shift+P** (Windows).
+  </Step>
+  <Step title="Open MCP Settings">
+    Type `MCP` and select **Cursor Settings: Open MCP Settings**.
+  </Step>
+  <Step title="Add the server">
+    Add the OpenFinance server inside the `mcpServers` object:
+
+    ```json
+    {
+      "mcpServers": {
+        "openfinance-tech": {
+          "type": "http",
+          "url": "https://api.openfinance.tech/agent/mcp",
+          "headers": {
+            "x-api-key": "open_xxxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Drop the `headers` object if you only need public tools.
+  </Step>
+  <Step title="Reload">
+    Open the Command Palette again, type `MCP`, and select **Reload MCP Servers**.
+  </Step>
+  <Step title="Use it">
+    OpenFinance tools are now available in Cursor's AI chat.
+  </Step>
+</Steps>
