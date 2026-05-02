@@ -93,5 +93,11 @@
       "x": "https://x.com/openfinancetech",
       "github": "https://github.com/openfinance-tech"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/introduction"
+    }
+  ]
 }
