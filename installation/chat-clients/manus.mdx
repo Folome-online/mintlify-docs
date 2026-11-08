@@ -18,7 +18,7 @@ Manus supports custom MCP connectors directly through its UI. Because OpenFinanc
     - **Name**: `OpenFinance`
     - **Transport**: `Streamable HTTP`
     - **Server URL**: `https://api.openfinance.tech/agent/mcp`
-    - **Headers** (only if you need wallet tools): `x-api-key: open_xxxxx`
+    - **Headers** (required): `x-api-key: open_xxxxx`
   </Step>
   <Step title="Save">
     Click **Save**.
@@ -48,7 +48,7 @@ Manus supports custom MCP connectors directly through its UI. Because OpenFinanc
     }
     ```
 
-    Drop the `headers` object if you only need public tools.
+    Replace `open_xxxxx` with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
   </Step>
   <Step title="Save">
     Click **Save**.

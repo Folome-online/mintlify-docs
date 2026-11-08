@@ -13,6 +13,14 @@ Run from your terminal:
 codex mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
 ```
 
+Then open `~/.codex/config.toml` and add your key to the entry it created (Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.):
+
+```toml
+[mcp_servers.openfinance-tech]
+url = "https://api.openfinance.tech/agent/mcp"
+http_headers = { "x-api-key" = "open_xxxxx" }
+```
+
 Verify it is configured:
 
 ```bash
@@ -23,21 +31,11 @@ codex mcp list
 
 Open `~/.codex/config.toml` (or a project-scoped `.codex/config.toml` in trusted projects) and add:
 
-<Tabs>
-  <Tab title="Public-only">
-    ```toml
-    [mcp_servers.openfinance-tech]
-    url = "https://api.openfinance.tech/agent/mcp"
-    ```
-  </Tab>
-  <Tab title="With wallet tools">
-    ```toml
-    [mcp_servers.openfinance-tech]
-    url = "https://api.openfinance.tech/agent/mcp"
-    http_headers = { "x-api-key" = "open_xxxxx" }
-    ```
-  </Tab>
-</Tabs>
+```toml
+[mcp_servers.openfinance-tech]
+url = "https://api.openfinance.tech/agent/mcp"
+http_headers = { "x-api-key" = "open_xxxxx" }
+```
 
 <Warning>
 Codex uses TOML, not JSON. The header block is a TOML inline table, note the `=` instead of `:`.

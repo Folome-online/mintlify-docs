@@ -25,26 +25,15 @@ hermes mcp test openfinance-tech
 
 ## Option B, edit `config.yaml`
 
-Open `~/.hermes/config.yaml` and add the OpenFinance server under `mcp_servers`:
+Open `~/.hermes/config.yaml` and add the OpenFinance server under `mcp_servers` with your key (Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys):
 
-<Tabs>
-  <Tab title="Public-only">
-    ```yaml
-    mcp_servers:
-      openfinance-tech:
-        url: "https://api.openfinance.tech/agent/mcp"
-    ```
-  </Tab>
-  <Tab title="With wallet tools">
-    ```yaml
-    mcp_servers:
-      openfinance-tech:
-        url: "https://api.openfinance.tech/agent/mcp"
-        headers:
-          x-api-key: "open_xxxxx"
-    ```
-  </Tab>
-</Tabs>
+```yaml
+mcp_servers:
+  openfinance-tech:
+    url: "https://api.openfinance.tech/agent/mcp"
+    headers:
+      x-api-key: "open_xxxxx"
+```
 
 <Warning>
 Hermes uses YAML, not JSON. Indentation matters, use two spaces and avoid tabs.

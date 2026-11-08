@@ -30,37 +30,21 @@ Available in all projects.
 
 ## Configuration
 
-Then paste this block.
+Then paste this block with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
 
-<Tabs>
-  <Tab title="Public-only">
-    ```json
-    {
-      "mcpServers": {
-        "openfinance-tech": {
-          "type": "http",
-          "url": "https://api.openfinance.tech/agent/mcp"
-        }
+```json
+{
+  "mcpServers": {
+    "openfinance-tech": {
+      "type": "http",
+      "url": "https://api.openfinance.tech/agent/mcp",
+      "headers": {
+        "x-api-key": "open_xxxxx"
       }
     }
-    ```
-  </Tab>
-  <Tab title="With wallet tools">
-    ```json
-    {
-      "mcpServers": {
-        "openfinance-tech": {
-          "type": "http",
-          "url": "https://api.openfinance.tech/agent/mcp",
-          "headers": {
-            "x-api-key": "open_xxxxx"
-          }
-        }
-      }
-    }
-    ```
-  </Tab>
-</Tabs>
+  }
+}
+```
 
 <Note>
 If `~/.claude.json` already has a `mcpServers` object, add the `"openfinance-tech": { ... }` entry inside it rather than replacing the whole file.
