@@ -1,11 +1,13 @@
 ---
 title: 'API Keys'
-description: 'Every OpenFinance MCP request needs an API key. Make a free account at openfinance.tech, create an open_ key on the External AI page and pass it as x-api-key.'
+description: 'Every OpenFinance MCP request needs OAuth sign-in or an x-api-key header. Make a free account at openfinance.tech and create an open_ key in External AI.'
 ---
 
 ## Do I need an API key?
 
-Yes. Every OpenFinance MCP request needs an API key, including market data, prices, funding rates, order books and trade previews. There is no keyless tier.
+Every OpenFinance MCP request needs OAuth sign-in or an `x-api-key` header, including market data, prices, funding rates, order books and trade previews. There is no keyless tier.
+
+Clients that support OAuth, such as Claude.ai and ChatGPT custom connectors, can sign in to your OpenFinance account instead: add the server URL with no header and approve the consent page when it opens.
 
 Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys. Keys are free to create.
 
@@ -29,7 +31,7 @@ Please make an account at [openfinance.tech](https://openfinance.tech) to get yo
 
 ## How the key is used
 
-The key is passed as `x-api-key: open_xxxxx` in every editor or chat-client config. Requests without it return `401 Unauthorized`.
+The key is passed as `x-api-key: open_xxxxx` in every editor or chat-client config. Requests with neither a key nor an OAuth sign-in return `401 Unauthorized`.
 
 ## Next
 
