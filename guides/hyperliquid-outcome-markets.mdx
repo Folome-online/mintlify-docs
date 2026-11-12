@@ -1,0 +1,101 @@
+---
+title: 'Trade Hyperliquid Outcome Markets'
+sidebarTitle: 'Outcome markets (HIP-4)'
+description: 'Hyperliquid''s Yes or No markets are easy to misread, because many share a name. Learn to check what each one really asks before you put any money on it.'
+---
+
+By the end of this guide you will have read a Hyperliquid outcome market correctly, bought whole shares on the side you chose, and sold or held them through expiry.
+
+These outcome markets are also called HIP-4. A share price between 0 and 1 reads like a probability. They settle in **USDC** from the same Hyperliquid balance you use for perps, and sizes are **whole shares**. See [Hyperliquid outcome markets](/markets/hyperliquid-outcomes).
+
+## What you need
+
+- USDC in your Hyperliquid account. No second token is needed. See [Fund each venue](/guides/fund-each-venue).
+
+## Steps
+
+<Steps>
+  <Step title="List the markets in two groups">
+    ```text
+    List the outcome markets on Hyperliquid. Show standalone Yes or No markets and grouped questions in separate sections, with the current price of each side.
+    ```
+
+    A **standalone** market is one Yes or No statement. A **question** groups several named outcomes where only one can be true, such as a set of price ranges.
+
+    <Frame caption="Outcome markets listed in chat, with standalone Yes or No markets and grouped questions shown separately">
+      <img src="/images/screens/hip4-chat-outcome-markets.png" alt="OpenFinance chat listing Hyperliquid outcome markets in two sections, binary markets and question markets, with current prices" />
+    </Frame>
+  </Step>
+  <Step title="Read the real question, not the label">
+    Recurring markets reuse the same display name. Ask for the meaning in words:
+
+    ```text
+    For that market, tell me in one sentence what Yes means: the underlying, the target price or range, and the exact expiry time in UTC.
+    ```
+
+    For a price question, ask which range each named outcome covers before you pick one.
+  </Step>
+  <Step title="Look at the book">
+    ```text
+    Show the order book for the Yes side of that market and the spread.
+    ```
+
+    A thin book means your price can move as you fill. Use a limit price.
+  </Step>
+  <Step title="Preview the order in whole shares">
+    ```text
+    Buy 20 Yes shares at no more than 0.42. Show me the order and the total cost in USDC first.
+    ```
+
+    If you ask in dollars, the agent rounds to whole shares. Very small orders can be rejected for being below the venue's minimum order value; raise the share count if that happens.
+  </Step>
+  <Step title="Place it (moves money)">
+    Reply yes if the side, share count and price match.
+  </Step>
+  <Step title="Check the position">
+    ```text
+    What outcome shares do I hold, and what are they worth at the current price?
+    ```
+  </Step>
+  <Step title="Sell early or hold to expiry (moves money)">
+    ```text
+    Sell my 20 Yes shares at 0.60 or better.
+    ```
+
+    Or hold until the market resolves. A share on the losing side goes to zero.
+  </Step>
+</Steps>
+
+Every order needs your confirmation, and nothing here is financial advice.
+
+## Going further: split and merge
+
+Besides buying and selling, Hyperliquid lets you convert between USDC and shares. **Split** turns USDC into equal Yes and No shares; **merge** turns matching Yes and No shares back into USDC. For questions, **merge a question** and **negate** work across named outcomes. Most traders only buy and sell; these matter if you hold both sides or make markets.
+
+```text
+Split 50 USDC into Yes and No shares on that outcome. Show me what I will hold first.
+```
+
+## Check it worked
+
+- Your share count is a whole number and matches the order.
+- The market you hold is the one whose expiry and target you read in step 2.
+
+## Common mistakes
+
+- **Trading the display name.** Two markets called the same thing can have different targets and expiries.
+- **Fractional sizes.** Orders must be in whole shares.
+- **Looking for USDH.** Outcome markets use USDC.
+- **Confusing a question with a standalone market.** In a question, only one named outcome can win.
+- **Building orders by hand in your own code.** Outcome shares use a special asset id. Read the formula on the [Hyperliquid tool](/mcp/tools-hyperliquid) page.
+
+## Next guides
+
+<CardGroup cols={2}>
+  <Card title="Polymarket from research to redeem" icon="square-poll-vertical" href="/guides/polymarket-research-to-redeem">
+    The other prediction venue.
+  </Card>
+  <Card title="Perp with take-profit and stop-loss" icon="chart-line" href="/guides/hyperliquid-perp-with-tp-sl">
+    Hedge a view with a perp.
+  </Card>
+</CardGroup>

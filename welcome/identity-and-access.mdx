@@ -1,0 +1,74 @@
+---
+title: 'Identity and access'
+description: 'Learn which credential your AI tools use to reach your account, what each one is allowed to do, and the simple habits that keep your money and your keys safe.'
+---
+
+One OpenFinance account sits behind everything you do, in the app and from your own AI agents. Four things identify you on that account, and each one can do something different, so it helps to know them apart.
+
+## Your four credentials
+
+| What | What it is | What it can do | Where you find it |
+| - | - | - | - |
+| **Account** | The email address you sign in with | Owns everything below | [openfinance.tech](https://openfinance.tech), **Sign in** |
+| **Wallet** | An embedded, self-custodial wallet: one EVM address for every EVM chain, plus one Solana address | Holds your funds and signs every trade and transfer you confirm | [Wallet](/product/wallet) |
+| **API key** | A key that starts with `open_`, one per account | Lets an AI agent act on your account through the MCP server and the inference API | [External AI](/product/external-ai) |
+| **OAuth sign-in** | A consent screen your AI client opens once | Gives that client the same access as the key, without you pasting the key | Opens on its own when you connect a client such as Claude or ChatGPT |
+
+## How they fit together
+
+Here is how the four come together, from your first sign-in to your first connected agent.
+
+<Steps>
+  <Step title="You sign in with your email">
+    That creates your account the first time. There is nothing to install and no separate signup per venue.
+  </Step>
+  <Step title="Your wallet is created with the account">
+    OpenFinance never takes custody of it. Trades and transfers are signed by your own wallet, and you can export its keys at any time.
+  </Step>
+  <Step title="Your API key is created with the account">
+    One key per account. The in-app chat uses the same account access, so your agent and the app see the same balances and positions.
+  </Step>
+  <Step title="Your agents connect with the key or with OAuth">
+    Clients that support OAuth, such as Claude and ChatGPT connectors, open a consent page instead of asking for the key. Coding agents and config files use the key in an `x-api-key` header.
+  </Step>
+</Steps>
+
+Every request to the MCP server needs one of the two, OAuth sign-in or the key. There is no keyless tier, even for market data. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
+
+## Which one should I use?
+
+The answer depends on the kind of client you connect.
+
+<CardGroup cols={2}>
+  <Card title="OAuth sign-in" icon="right-to-bracket" href="/installation/chat-clients/claude-ai-web">
+    For chat apps with a connectors screen: Claude.ai, Claude Desktop and ChatGPT. Nothing to copy or store.
+  </Card>
+  <Card title="API key" icon="key" href="/getting-started/api-keys">
+    For coding agents and config files: Claude Code, Cursor, Codex, OpenClaw, Hermes and your own code.
+  </Card>
+</CardGroup>
+
+## Keep each one safe
+
+<Warning>
+Your API key and your wallet keys can both move money. Treat them like passwords.
+</Warning>
+
+- **API key.** Keep it in a config file or an environment variable, never in a shared chat, a screenshot or a git repository.
+- **Wallet keys.** Export them only to back them up. Anyone with them controls the wallet. Read [Safety and custody](/reference/safety-and-custody).
+- **OAuth.** Only approve a consent page that your own client opened, right after you clicked Connect.
+- **Confirmations.** Every trade needs your confirmation. Read the confirmation card before you approve it.
+
+## Next
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/welcome/quickstart">
+    Sign up, fund your wallet and place a first trade.
+  </Card>
+  <Card title="Authentication for agents" icon="lock" href="/mcp/authentication">
+    The technical details of OAuth and the API key.
+  </Card>
+  <Card title="Safety and custody" icon="shield-halved" href="/reference/safety-and-custody">
+    Custody, confirmations and what a key can do.
+  </Card>
+</CardGroup>

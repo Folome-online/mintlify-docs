@@ -1,0 +1,88 @@
+---
+title: 'Glossary'
+description: 'Look up any trading, wallet or agent term you meet in the OpenFinance docs, from basis points and bridges to perps, pUSD and TWAP, explained in plain language.'
+---
+
+Each definition is kept to a line or two. The terms are grouped by topic, starting with trading, then order lifetimes, wallets and chains, and finally agents and the API.
+
+## Trading terms
+
+| Term | Meaning |
+| --- | --- |
+| Basis point | One hundredth of one percent. 100 basis points is 1% |
+| Bonding curve | A pool that sells a new token at a price that rises as more is bought |
+| Cross margin | All your positions share one pool of collateral |
+| Funding rate | A periodic payment between long and short holders of a perp that keeps its price near the underlying price |
+| Graduation | The point where a launched token leaves its bonding curve and its liquidity moves to a regular exchange pool |
+| HIP-3 | Hyperliquid's framework for perps listed by independent deployers. Stock, index, commodity, FX and pre-IPO perps are HIP-3 markets |
+| HIP-4 | Hyperliquid's outcome markets: shares in Yes or No outcomes, priced between 0 and 1 |
+| Isolated margin | Collateral is set aside for one position only |
+| Leverage | Trading a position larger than your collateral. It magnifies gains and losses |
+| Limit order | An order to buy or sell at a price you name, or better |
+| Liquidation | The venue closing a leveraged position because its collateral is no longer enough |
+| Liquidity | How much can be bought or sold without moving the price much |
+| Market order | An order that fills now at the prices on offer |
+| Perp | A perpetual future: a contract that tracks a price with no expiry |
+| Post-only | A limit order that is cancelled if it would fill immediately |
+| Prediction market | A market where shares pay out depending on the outcome of an event |
+| Reduce-only | An order that can only shrink a position, never open or flip one |
+| Slippage | The gap between the price you expected and the price you got |
+| Spot | Buying or selling the asset itself, with no leverage |
+| Stop-loss, take-profit | Orders that trigger when the price reaches a level you set |
+| Tick size | The smallest price step a market allows |
+| TWAP | A large order split into slices and worked over a set time |
+
+## Order lifetimes
+
+| Term | Meaning |
+| --- | --- |
+| GTC | Good till cancelled. Rests until it fills or you cancel it |
+| GTD | Good till date. Rests until a time you set |
+| IOC | Immediate or cancel. Fills what it can now and cancels the rest |
+| FOK | Fill or kill. Fills completely now, or not at all |
+| FAK | Fill and kill. Fills what it can now and cancels the rest |
+| ALO | Add liquidity only. Another name for post-only |
+
+## Wallet and chain terms
+
+| Term | Meaning |
+| --- | --- |
+| Bridge | Moving value from one blockchain to another |
+| Deposit wallet (Polymarket) | A separate smart-contract wallet for your account that holds the funds Polymarket trades from |
+| Embedded wallet | A wallet created for you inside the app when you sign up. Yours is self-custodial, and you can export its keys |
+| EVM | The family of chains that share Ethereum's address format, such as Ethereum, Base, Arbitrum and Polygon |
+| Gas | What a network charges to process a transaction, paid in the chain's native coin |
+| Onramp | Buying crypto with a card or bank transfer |
+| pUSD | The dollar token Polymarket settles in |
+| Robinhood Chain | An EVM chain (chain id 4663) where OpenFinance token launches and tokenized-stock pairs live |
+| Smallest unit | A token amount written as a whole number with no decimal point. 1 USDC is 1000000 because USDC has 6 decimals |
+| Tokenized stock | A token that tracks the price of a share. It is not the share itself |
+| USDC | A dollar stablecoin. The only currency Hyperliquid accepts |
+| USDC.e | A bridged form of USDC on Polygon. Some Polymarket winnings arrive in it and must be converted to pUSD |
+| USDH | A dollar token used as collateral by a small number of HIP-3 markets on Hyperliquid |
+
+## Agent and API terms
+
+| Term | Meaning |
+| --- | --- |
+| Action | The operation you pick inside a multi-purpose tool, such as `place_order` inside `hyperliquid` |
+| AI credits | The balance that pays for model usage in the chat and the inference API |
+| API key | A secret that starts with `open_` and acts as your account |
+| Asset index | The number Hyperliquid uses to identify a market in an order |
+| Inference API | An OpenAI-compatible endpoint for calling AI models from your own code |
+| MCP | Model Context Protocol, a standard way for AI clients to call external tools |
+| OAuth | Signing in through a browser page so your client receives a token instead of a pasted key |
+| Skills | Playbooks that teach a coding agent how to use the OpenFinance tools well |
+| Streamable HTTP | The transport the OpenFinance MCP server uses |
+| Tool | One capability an MCP server offers to an AI client |
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Markets overview" icon="globe" href="/markets/overview">
+    See the terms in context.
+  </Card>
+  <Card title="MCP overview" icon="plug" href="/mcp/overview">
+    How agents connect.
+  </Card>
+</CardGroup>

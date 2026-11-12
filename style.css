@@ -1,0 +1,61 @@
+/* OpenFinance docs: warm "Claude" palette matching the in-app theme.
+   Tokens mirror the app: cream page, white cards, warm ink text, one chrome green. */
+:root {
+  --of-bg: #f4f3ef;
+  --of-rail: #eceae4;
+  --of-surface: #ffffff;
+  --of-text: #1f1e1d;
+  --of-text-2: #6b6862;
+  --of-line: rgba(31, 30, 29, 0.10);
+  --of-green: #2e7d57;
+  --of-green-text: #1e6647;
+  --of-green-tint: #e8efe4;
+  --of-pill: #e7e4d8;
+  --of-clay: #d97757;
+}
+
+/* Cards: white surface on cream with a hairline, soft lift on hover. */
+.card {
+  border-color: var(--of-line) !important;
+  box-shadow: 0 1px 0 rgba(31, 30, 29, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+a.card:hover, .card[role="link"]:hover {
+  box-shadow: 0 6px 20px -10px rgba(31, 30, 29, 0.25);
+  transform: translateY(-1px);
+}
+.card [data-component-part="card-image"] {
+  aspect-ratio: 3 / 2;
+  border-bottom: 1px solid var(--of-line);
+}
+
+/* Screenshot frames sit on the rail colour so white captures read as images. */
+.frame, [data-component-part="frame"] {
+  background: var(--of-rail);
+}
+.dark .frame, .dark [data-component-part="frame"] {
+  background: rgba(255, 255, 255, 0.04);
+}
+.dark .card {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Logo: tight lockup image, drawn larger and flush with the search box edge.
+   The image is padded so its centre is the wordmark's optical centre. */
+img.nav-logo {
+  height: 28px !important;
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+@media (max-width: 1023px) {
+  img.nav-logo { height: 30px !important; }
+}
+
+/* Screenshots never stretch past their natural size, so close-up captures stay sharp. */
+.frame img, [data-component-part="frame"] img {
+  width: auto !important;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}

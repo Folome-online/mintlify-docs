@@ -1,0 +1,166 @@
+---
+title: 'Hyperliquid Tool'
+description: 'Look up every action your agent can call on Hyperliquid, from prices to orders and outcome shares, and the request fields it has to get exactly right.'
+---
+
+The `hyperliquid` tool covers perps, spot, HIP-3 markets and HIP-4 outcome markets on Hyperliquid. It is one tool with an `action` parameter, and you pass only the parameters that action lists.
+
+For what the venue is and how funding works, read [Hyperliquid](/markets/hyperliquid) first. Every action needs authentication; see [Authentication](/mcp/authentication). A call looks like this:
+
+```json
+{
+  "name": "hyperliquid",
+  "arguments": { "action": "get_market_metas", "kind": "perp" }
+}
+```
+
+## Actions
+
+Actions marked **write** place orders, move funds or change account settings. Show the user a summary and get a yes before calling them. Every trade needs the user's confirmation, and nothing here is financial advice.
+
+### Market data
+
+| Action | What it does |
+| --- | --- |
+| `get_all_mids` | Mid price for every market |
+| `get_market_metas` | Market metadata. `kind: 'perp'` returns asset indices and size precision, `'spot'` returns spot pairs, `'all'` returns funding, open interest, mark and oracle prices and 24 hour volume |
+| `get_perp_categories` | Every HIP-3 perp with its category: crypto, stocks, commodities, indices, fx or preipo |
+| `get_l2_book` | Order book for one coin |
+| `get_candle_snapshot` | Candles for a coin and interval, from 1 minute to 1 month |
+| `get_token_details` | Details for a spot token, by its hex token id |
+| `get_all_dexs_asset_ctxs` | Latest cached snapshot of asset contexts across all dexes |
+| `set_all_dexs_asset_ctxs_subscription` | Turn the live asset-context stream on or off |
+| `get_ws_status` | Whether the live stream is connected |
+
+### Account
+
+| Action | What it does |
+| --- | --- |
+| `get_account_summary` | Positions on the main dex and every HIP-3 dex, spot balances and account mode, in one call. `view: 'all'` returns the equity curve over time instead |
+| `get_batch_portfolio_states` | The same snapshot for a list of other addresses |
+| `get_deposit_address` | The address on Arbitrum that funds this account with USDC |
+| `get_user_fills` | Recent fills, optionally by time range |
+| `get_user_funding_history` | Funding payments |
+| `get_rate_limit` | Current rate-limit window |
+| `get_user_abstraction` | Current account mode |
+| `set_user_abstraction` **write** | Switch to unified account mode. One time per wallet |
+
+### Orders
+
+| Action | What it does |
+| --- | --- |
+| `place_order` **write** | Place one or more limit or trigger orders, optionally grouped with a take-profit and stop-loss |
+| `modify_order` **write** | Change an open order |
+| `cancel_order` **write** | Cancel one or more orders by asset index and order id |
+| `get_open_orders` | Open orders. `verbose: true` adds trigger and reduce-only details |
+| `get_historical_orders` | Filled, cancelled and rejected orders |
+| `get_order_status` | Status of one order |
+
+### TWAP, leverage and funds
+
+| Action | What it does |
+| --- | --- |
+| `place_twap_order` **write** | Work a total size over a number of minutes |
+| `terminate_twap_order` **write** | Stop a running TWAP |
+| `get_twap_fills` | Fills from TWAP slices |
+| `update_leverage` **write** | Set leverage and cross or isolated mode for one asset |
+| `update_isolated_margin` **write** | Add or remove margin on an isolated position |
+| `withdraw_to_arbitrum` **write** | Withdraw USDC to the caller's own address on Arbitrum. Arrives in about 5 minutes |
+
+### Outcomes (HIP-4)
+
+| Action | What it does |
+| --- | --- |
+| `get_outcome_meta` | All outcome markets, split into standalone binary markets and grouped questions, with parsed metadata |
+| `split_outcome` **write** | Turn USDC into equal Yes and No shares of an outcome |
+| `merge_outcome` **write** | Turn matching Yes and No shares back into USDC |
+| `merge_question` **write** | Turn one Yes share of every named outcome in a question back into USDC |
+| `negate_outcome` **write** | Turn No shares of one outcome into Yes shares of every other outcome in the question |
+
+User-scoped reads such as `get_account_summary`, `get_open_orders` and `get_user_fills` accept an optional `address`. Set it to read another wallet; leave it out for the caller's own data. `get_deposit_address` always returns the caller's address.
+
+## Request-shape rules
+
+<Warning>
+Order requests use Hyperliquid's single-letter field names. The readable names you see in responses (`coin`, `is_buy`, `sz`, `limit_px`) are rejected on the request side and produce a confusing server error.
+</Warning>
+
+A correct `place_order` call:
+
+```json
+{
+  "action": "place_order",
+  "orders": [
+    {
+      "a": 110012,
+      "b": false,
+      "p": "384.96",
+      "s": "0.052",
+      "r": false,
+      "t": { "limit": { "tif": "FrontendMarket" } },
+      "szDecimals": 4
+    }
+  ],
+  "grouping": "na"
+}
+```
+
+Here is what each field in an order means:
+
+| Field | Meaning |
+| --- | --- |
+| `a` | Numeric asset index. Never a coin symbol |
+| `b` | `true` to buy, `false` to sell |
+| `p` | Price, as a string |
+| `s` | Size in base-asset units, as a string. Not a dollar amount |
+| `r` | Reduce only |
+| `t` | Order type. Either a `limit` with `tif` of `Gtc`, `Ioc`, `Alo` or `FrontendMarket`, or a `trigger` with `isMarket`, `triggerPx` and `tpsl` of `tp` or `sl` |
+| `c` | Optional client order id |
+| `szDecimals` | Size precision from `get_market_metas`. Pass it so the server rounds price and size to the market's rules |
+
+`grouping` is `na` by default, `normalTpsl` to group a take-profit and stop-loss with an entry, or `positionTpsl` to attach them to an existing position.
+
+### Asset index
+
+Compute `a` from `get_market_metas`. Do not guess it.
+
+| Market | Formula |
+| --- | --- |
+| Main-dex perp | Index in the perp universe (BTC is 0, ETH is 1) |
+| HIP-3 perp | `100000 + perp_dex_index * 10000 + index_in_meta` |
+| Spot pair | `10000 + spot_index` |
+| HIP-4 outcome share | `100000000 + (10 * outcome + side)` |
+
+`update_leverage`, `update_isolated_margin`, `cancel_order` and `place_twap_order` take the same numeric index. A symbol such as `xyz:NVDA` fails there.
+
+<Warning>
+The HIP-4 offset is one hundred million: a 1 followed by eight zeros. It is easy to miscount.
+</Warning>
+
+### Outcome shares
+
+- An outcome share's encoding is `10 * outcome + side`. Its spot coin is `#` followed by the encoding.
+- Side `0` is the first entry in the outcome's `sideSpecs` and side `1` is the second. On a standard Yes or No market, Yes is side `0`. Use the names in `sideSpecs` when you show a market.
+- Sizes are whole shares.
+- Collateral is USDC. No other token is needed.
+- Recurring markets reuse the same display name. Build the label from the parsed metadata (underlying, target or thresholds, expiry) and not from `name`.
+
+## Tips
+
+- **Read the balance as one number.** Add the perp withdrawable amount and the spot USDC total from `get_account_summary`, and report a single USDC balance.
+- **Check the account mode once.** If the mode is `default` or `disabled` and there is perp USDC, call `set_user_abstraction` with `abstraction: 'u'`, then tell the user it was done.
+- **Pick the time-in-force by intent.** `Ioc` for "buy now", `Gtc` only when the user names a price, `Alo` for post-only, `FrontendMarket` for HIP-3 stock perps.
+- **Convert dollars to size yourself.** Divide the dollar amount by the mid price and round to `szDecimals`.
+- **Relay collateral errors as given.** An insufficient-funds rejection names the asset the market needs. A few HIP-3 dexes use USDH; get it by buying USDH with USDC on Hyperliquid spot.
+- **`t` on a TWAP is different.** On `place_twap_order`, `t` is a true or false flag for randomized timing and `m` is the duration in minutes.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Hyperliquid" icon="chart-line" href="/markets/hyperliquid">
+    Funding, order types and limits in plain words.
+  </Card>
+  <Card title="Hyperliquid outcomes" icon="circle-half-stroke" href="/markets/hyperliquid-outcomes">
+    How outcome markets work.
+  </Card>
+</CardGroup>

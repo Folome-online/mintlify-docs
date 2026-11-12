@@ -1,0 +1,121 @@
+---
+title: 'Launchpad Tools'
+description: 'Find the right tool for each kind of token launch, the actions each one offers, and the checks your agent should run before it sends anything permanent.'
+---
+
+Four tools launch tokens and manage them afterwards. Each takes an `action` parameter. For the plain-language version, read [Token launches](/markets/token-launches). Every action needs authentication; see [Authentication](/mcp/authentication).
+
+## Which tool to use
+
+Start from what the user asked for:
+
+| The user wants | Tool |
+| --- | --- |
+| A token on Solana | `openfinance-launchpad` |
+| A token on Robinhood Chain, with a choice of where trading fees go | `openfinance-launchpad-wrapper` |
+| A token on Robinhood Chain as a Uniswap V4 pool, paired with an approved quote token such as USDG | `openfinance-launchpad-v4` |
+| Pair assets, launch terms, or fee claims on earlier Pons launches | `openfinance-pons-launch` |
+
+<Warning>
+The two Robinhood Chain launch venues create different pools, and the choice is permanent. If the user says only "launch a token on Robinhood Chain", with nothing about fee modules or Uniswap, ask which one they want. A plain launch with no fee preference on the Pons curve uses `openfinance-launchpad-wrapper` with `module: 'keep'`.
+</Warning>
+
+Actions marked **write** send real transactions. A launch is permanent and commits real funds. Show every term and get a yes before calling. Nothing here is financial advice.
+
+## openfinance-launchpad (Solana)
+
+A token launches on a bonding curve, trades on it, and graduates to an exchange pool when the curve fills.
+
+| Action | What it does |
+| --- | --- |
+| `launch_token` **write** | Create the token and its pool from a name, symbol and image, with optional links and an optional first buy in the same transaction |
+| `list_tokens` | Feed of launched tokens, newest or by market cap. Filter by `creator` for one wallet's launches |
+| `get_pool_state` | Whether a pool has graduated and how far along the curve it is |
+| `quote_buy`, `quote_sell` | Quote a trade on the curve |
+| `buy`, `sell` **write** | Trade on the curve before graduation |
+| `migrate` **write** | Move a filled curve into its exchange pool |
+| `get_pool_fees` | Fee breakdown for one pool |
+| `get_creator_fees` | The caller's creator fees across all their launches |
+| `claim_creator_fees` **write** | Withdraw creator fees from one pool to the caller's wallet |
+
+After graduation, `buy` and `sell` here return `alreadyGraduated: true`. Trade the token through the Jupiter tools on the [Onchain tools](/mcp/tools-onchain) page instead.
+
+## openfinance-launchpad-wrapper (Robinhood Chain, fee modules)
+
+This tool launches on the Pons curve with a fee module that fixes where trading fees go.
+
+| Action | What it does |
+| --- | --- |
+| `simulate_launch` | Build and validate the exact launch without sending it. Returns allocations and the would-be addresses |
+| `launch` **write** | Launch with a `module`: `keep`, `wallet`, `split`, `burn`, `raffle` or `holders` |
+| `list_launches` | Every launch from this launchpad, newest first |
+| `list_creator_launches` | Every launch by one creator |
+| `get_launch` | One launch's module, allocations and routing |
+| `get_funding` | Why a launch's fees have or have not moved yet |
+| `get_raffle` | A raffle's live state |
+| `get_raffle_claims` | A holder's claimable raffle prizes |
+| `list_raffle_stocks` | Tokenized stocks a raffle may pay prizes in |
+| `get_readiness` | Whether a raffle launch is possible right now |
+| `get_keeper_status` | Health check for the fee automation |
+
+- The module is frozen at launch. Only `keep` can be pointed at another wallet later.
+- `creatorTaxBps` is the total trading tax and is capped by a live limit.
+- A `split` needs 2 to 16 recipients whose shares add up to exactly 10000 basis points. Give any rounding remainder to one recipient.
+- Call `simulate_launch` before `launch`, and `get_readiness` before offering a raffle.
+
+## openfinance-launchpad-v4 (Robinhood Chain, Uniswap V4)
+
+The bonding curve is a real Uniswap V4 position, so the token is tradable through Uniswap right away and graduates into locked liquidity.
+
+| Action | What it does |
+| --- | --- |
+| `get_readiness` | Whether launches are possible right now |
+| `list_quote_assets` | Approved pair tokens, with their decimals |
+| `get_pair_terms` | Live terms for launching against one pair token |
+| `launch` **write** | Deploy the token and open its pool |
+| `list_launches` | Launches on this venue |
+| `get_pool`, `get_market`, `get_candles` | Pool state, market data and candles for a launch |
+| `get_quote` | Quote a buy or sell for a specific trader |
+| `buy`, `sell` **write** | Trade through the pool |
+| `graduate` **write** | Graduate a filled curve |
+| `get_fees` | Fees accrued for the creator |
+| `claim_fees` **write** | Claim those fees |
+
+- Amounts on `buy`, `sell` and `get_quote` are raw integers in the token's smallest unit. The pair token's decimals are not always 18. Read them from `list_quote_assets`.
+- A snipe tax applies in the first seconds after launch and depends on who is trading, so always take the quote for the trader's own address.
+- Name, symbol, pair token and creator tax are frozen at launch.
+
+## openfinance-pons-launch (reads and earlier launches)
+
+This tool reads pair assets and launch terms, and handles fees on launches already made on Pons.
+
+| Action | What it does |
+| --- | --- |
+| `list_quote_assets` | Assets approved as a launch pair, including tokenized stocks |
+| `get_launch_terms` | Live launch terms and eligibility for the caller against one pair asset |
+| `list_tokens` | Tokens launched through the platform on Pons |
+| `get_claimable_fees` | What is claimable now, and which launches still hold unswept fees |
+| `sweep_fees` **write** | Move a launch's accrued fees to where they can be claimed |
+| `claim_fees` **write** | Withdraw claimable fees for one pair asset |
+| `enable_holder_fee_sharing` **write** | Redirect a launch's creator fees to its holders. Cannot be undone |
+| `launch_token` **write** | Kept for compatibility. Use `openfinance-launchpad-wrapper` for new launches |
+
+## Tips
+
+- **Images.** Launch actions take the image as base64 data.
+- **Links.** Pass website and social links as full URLs exactly as the user gave them.
+- **Suggest a website.** It is optional, but worth asking once before a Solana launch. Never block a launch on it.
+- **Holdings.** Tokens from Robinhood Chain launches live on chain `4663`. Include it when reading holdings.
+- **Solana wallet setup.** A `412` on a Solana launch or trade means the user's Solana wallet is not yet enabled for agent trading.
+- **Never launch to test.** Use `simulate_launch`, `get_launch_terms` or `get_pair_terms`.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Token launches" icon="rocket" href="/markets/token-launches">
+    The plain-language guide.
+  </Card>
+  <Card title="Safety and custody" icon="shield-halved" href="/reference/safety-and-custody">
+    Confirmations and irreversible actions.
+  </Card>
+</CardGroup>

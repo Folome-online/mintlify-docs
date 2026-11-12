@@ -1,21 +1,21 @@
 ---
 title: 'Skills vs MCP'
-description: 'OpenFinance ships two pieces: the MCP server gives your agent live tools and data, and skills teach it to use them well. See what each does and what to install.'
+description: 'Learn why OpenFinance comes in two parts for coding agents, what each part does for your agent, and whether you should install just one of them or both.'
 ---
 
-OpenFinance ships two things, and they do different jobs.
+OpenFinance ships two things, and they do different jobs. One gives your agent the ability to act; the other gives it the judgement to act well.
 
 ## MCP server, the live tool layer
 
-The MCP server is what lets the agent fetch real prices, simulate a trade, or build a transaction. Without it, the agent has no hands.
+The MCP server is what lets the agent fetch real prices, get a quote, or place an order. Without it, the agent has no hands.
 
 ## Skills, the static playbooks
 
-Skills teach the agent **how** to use OpenFinance well, when to use isolated vs cross margin, how to size a Hyperliquid perp, how to interpret a Polymarket order book, how to chain `previewTrade` before `buildTransaction`. Without them, the agent has hands but no judgement.
+Skills teach the agent **how** to use OpenFinance well: when to use isolated vs cross margin, how to size a Hyperliquid perp, how to interpret a Polymarket order book, and how to get a quote with `relay_get_quote` before calling `relay_execute`. Without them, the agent has hands but no judgement.
 
 ## Which should I install?
 
-You can install either independently. For the best experience, install both.
+You can install either one on its own, but they work best together: the server does the work, and the skills guide it.
 
 | Component  | Purpose                              | Install with                             |
 | ---------- | ------------------------------------ | ---------------------------------------- |

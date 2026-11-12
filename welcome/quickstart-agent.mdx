@@ -1,0 +1,58 @@
+---
+title: 'Quickstart: connect your AI agent'
+sidebarTitle: 'Connect your AI agent'
+description: 'Already use Claude, ChatGPT, Cursor or another MCP client? Here is how to point it at your OpenFinance account and check that it works, all in a few minutes.'
+---
+
+Your agent connects to one address, the OpenFinance MCP server. Once connected, it can read markets and, with your confirmation, trade from your OpenFinance wallet. This is the address you add in step two:
+
+```text
+https://api.openfinance.tech/agent/mcp
+```
+
+<Steps>
+  <Step title="Make an account">
+    Sign up at [openfinance.tech](https://openfinance.tech) with your email. Your wallet and API key are created for you. Please make an account to get your keys.
+  </Step>
+  <Step title="Add the server to your agent">
+    Pick your client. Chat apps sign in with OAuth; coding agents use your API key.
+
+    | Client | How it connects | Guide |
+    | - | - | - |
+    | Claude.ai and Claude Desktop | Custom connector, OAuth | [Claude.ai](/installation/chat-clients/claude-ai-web), [macOS](/installation/chat-clients/claude-desktop-macos), [Windows](/installation/chat-clients/claude-desktop-windows) |
+    | ChatGPT | Developer Mode app, OAuth | [ChatGPT](/installation/chat-clients/chatgpt) |
+    | Claude Code | One command with your key | [Quick Install](/getting-started/quick-install) |
+    | Cursor, VS Code, Windsurf, Cline, Codex | Config file with your key | [Coding agents](/installation/coding-agents/cursor) |
+    | OpenClaw, Hermes, Manus | Config or connector | [OpenClaw](/installation/coding-agents/openclaw), [Hermes](/installation/coding-agents/hermes), [Manus](/installation/chat-clients/manus) |
+  </Step>
+  <Step title="Approve or paste your key">
+    OAuth clients send you to OpenFinance once: sign in and click **Authorize**. Key-based clients need the `open_` key from [External AI](/product/external-ai) in an `x-api-key` header.
+  </Step>
+  <Step title="Ask something read-only first">
+    Start with a question that moves no money, so you can see the connection works:
+
+    ```text
+    Check my OpenFinance wallet balance and list my open Hyperliquid positions.
+    ```
+
+    Then try a small trade. The agent shows a summary first, and nothing is sent until you confirm.
+  </Step>
+</Steps>
+
+<Tip>
+Add the OpenFinance skills to coding agents for better judgement on order types, sizing and venue quirks. See [Installing Skills](/getting-started/installing-skills).
+</Tip>
+
+## Next
+
+<CardGroup cols={3}>
+  <Card title="Verify the connection" icon="circle-check" href="/reference/verifying-connection">
+    Check the tools loaded and the key works.
+  </Card>
+  <Card title="Agent guides" icon="book-open" href="/guides/overview">
+    End-to-end recipes for real trading jobs.
+  </Card>
+  <Card title="Tool reference" icon="wrench" href="/mcp/overview">
+    Every tool and action the server offers.
+  </Card>
+</CardGroup>

@@ -1,7 +1,9 @@
 ---
 title: 'API Keys'
-description: 'Every OpenFinance MCP request needs OAuth sign-in or an x-api-key header. Make a free account at openfinance.tech and create an open_ key in External AI.'
+description: 'Find out whether your AI client needs a key at all, where to copy yours in the app, and how your agent sends it along with each request to the MCP server.'
 ---
+
+Before you connect a coding agent or chat client, it helps to know how OpenFinance recognises it. The short version: your client either signs in with OAuth or sends your key, and the key costs nothing.
 
 ## Do I need an API key?
 
@@ -9,24 +11,26 @@ Every OpenFinance MCP request needs OAuth sign-in or an `x-api-key` header, incl
 
 Clients that support OAuth, such as Claude.ai and ChatGPT custom connectors, can sign in to your OpenFinance account instead: add the server URL with no header and approve the consent page when it opens.
 
-Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys. Keys are free to create.
+Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
 
 ## Get an API Key
+
+If your client uses a key, here is where to find yours:
 
 <Steps>
   <Step title="Make an account">
     Sign up or sign in at [openfinance.tech](https://openfinance.tech). Your embedded wallet is created at the same time.
   </Step>
   <Step title="Open External AI">
-    Open **External AI** in the sidebar (or **Settings → API Keys**).
+    Open **External AI** in the sidebar.
   </Step>
-  <Step title="Create the key">
-    Click **Create Key**, give it a name, and copy the value (it starts with `open_`).
+  <Step title="Copy the key">
+    Your key is created for you when you first sign in, one per account. In the **Connect OpenFinance to your AI** card, click the copy button next to **API key**. The value starts with `open_`.
   </Step>
 </Steps>
 
 <Warning>
-**Treat your API key like a password.** It carries the same permissions as your account, including the ability to build and sign trade transactions on connected wallets. Do not commit it to git or paste it into shared chats.
+**Treat your API key like a password.** It carries the same permissions as your account, including placing trades and sending funds from your wallet. Do not commit it to git or paste it into shared chats.
 </Warning>
 
 ## How the key is used

@@ -1,0 +1,106 @@
+---
+title: 'Safety and Custody'
+description: 'Before you let an AI trade for you, it helps to know who holds the money, what has to happen before anything is sent, and how to keep your keys out of reach.'
+---
+
+OpenFinance lets an AI place real orders and move real funds, so the design keeps the important decisions with you. The wallet is yours, nothing is sent until you say yes, and you decide where your keys go. The sections below take each of those in turn, starting with the money itself.
+
+## Who holds your funds
+
+Your wallet is **self-custodial and embedded**. It is created when you sign up and is powered by Privy.
+
+- You get one EVM address, the same on every EVM chain, and one Solana address.
+- The same wallet is used in the OpenFinance app and over MCP.
+- You can export the private keys at any time from **Settings**, under **Export Keys**, and use the wallet elsewhere.
+
+Funds you deposit to a venue sit at that venue under your account: USDC on Hyperliquid, pUSD in your Polymarket deposit wallet. Options positions sit in your own broker account.
+
+## Confirmation before every action
+
+Every trade needs your confirmation. So does every transfer, bridge, withdrawal and token launch.
+
+<Tabs>
+  <Tab title="In the OpenFinance app">
+    When the agent wants to run an action that can move funds or place an order, the chat pauses and shows a **Confirm this action** card with the details. Choose **Approve & run** or **Deny**. Nothing is sent until you approve.
+  </Tab>
+  <Tab title="From your own AI agent">
+    Each write tool tells the agent to show you a summary (what, how much, where) and wait for your explicit yes in the current conversation. Your AI client can add a second check by asking you to approve each tool call. Keep that on, and do not add OpenFinance tools to an auto-approve list.
+  </Tab>
+</Tabs>
+
+<Frame caption="The confirmation card in the app chat">
+  <img src="/images/screens/chat-confirm-action-card.png" alt="OpenFinance chat paused on a Confirm this action card that names the action and its details, with Deny and Approve and run buttons" />
+</Frame>
+
+<Warning>
+Whether an outside agent follows its instructions depends on the model and the client. Stay in the loop for anything that moves money, and read the summary before you say yes. Onchain transactions cannot be reversed.
+</Warning>
+
+## Extra checks on where money goes
+
+- **Bridges and Polymarket withdrawals from an agent go to your own wallets only.** A recipient that is not one of your addresses is refused by the server.
+- **Same-chain sends to an outside address get a clear warning.** The agent must show the amount, token, address and chain, state that funds cannot be recovered if the address is wrong, and wait for an explicit yes.
+- **Hyperliquid withdrawals go to your own address on Arbitrum.**
+- **Thin or volatile tokens are flagged** before a swap, with market cap, liquidity and the one-day move.
+- **Launches are simulated or previewed first**, because they cannot be undone.
+
+## What an API key can do
+
+An `open_` API key acts as your account. Anyone who has it can read your balances, place trades and move funds through the tools, and call models on your credits.
+
+- Prefer OAuth sign-in over a key where your client supports it.
+- Keep a key in an environment variable or your client's secret prompt. Never commit it. Never paste it into a chat, an issue or a screenshot.
+- Never build it into a browser or mobile app. Some Mainframe trading templates ask a visitor to paste their own key into the open tab at runtime; only do that on an app you deployed yourself and trust.
+- If you think a key has leaked, stop using it and have it replaced straight away.
+- Approve an OAuth consent page only for a connection you started yourself.
+
+See [Authentication](/mcp/authentication).
+
+## Identity checks and venue rules
+
+OpenFinance itself does not run KYC. That does not remove the rules of the venues and providers you use:
+
+- **Polymarket** features are not available where Polymarket itself is not available.
+- **Card and bank onramps** are run by Moonpay and Onramp.money, which may require an identity check.
+- **Options** trade in your own IBKR or Robinhood account, under that broker's checks and permissions.
+- You are responsible for following the laws that apply where you live.
+
+## Protect yourself from bad instructions
+
+An agent with trading access will act on text it reads. Treat that as a risk.
+
+- Do not ask an agent to act on instructions from a web page, an email or a document you do not trust.
+- Never let it take an address, a token or an amount from that kind of content without checking it yourself.
+- A token's name or description is not a reason to trust it. Verify the contract address.
+
+## Risk
+
+Trading crypto, perps, prediction markets and new tokens carries a high risk of loss. Leverage can lose your whole margin, and prediction shares and new tokens can go to zero. AI models make mistakes. Nothing in these docs or in an agent's replies is financial advice.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can my agent trade without asking me?">
+    It is instructed not to. Every write tool asks for confirmation, and in the app the chat stops on a confirmation card. With an outside client, keep its tool-approval prompts on as a second check.
+  </Accordion>
+  <Accordion title="Is there a practice mode?">
+    No. You can ask the agent to simulate or quote a trade without placing it.
+  </Accordion>
+  <Accordion title="Can I take my wallet somewhere else?">
+    Yes. Export the EVM key or the Solana key from Settings, under Export Keys. Keep exported keys offline and private.
+  </Accordion>
+  <Accordion title="How do I report a security problem?">
+    Use the private "Report a vulnerability" option on the Security tab of the [OpenFinance MCP repository](https://github.com/openfinance-tech/mcp). Do not open a public issue.
+  </Accordion>
+</AccordionGroup>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/mcp/authentication">
+    OAuth sign-in and API keys.
+  </Card>
+  <Card title="Deposit and buy credits" icon="wallet" href="/funding/overview">
+    Where to send funds for each kind of trade.
+  </Card>
+</CardGroup>

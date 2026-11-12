@@ -1,9 +1,9 @@
 ---
 title: 'Codex'
-description: 'Add OpenFinance to OpenAI Codex with codex mcp add or a config.toml entry. The CLI and IDE extension share one configuration, so you only set your API key once.'
+description: 'Connect OpenAI Codex to OpenFinance from the command line or by editing its config file, so Codex can read markets and place trades with your account.'
 ---
 
-Codex supports MCP servers in both the CLI and the IDE extension. Configuration is shared between them, so you only set it up once.
+Codex supports MCP servers in both the CLI and the IDE extension. Configuration is shared between them, so you only set it up once. Use either option below; both end with the same entry in `config.toml`.
 
 ## Option A, CLI
 
@@ -13,7 +13,7 @@ Run from your terminal:
 codex mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
 ```
 
-Then open `~/.codex/config.toml` and add your key to the entry it created (Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.):
+Then open `~/.codex/config.toml` and add your key to the entry it created. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys. The finished entry looks like this:
 
 ```toml
 [mcp_servers.openfinance-tech]
@@ -38,7 +38,7 @@ http_headers = { "x-api-key" = "open_xxxxx" }
 ```
 
 <Warning>
-Codex uses TOML, not JSON. The header block is a TOML inline table, note the `=` instead of `:`.
+Codex uses TOML, not JSON. The header block is a TOML inline table, so note the `=` instead of `:`.
 </Warning>
 
 ## First-time MCP users

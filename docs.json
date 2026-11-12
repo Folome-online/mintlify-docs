@@ -1,22 +1,235 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "OpenFinance",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#55D799",
-    "dark": "#0D9373"
+    "primary": "#2E7D57",
+    "light": "#8FCFAA",
+    "dark": "#276C4B"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Docs",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Welcome",
+            "icon": "hand-wave",
             "pages": [
               "introduction",
+              "welcome/what-is-openfinance",
+              "welcome/identity-and-access",
+              {
+                "group": "Quickstarts",
+                "pages": [
+                  "welcome/quickstart",
+                  "welcome/quickstart-agent",
+                  "welcome/quickstart-build"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Deposit and buy credits",
+            "icon": "wallet",
+            "pages": [
+              "funding/overview",
+              {
+                "group": "Deposit funds",
+                "pages": [
+                  "funding/deposit-funds",
+                  "funding/deposit-polymarket",
+                  "funding/deposit-hyperliquid",
+                  "funding/deposit-onchain"
+                ]
+              },
+              {
+                "group": "Buy AI credits",
+                "pages": [
+                  "funding/buy-ai-credits",
+                  "funding/buy-credits-with-crypto"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Markets",
+            "icon": "chart-line",
+            "pages": [
+              "markets/overview",
+              {
+                "group": "Hyperliquid",
+                "pages": [
+                  "markets/hyperliquid",
+                  "markets/hyperliquid-outcomes"
+                ]
+              },
+              "markets/polymarket",
+              {
+                "group": "Onchain",
+                "pages": [
+                  "markets/onchain-tokens",
+                  "markets/bridge-and-swap",
+                  "markets/fund-with-card-or-bank"
+                ]
+              },
+              "markets/token-launches",
+              "markets/options"
+            ]
+          },
+          {
+            "group": "Reference",
+            "icon": "book-open",
+            "pages": [
+              "reference/safety-and-custody",
+              "reference/glossary"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "App",
+        "groups": [
+          {
+            "group": "Agent",
+            "icon": "comments",
+            "pages": [
+              "product/chat",
+              "product/build-mode",
+              "product/studio",
+              "product/models-and-credits"
+            ]
+          },
+          {
+            "group": "Trade",
+            "icon": "wallet",
+            "pages": [
+              "product/wallet",
+              "product/live-transactions"
+            ]
+          },
+          {
+            "group": "Connect",
+            "icon": "plug",
+            "pages": [
+              "product/external-ai",
+              "product/connectors"
+            ]
+          },
+          {
+            "group": "Account",
+            "icon": "user",
+            "pages": [
+              "product/settings"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Alchemy",
+        "groups": [
+          {
+            "group": "Get started",
+            "icon": "flask",
+            "pages": [
+              "alchemy/overview",
+              "alchemy/first-run",
+              "alchemy/writing-good-events"
+            ]
+          },
+          {
+            "group": "Read a result",
+            "icon": "magnifying-glass-chart",
+            "pages": [
+              "alchemy/reading-results",
+              "alchemy/deeper-analysis"
+            ]
+          },
+          {
+            "group": "Trade",
+            "icon": "arrow-right-arrow-left",
+            "pages": [
+              "alchemy/trading",
+              "alchemy/order-ticket",
+              "alchemy/positions"
+            ]
+          },
+          {
+            "group": "Reference",
+            "icon": "book-open",
+            "pages": [
+              "alchemy/history-and-models",
+              "alchemy/faq"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Mainframe",
+        "groups": [
+          {
+            "group": "Mainframe",
+            "icon": "table-cells-large",
+            "pages": [
+              "mainframe/overview",
+              "mainframe/how-it-works",
+              "mainframe/customize",
+              "mainframe/safety"
+            ]
+          },
+          {
+            "group": "Templates",
+            "icon": "layer-group",
+            "pages": [
+              {
+                "group": "Prediction markets",
+                "pages": [
+                  "mainframe/templates/updown-hip4",
+                  "mainframe/templates/updown-polymarket"
+                ]
+              },
+              {
+                "group": "Perp dexes",
+                "pages": [
+                  "mainframe/templates/ai-perps-dex",
+                  "mainframe/templates/pair-trader",
+                  "mainframe/templates/hl-compare"
+                ]
+              },
+              {
+                "group": "Trading",
+                "pages": [
+                  "mainframe/templates/carry-bot"
+                ]
+              },
+              {
+                "group": "Websites",
+                "pages": [
+                  "mainframe/templates/linkflow",
+                  "mainframe/templates/heritage-grove",
+                  "mainframe/templates/camper"
+                ]
+              },
+              {
+                "group": "Animated",
+                "pages": [
+                  "mainframe/templates/mainframe",
+                  "mainframe/templates/orbis-nft",
+                  "mainframe/templates/meadowbell"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Connect an agent",
+        "groups": [
+          {
+            "group": "Getting started",
+            "icon": "rocket",
+            "pages": [
               "getting-started/quick-install",
               "getting-started/skills-vs-mcp",
               "getting-started/api-keys",
@@ -24,7 +237,8 @@
             ]
           },
           {
-            "group": "Coding Agents",
+            "group": "Coding agents",
+            "icon": "terminal",
             "pages": [
               "installation/coding-agents/claude-code",
               "installation/coding-agents/codex",
@@ -37,7 +251,8 @@
             ]
           },
           {
-            "group": "Chat Clients",
+            "group": "Chat clients",
+            "icon": "comments",
             "pages": [
               "installation/chat-clients/claude-desktop-macos",
               "installation/chat-clients/claude-desktop-windows",
@@ -47,10 +262,86 @@
             ]
           },
           {
-            "group": "Reference",
+            "group": "Help",
+            "icon": "life-ring",
             "pages": [
               "reference/verifying-connection",
               "reference/troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "MCP and API",
+        "groups": [
+          {
+            "group": "MCP server",
+            "icon": "server",
+            "pages": [
+              "mcp/overview",
+              "mcp/authentication",
+              {
+                "group": "Tool reference",
+                "pages": [
+                  "mcp/tools-hyperliquid",
+                  "mcp/tools-polymarket",
+                  "mcp/tools-onchain",
+                  "mcp/tools-relay",
+                  "mcp/tools-launchpads",
+                  "mcp/tools-wallet-and-onramp"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Inference API",
+            "icon": "microchip",
+            "pages": [
+              "inference/overview",
+              "inference/examples"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Agent guides",
+        "groups": [
+          {
+            "group": "Start here",
+            "icon": "compass",
+            "pages": [
+              "guides/overview"
+            ]
+          },
+          {
+            "group": "Get set up",
+            "icon": "shield-check",
+            "pages": [
+              "guides/safe-trading-agent",
+              "guides/fund-each-venue",
+              "guides/move-funds-between-chains"
+            ]
+          },
+          {
+            "group": "Trade",
+            "icon": "chart-line",
+            "pages": [
+              "guides/polymarket-research-to-redeem",
+              "guides/hyperliquid-perp-with-tp-sl",
+              "guides/hyperliquid-stock-perps",
+              "guides/hyperliquid-outcome-markets",
+              "guides/solana-memecoin-swap",
+              "guides/tokenized-stocks-and-fx",
+              "guides/twap-and-limit-ladders",
+              "guides/track-other-traders"
+            ]
+          },
+          {
+            "group": "Build",
+            "icon": "hammer",
+            "pages": [
+              "guides/build-trading-dashboard",
+              "guides/inference-api-in-your-code"
             ]
           }
         ]
@@ -60,7 +351,7 @@
       "anchors": [
         {
           "anchor": "Full Tool Reference",
-          "href": "https://openfinance.tech/agents#capabilities",
+          "href": "/mcp/overview",
           "icon": "book-open"
         },
         {
@@ -72,14 +363,15 @@
     }
   },
   "logo": {
-    "light": "/images/OFLogo.png",
-    "dark": "/images/OFLogoWhite.png"
+    "light": "/images/logo-light.png",
+    "dark": "/images/logo-dark.png",
+    "href": "https://openfinance.tech"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "https://openfinance.tech/support"
+        "label": "Contact: dev@openfinance.tech",
+        "href": "mailto:dev@openfinance.tech"
       }
     ],
     "primary": {
@@ -99,5 +391,39 @@
       "source": "/",
       "destination": "/introduction"
     }
-  ]
+  ],
+  "description": "OpenFinance is an AI workspace for financial markets: research, trade and build across crypto, stocks, forex and prediction markets from one account and one API key.",
+  "background": {
+    "color": {
+      "light": "#F4F3EF",
+      "dark": "#1F1E1D"
+    }
+  },
+  "fonts": {
+    "heading": {
+      "family": "Inter"
+    },
+    "body": {
+      "family": "Inter"
+    }
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "styling": {
+    "eyebrows": "section",
+    "codeblocks": "system"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "claude",
+      "chatgpt"
+    ],
+    "display": "header"
+  },
+  "seo": {
+    "indexing": "all"
+  }
 }

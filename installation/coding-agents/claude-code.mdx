@@ -1,13 +1,13 @@
 ---
 title: 'Claude Code'
-description: 'Set up the OpenFinance MCP server in Claude Code by hand: add it to .mcp.json for one project or ~/.claude.json for all of them, with your API key as a header.'
+description: 'Prefer to edit config files yourself? This is the manual way to add OpenFinance to Claude Code, for a single project or for every project you work in.'
 ---
 
-If you skipped the [Quick Install](/getting-started/quick-install), you can wire the MCP server up by hand. Choose one of the two options below.
+If you used the [Quick Install](/getting-started/quick-install), you are already set up and can skip this page. Otherwise, pick where the server should live, then add the configuration below.
 
 ## Option A, Project-level
 
-Available in one project only.
+Use this when only one project should see OpenFinance.
 
 <Steps>
   <Step title="Navigate to your project">
@@ -20,7 +20,7 @@ Available in one project only.
 
 ## Option B, Global
 
-Available in all projects.
+Use this to make OpenFinance available in every project.
 
 <Steps>
   <Step title="Edit global config">
@@ -30,7 +30,7 @@ Available in all projects.
 
 ## Configuration
 
-Then paste this block with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
+Whichever option you chose, paste this block into the file with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
 
 ```json
 {
@@ -50,4 +50,4 @@ Then paste this block with your key. Please make an account at [openfinance.tech
 If `~/.claude.json` already has a `mcpServers` object, add the `"openfinance-tech": { ... }` entry inside it rather than replacing the whole file.
 </Note>
 
-Restart Claude Code, OpenFinance tools are now available.
+Restart Claude Code, and the OpenFinance tools are ready to use.

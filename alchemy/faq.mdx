@@ -1,0 +1,101 @@
+---
+title: 'Alchemy FAQ'
+sidebarTitle: 'FAQ'
+description: 'Quick answers to the questions people ask most once they start using Alchemy, grouped by stage, with a link from each one to the page that has the detail.'
+---
+
+You have met most of these answers on the way through this tab. They are collected here so you can find one fast, starting with getting set up and ending with the risks worth keeping in mind.
+
+## Getting started
+
+<AccordionGroup>
+  <Accordion title="Can I use Alchemy without signing in?">
+    Yes, to look around. You can open the page, open the samples tagged **Try me** and **Impact of AI Bubble crash**, open order tickets to see them, and view the Positions tab. Running your own question and confirming a trade ask you to sign in. See [Your first run](/alchemy/first-run).
+  </Accordion>
+  <Accordion title="What does a run cost?">
+    A live run spends AI credits from the same balance as Chat; a stronger model costs more. Samples, saved runs, views, Learn and tickets cost nothing. See [History, models and credits](/alchemy/history-and-models).
+  </Accordion>
+  <Accordion title="How long does a run take?">
+    A live run can take 3 to 4 minutes. You can move to another page of the app while it works; it keeps going in that browser tab and shows in **Recents**. Closing or refreshing the tab stops it, so the browser asks first.
+  </Accordion>
+  <Accordion title="Can I run two questions at once?">
+    Yes, each in its own tab. Asking a new question while one is running opens it in a new tab. The same question cannot run twice at once; Alchemy says it is "already running in another tab".
+  </Accordion>
+  <Accordion title="Is Alchemy the same as asking Chat?">
+    No. Alchemy is its own page with a fixed research pipeline and a structured result. The Alchemy starters on Chat's home screen open this page. See [Overview](/alchemy/overview).
+  </Accordion>
+</AccordionGroup>
+
+## Markets and odds
+
+<AccordionGroup>
+  <Accordion title="Why did Alchemy not find a market for my event?">
+    Polymarket may have no market on it, or your wording may not share enough names and words with the market's question. The summary then shows "no market prices this yet" and trades come from related markets. Reword with a name and a date. See [Writing good events](/alchemy/writing-good-events).
+  </Accordion>
+  <Accordion title="Why are Alchemy's odds different from the market's?">
+    The market's odds are a price that traders pay. Alchemy's odds are an AI model's estimate. The difference is the **Edge**, and it is the reason a trade might be worth a look. The model can be wrong, and the market often knows things the model does not.
+  </Accordion>
+  <Accordion title="Are the numbers live?">
+    No. The odds, tiles and basket prices are captured when the run finishes; the card shows "Captured" with a time. Card charts, xStocks quotes and the Hyperliquid routes in Trade Exposure load live. Odds are Polymarket mid prices. Before trading an older result, ask the question again. See [The order ticket](/alchemy/order-ticket).
+  </Accordion>
+  <Accordion title="Why does the headline market look slightly off?">
+    Alchemy picks the closest live market with real volume. Sometimes the best match is a nearby question, such as a different date. Check the related markets under **On the same curve**, and use the lightning button to trade one of those instead.
+  </Accordion>
+</AccordionGroup>
+
+## Trading
+
+<AccordionGroup>
+  <Accordion title="Does Alchemy place the whole basket for me?">
+    No. Each trade opens its own ticket, and you confirm each one. **Review N trades** lists them with an **Open ticket** button per row. See [Basket and budget](/alchemy/trading).
+  </Accordion>
+  <Accordion title="Why are some trades greyed out?">
+    Their venue is switched off in **Markets connected**, or the route is on a venue Alchemy does not trade, such as IBKR or Robinhood. Switch the venue on, or treat the route as reference.
+  </Accordion>
+  <Accordion title="Can Alchemy trade options or shares at my broker?">
+    No. IBKR and Robinhood routes are shown so you can see the coverage, and **Enable** takes you to the Connectors page, but Alchemy sends orders only to Polymarket, Hyperliquid and xStocks on Solana.
+  </Accordion>
+  <Accordion title="Does Alchemy set a stop-loss or take-profit?">
+    No. The profit target and stop on each trade are for planning. Exit yourself, for example with **Close** on the Positions tab.
+  </Accordion>
+  <Accordion title="Why was my Polymarket order rejected?">
+    Common reasons: the amount is under \$5, the market needs more shares than the amount buys, there is not enough pUSD in your Polymarket deposit wallet, or the price moved past the cap so the fill-or-kill order did not fill, which is likely on an older result. The ticket says which. See [The order ticket](/alchemy/order-ticket).
+  </Accordion>
+</AccordionGroup>
+
+## Positions and history
+
+<AccordionGroup>
+  <Accordion title="Why does a position show under Non Alchemy Trades?">
+    It is open on your account, but this browser has no Alchemy record of it: you placed it elsewhere, on another device, or the browser data was cleared. You can still close it there.
+  </Accordion>
+  <Accordion title="Does a strategy keep trading on its own?">
+    No. A strategy is the group of positions you placed from one question. Nothing runs in the background. **Strategy rules** are a draft only and start no monitoring or orders.
+  </Accordion>
+  <Accordion title="Why is my history missing on another computer?">
+    Alchemy history is saved in the browser you used, per signed-in user. It does not sync. See [History, models and credits](/alchemy/history-and-models).
+  </Accordion>
+  <Accordion title="Can I share a result?">
+    The page address names the open run, but the run itself lives in your browser, so the link does not show it to someone else. Share a screenshot or the key numbers instead.
+  </Accordion>
+</AccordionGroup>
+
+## Risks to keep in mind
+
+- Alchemy's research is written by an AI model and can be wrong or out of date.
+- Prediction market shares can lose the whole stake if the event resolves the other way.
+- Perps can be liquidated, and funding is paid or earned every hour while you hold.
+- Thin markets move when you trade them; check **Liquidity** first.
+
+Every trade needs your confirmation, and nothing in Alchemy or these docs is financial advice.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Overview" icon="flask" href="/alchemy/overview">
+    Back to the start of the Alchemy tab.
+  </Card>
+  <Card title="Troubleshooting" icon="wrench" href="/reference/troubleshooting">
+    Fixes for common errors across OpenFinance.
+  </Card>
+</CardGroup>

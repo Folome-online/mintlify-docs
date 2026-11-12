@@ -1,9 +1,9 @@
 ---
 title: 'OpenClaw'
-description: 'Add OpenFinance to OpenClaw with its config file or the openclaw mcp add command, include your API key header, and give your OpenClaw agent live trading tools.'
+description: 'Give your OpenClaw agent live market data and trading tools from your OpenFinance account, by editing one config file or by running a single CLI command.'
 ---
 
-OpenClaw supports MCP servers natively. Remote streamable HTTP endpoints like OpenFinance can be added to OpenClaw's config and invoked through any of its interfaces (TUI, messaging channels, or sub-agents).
+OpenClaw supports MCP servers natively. Remote streamable HTTP endpoints like OpenFinance can be added to OpenClaw's config and invoked through any of its interfaces (TUI, messaging channels, or sub-agents). Option A edits the config file by hand; Option B does the same thing in one command.
 
 ## Option A, edit `openclaw.json`
 
@@ -20,6 +20,7 @@ OpenClaw supports MCP servers natively. Remote streamable HTTP endpoints like Op
         "servers": {
           "openfinance-tech": {
             "url": "https://api.openfinance.tech/agent/mcp",
+            "transport": "streamable-http",
             "headers": {
               "x-api-key": "open_xxxxx"
             }
@@ -29,10 +30,10 @@ OpenClaw supports MCP servers natively. Remote streamable HTTP endpoints like Op
     }
     ```
 
-    Replace `open_xxxxx` with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
+    Keep `transport` as `streamable-http`; OpenClaw falls back to `sse` when it is omitted. Replace `open_xxxxx` with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
   </Step>
-  <Step title="Restart">
-    Restart OpenClaw, or run the reload command to refresh MCP connections.
+  <Step title="Reload">
+    Run `openclaw mcp reload` to refresh MCP connections, or restart OpenClaw.
   </Step>
 </Steps>
 
@@ -43,15 +44,16 @@ OpenClaw uses `mcp.servers`, nested under a top-level `mcp` key. This is differe
 ## Option B, CLI
 
 ```bash
-openclaw mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
+openclaw mcp add openfinance-tech --url "https://api.openfinance.tech/agent/mcp" --transport streamable-http --header "x-api-key: open_xxxxx"
 ```
 
-For wallet tools, set the header during registration as documented in the OpenClaw CLI reference for your version.
+Every request needs the header, market data included.
 
 ## Verify
 
 ```bash
 openclaw mcp list
+openclaw mcp doctor --probe
 ```
 
 `openfinance-tech` should appear in the output with a connected status.

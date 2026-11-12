@@ -1,0 +1,112 @@
+---
+title: 'Token Launches'
+description: 'Describe the token you want and the agent launches it for you. Learn which kind of launch fits your plan, what to prepare and what you cannot change later.'
+---
+
+You can do this in the OpenFinance chat or from your own agent over MCP. Either way, the agent prepares the launch, shows you every term, and sends it only after you confirm.
+
+## What it is
+
+A launch creates a new token and a market for it in one step. The market starts on a **bonding curve**: a pool that sells the token at a rising price as people buy. When enough has been bought, the token **graduates** and its liquidity moves to a regular exchange pool.
+
+OpenFinance supports three kinds of launch on two chains:
+
+| Launch | Chain | Paired against | Pick it when |
+| --- | --- | --- | --- |
+| Solana bonding curve | Solana | SOL | You want a Solana token that graduates to an exchange pool |
+| Fee-module launch | Robinhood Chain | ETH or another approved asset, including tokenized stocks such as TSLA or NVDA | You care where the trading fees go: keep, send to a wallet, split, burn, raffle or pay holders |
+| Uniswap V4 launch | Robinhood Chain | An approved quote token such as USDG | You want the token tradable through Uniswap right away |
+
+<Warning>
+A launch is permanent. The token, its name and symbol, its pair asset and its fee setup cannot be changed afterwards. Never launch "just to test". Ask for a simulation or a terms preview instead.
+</Warning>
+
+Every launch, buy, sell and fee claim needs your confirmation before it is sent, and nothing here is financial advice. Most new tokens lose value.
+
+## Before you launch
+
+- **Have funds in your wallet.** Solana launches need some SOL, and Robinhood Chain launches need the pair asset or ETH. The agent shows the exact total before you confirm, including any first buy you add.
+- **Prepare the basics:** name, symbol and an image. A description, website and social links are optional. Give links as full URLs.
+- **Decide the things you cannot change later:** the pair asset, the creator tax if any, and on a fee-module launch, the fee module.
+- **On Robinhood Chain, say which kind you want.** The two Robinhood Chain launches create different pools that are not interchangeable. If you do not say, the agent asks.
+- **Enable your Solana wallet for agent trading** before a Solana launch. If it is not enabled, the request fails with a 412 error and instructions.
+
+<Frame caption="A simulated launch in chat: every term is shown before anything is sent">
+  <img src="/images/screens/launch-chat-simulate-launch.png" alt="OpenFinance chat showing a simulated token launch with name, symbol, pair asset, fee module and creator tax, before confirmation" />
+</Frame>
+
+## Ask in the app
+
+Prompts like these work in the chat:
+
+- "Launch a token called Rocket, symbol RKT, on Solana. Here is the image. Show me the terms first."
+- "Which assets can I pair a token against on Robinhood Chain?"
+- "Launch a token paired with TSLA on Robinhood Chain that burns its trading fees. Simulate it first."
+- "What are the current launch terms for an ETH pair on Robinhood Chain?"
+- "Show the tokens I have launched and any creator fees I can claim."
+- "Buy 0.1 SOL of my token on its curve. Show the quote first."
+
+## Fee modules on Robinhood Chain
+
+A fee-module launch fixes where the token's trading fees go:
+
+| Module | Where fees go |
+| --- | --- |
+| Keep | Your own wallet. This is the default, and the only module you can point at a different wallet later |
+| Wallet | One wallet you name |
+| Split | Several wallets, by shares you set |
+| Burn | Buying the token back and burning it |
+| Raffle | A recurring prize draw among holders |
+| Holders | Paid out to holders in proportion to what they hold |
+
+## After the launch
+
+- **Trading.** Before graduation, a token trades on its curve. After graduation, a Solana token trades through Jupiter like any other token; see [Onchain tokens](/markets/onchain-tokens).
+- **Creator fees.** Ask what you can claim, then claim it. On some Robinhood Chain launches, fees must first be swept from the curve before they can be claimed; the agent does this in two confirmed steps.
+- **Holdings.** Tokens from Robinhood Chain launches live on Robinhood Chain. When you ask what you hold, make sure that chain is checked.
+- **A page to share.** Each token launched through OpenFinance has a public page at `openfinance.tech/launchpad/` followed by the token address.
+
+## From your own agent
+
+Each kind of launch has its own tool:
+
+| Launch | Tool |
+| --- | --- |
+| Solana bonding curve | `openfinance-launchpad` |
+| Fee-module launch on Robinhood Chain | `openfinance-launchpad-wrapper` |
+| Uniswap V4 launch on Robinhood Chain | `openfinance-launchpad-v4` |
+| Pair assets, launch terms and fee claims for earlier Pons launches | `openfinance-pons-launch` |
+
+See [Launchpad tools](/mcp/tools-launchpads) for actions and required checks.
+
+## Limits
+
+- Launch settings such as total supply and the graduation threshold are fixed by the launchpad, not chosen per launch.
+- Pair assets on Robinhood Chain come from a live approved list that can change. Ask for the list before you choose.
+- A raffle launch needs its supporting services to be live. The agent checks readiness first.
+- Launch terms, taxes and thresholds are read live at launch time. Treat any number you saw earlier as out of date.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I change the fee module later?">
+    Only the Keep module can be pointed at a different wallet later. Burn, split, raffle and holders are fixed for good.
+  </Accordion>
+  <Accordion title="Can I buy some of my own token at launch?">
+    Yes. You can add a first buy that happens in the same transaction as the launch. It is added to the total you confirm.
+  </Accordion>
+  <Accordion title="Is there a launch page in the app?">
+    Launching is done by asking the agent. There is no separate launch form to fill in.
+  </Accordion>
+</AccordionGroup>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Launchpad tools" icon="wrench" href="/mcp/tools-launchpads">
+    Tool reference for agents.
+  </Card>
+  <Card title="Onchain tokens" icon="coins" href="/markets/onchain-tokens">
+    Trade a token after it graduates.
+  </Card>
+</CardGroup>

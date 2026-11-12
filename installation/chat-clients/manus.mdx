@@ -1,9 +1,9 @@
 ---
 title: 'Manus'
-description: 'Add OpenFinance to Manus as a custom MCP connector, by direct URL setup or JSON import with your API key, so the Manus agent can research markets and trade.'
+description: 'Give the Manus agent live market and trading tools by adding OpenFinance as a custom MCP connector, either by typing in the URL or by importing a JSON file.'
 ---
 
-Manus supports custom MCP connectors directly through its UI. Because OpenFinance runs over Streamable HTTP, you can add it without any local wrapper.
+Manus supports custom MCP connectors directly through its UI. Because OpenFinance runs over Streamable HTTP, you can add it without any local wrapper. Pick whichever of the two setups below you find easier; both use your API key.
 
 ## Option 1, Direct Configuration (URL)
 
@@ -61,4 +61,4 @@ Once saved, OpenFinance is available to the Manus agent across all your tasks. Y
 
 ## Verify
 
-Start a new task and ask the agent to list available connectors, or invoke an OpenFinance tool directly. Manus will surface a connector authorization step the first time wallet tools are called.
+Start a new task and ask the agent to list available connectors, or to call an OpenFinance tool such as `get_wallet_addresses`.

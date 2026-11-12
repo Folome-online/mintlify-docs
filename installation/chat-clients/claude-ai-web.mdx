@@ -1,9 +1,9 @@
 ---
 title: 'Claude.ai (Web)'
-description: 'Add OpenFinance as a custom connector on Claude.ai: paste the MCP server URL in Settings, Connectors, add your API key header, and switch it on in any chat.'
+description: 'Bring OpenFinance into your Claude.ai chats as a custom connector. You sign in once with your OpenFinance account, so there is no API key to copy or store.'
 ---
 
-Because OpenFinance MCP runs over Streamable HTTP, it works directly with Claude.ai's custom connectors.
+Because the OpenFinance MCP server runs over Streamable HTTP, Claude.ai can connect to it directly, with nothing to install. The whole setup happens in Claude.ai's settings.
 
 <Steps>
   <Step title="Open Connectors settings">
@@ -15,10 +15,14 @@ Because OpenFinance MCP runs over Streamable HTTP, it works directly with Claude
   <Step title="Fill in the details">
     - **Name**: `OpenFinance`
     - **URL**: `https://api.openfinance.tech/agent/mcp`
-    - **Custom header** (required): name `x-api-key`, value `open_xxxxx`
+
+    No header is needed. Claude.ai signs in to your OpenFinance account with OAuth.
   </Step>
-  <Step title="Save and enable">
-    Click **Add**. Open any chat and click the **tools menu**. OpenFinance should appear, toggle it on for the conversation.
+  <Step title="Connect and approve">
+    Click **Add**, then click **Connect** on the OpenFinance connector. You are sent to OpenFinance: sign in and click **Authorize** on the consent page.
+  </Step>
+  <Step title="Switch it on">
+    Open any chat and click the **tools menu**. OpenFinance should appear, toggle it on for the conversation.
   </Step>
 </Steps>
 

@@ -1,11 +1,13 @@
 ---
 title: 'Verifying the Connection'
-description: 'Check the OpenFinance MCP server responds: call tools/list with curl and your x-api-key header, then call a wallet tool to confirm your key and wallet work.'
+description: 'If your client shows no tools or you want to rule out a setup problem, two quick curl calls tell you whether the server and your API key are both working.'
 ---
 
-Hit the endpoint directly to confirm it responds. Every call needs OAuth sign-in or an `x-api-key` header; curl uses the header, so please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
+Testing from the terminal takes your editor or chat client out of the picture. Every call needs OAuth sign-in or an `x-api-key` header; curl uses the header, so please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
 
 ## List the tools
+
+Start by asking the server which tools it offers:
 
 ```bash
 curl -i https://api.openfinance.tech/agent/mcp \
@@ -18,6 +20,8 @@ curl -i https://api.openfinance.tech/agent/mcp \
 A `200 OK` with a JSON-RPC payload listing tools means you are good to go.
 
 ## Call a wallet tool
+
+Then call a tool that reads your own account. This confirms that your key and your wallet both work:
 
 ```bash
 curl -i https://api.openfinance.tech/agent/mcp \

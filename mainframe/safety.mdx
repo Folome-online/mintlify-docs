@@ -1,0 +1,78 @@
+---
+title: 'Keys and safety'
+sidebarTitle: 'Keys and safety'
+description: 'A few Mainframe templates can trade with your OpenFinance key. Here is how they keep that key safe, and what to check in your own copy before you use it.'
+---
+
+Six templates fall into that group: AI assisted Perps dex, Pair Trader Dex, Squiggly, Arb Funding, HIP-4 Up/Down Edge and Poly Up/Down Assist. They all follow the same rules for your key, and because those rules are written into their prompts, you can check that your own build follows them too.
+
+Every trade needs your confirmation, and nothing in these templates is financial advice.
+
+## The short version
+
+- Charts and market data work without a key. Trading, balances and (in some templates) the AI turn on only after you paste **your own** OpenFinance key into **your own** copy.
+- The key is pasted in the browser and kept only in that browser tab. Close the tab and it is gone.
+- The key is never written into the code, an environment variable, a cookie, a URL or a log.
+- Do not share your deployed link. Treat your copy as a private tool.
+
+<Warning>
+**Your OpenFinance key can place trades and move funds.** It is the one key to your OpenFinance account. Never paste it into a copy of a template that someone else deployed, never put it in a chat or a screenshot, and never ask the builder to save it in a file.
+</Warning>
+
+## How the key is handled
+
+Here are the rules in full, as the prompts state them:
+
+| Rule | What the prompts require |
+| --- | --- |
+| Where the key lives | Only in the browser tab's session storage. Never in local storage, a cookie, a URL or app state that gets logged |
+| How it is entered | A password-style field that checks for the `open_` format. A **Forget key** button clears it |
+| How it is sent | Per request, as the `x-api-key` header, to the app's own small server route, which forwards it to `api.openfinance.tech` and to no other host. This route exists because the OpenFinance API does not accept direct browser calls from other sites |
+| What the route keeps | Nothing. It does not cache or log headers |
+| Secrets in the code | None. The prompts forbid any key in the repository, and their acceptance checks search the code for one |
+| Text from APIs | Shown as plain text only, never run as HTML, so injected code cannot read the key from the tab |
+
+Some templates add stricter limits:
+
+- **AI assisted Perps dex** and **Pair Trader Dex** only let their server route reach a short allowlist of OpenFinance routes. Withdrawals and transfers are not on it, so the app's server can never be used to move funds out.
+- **Pair Trader Dex** also refuses requests from other websites, never follows redirects, and sets strict browser security headers.
+- **Arb Funding** is a dry run by default. It sends real orders only when live trading is switched on in its deployment settings, you tick **armed**, and you confirm each send.
+
+## Every trade asks first
+
+Whatever happens to the key, no order goes out on its own. Each trading template shows what it is about to send and waits for you:
+
+- Squiggly and Arb Funding show a browser confirm that names the action before each send.
+- HIP-4 Up/Down Edge and Poly Up/Down Assist repeat the whole order, side, shares and price, and say that it is a real order.
+- AI assisted Perps dex opens a confirm box with the order value, leverage, margin and estimated liquidation. Pair Trader Dex lists every leg with the leverage, margin and current funding. Both read the live order book again and send nothing if the price moved more than 1% since you confirmed.
+
+Check that your build behaves this way before you trust it with funds. If a send ever goes through without asking, stop and ask the builder to fix it.
+
+## Keep your copy private
+
+The prompts are written as personal tools. Their own warnings tell you not to share the deployed link or the code. Anyone who can open your copy and has your key could trade with your funds, and anyone who pastes their key into your copy is trusting you with theirs.
+
+- Share the template with a friend, not your deployment. They can deploy their own copy from Mainframe.
+- Keep the GitHub repository private if you add anything personal to it.
+- Never add your key to Vercel environment variables, even "just for testing".
+
+## Demos are previews
+
+The demos in the gallery are previews. Trading demos are captured pictures of the finished app with live data at the time of capture; prices, calls and positions in them are not current and do not belong to any account you can see. Website demos are the page itself running in the viewer, with no account behind it. Nothing in a demo can trade.
+
+## If something goes wrong
+
+- **Your key ended up somewhere it should not be** (someone else's copy, a chat, a screenshot or a file): close that tab, treat the key as exposed, and email [dev@openfinance.tech](mailto:dev@openfinance.tech).
+- **An order did not do what you expected:** check your positions and open orders, in your copy of the app or by asking in [Chat](/product/chat), before you try again.
+- **The build put a key in the code:** remove it, push the fix, and treat that key as exposed.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="API keys" icon="key" href="/getting-started/api-keys">
+    Where to find your `open_` key.
+  </Card>
+  <Card title="Safety and custody" icon="shield-halved" href="/reference/safety-and-custody">
+    How your OpenFinance wallet and funds are held.
+  </Card>
+</CardGroup>

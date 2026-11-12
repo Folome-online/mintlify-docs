@@ -1,9 +1,9 @@
 ---
 title: 'Installing Skills'
-description: 'Install the OpenFinance SKILL.md playbooks with npx skills add so Claude Code, Codex, Cursor and other coding agents know how to quote, size and place trades.'
+description: 'Give your coding agent the OpenFinance playbooks with a single command, choose whether they live in one project or in all of them, and check they loaded.'
 ---
 
-Skills are SKILL.md-format playbooks that auto-load into your editor when relevant. They work across Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, and most modern coding agents.
+Skills are SKILL.md-format playbooks that auto-load into your editor when relevant, so your agent knows how to quote, size and place trades on OpenFinance. They work across Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, and most modern coding agents.
 
 ## One command (auto-detects your editor)
 
@@ -22,23 +22,27 @@ cd ~/code/my-trading-bot
 npx skills add openfinance-tech/skills -y
 ```
 
-This creates `.claude/skills/openfinance-tech/` (and equivalents for other agents) inside the project. Commit the folder to git so your team gets the same playbooks.
+This creates one folder per skill under `.claude/skills/`, for example `.claude/skills/openfin-hyperliquid/` (and equivalents for other agents), inside the project. Commit the folder to git so your team gets the same playbooks.
 
 ## Global install
+
+To make the skills available everywhere instead, add `--global`:
 
 ```bash
 npx skills add openfinance-tech/skills -y --global
 ```
 
-Installs to `~/.claude/skills/` so the skills are available in every project.
+This installs to `~/.claude/skills/`, so the skills are available in every project.
 
 ## Verify
+
+Whichever way you installed, check what landed:
 
 ```bash
 npx skills list
 ```
 
-You should see `openfinance-tech` in the output. In Claude Code, type `/` and the skill commands will appear in the slash-command menu.
+You should see the OpenFinance skills, such as `openfin-setup` and `openfin-hyperliquid`, in the output. In Claude Code, type `/` and the skill commands will appear in the slash-command menu.
 
 <Note>
 Skills installed via `npx skills add` only apply to local editors. They do not apply to Claude.ai web or ChatGPT.

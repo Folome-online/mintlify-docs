@@ -1,0 +1,109 @@
+---
+title: 'Work a Large Order With TWAP or a Limit Ladder'
+sidebarTitle: 'TWAP and limit ladders'
+description: 'Big orders can fill at worse prices than the one on your screen. Learn how to break one up with your agent, on Hyperliquid or Polymarket, before you send it.'
+---
+
+By the end of this guide you will have worked a large order without hitting the book all at once: either as a TWAP that trades in slices over time, or as a ladder of limit orders spread across prices.
+
+Here is why it matters. A single large market order eats through the order book and fills at worse and worse prices. The two methods avoid that in different ways:
+
+| | TWAP | Limit ladder |
+| --- | --- | --- |
+| Spreads the order over | Time | Price |
+| How it fills | Market slices, automatically, until the duration ends | Only when the price reaches each level |
+| Where | Hyperliquid | Hyperliquid and Polymarket |
+| Good for | Getting filled with less impact | Buying dips or selling into strength at chosen prices |
+
+## What you need
+
+- Funds on the venue: USDC on Hyperliquid, or pUSD in your Polymarket deposit wallet. See [Fund each venue](/guides/fund-each-venue).
+- A total size, and either a duration (TWAP) or a price range and number of levels (ladder).
+
+## Run a TWAP on Hyperliquid
+
+<Steps>
+  <Step title="Check the book first">
+    ```text
+    Show the Hyperliquid order book and 24 hour volume for SOL perps.
+    ```
+
+    Compare your total size with what sits near the top of the book. That tells you whether a TWAP is worth it.
+  </Step>
+  <Step title="Preview the TWAP">
+    ```text
+    Buy 20 SOL perps with a TWAP over 60 minutes, with randomized timing. Show me the total size, duration, slice count and total value before placing it.
+    ```
+
+    <Frame caption="A TWAP summary in chat with size, duration and slices, waiting for confirmation">
+      <img src="/images/screens/guide-twap-summary.png" alt="OpenFinance chat showing a Hyperliquid TWAP order summary for SOL with total size, duration in minutes, randomized timing, slice count and total value, and a Confirm this action card" />
+    </Frame>
+  </Step>
+  <Step title="Start it (moves money)">
+    Reply yes. The TWAP now trades on its own until the duration ends.
+  </Step>
+  <Step title="Watch the slices">
+    ```text
+    Show my TWAP fills so far: filled size, average price and what is left.
+    ```
+  </Step>
+  <Step title="Stop it early if you need to (moves money)">
+    ```text
+    Stop my running SOL TWAP.
+    ```
+
+    Slices that already filled stay filled. Your position is whatever has executed so far.
+  </Step>
+</Steps>
+
+## Place a limit ladder
+
+<Steps>
+  <Step title="Describe the ladder">
+    ```text
+    On Hyperliquid, place 5 limit buy orders for ETH perps, 0.02 ETH each, spaced evenly from 2% to 6% below the current mid price, good till cancelled. Show me every order with its price before placing.
+    ```
+
+    Several orders can go in one request, and you confirm them together.
+  </Step>
+  <Step title="Place it (moves money)">
+    Check every price and size, then reply yes.
+  </Step>
+  <Step title="Manage the ladder">
+    ```text
+    Show my open ETH orders. Cancel any that have not filled in 24 hours.
+    ```
+  </Step>
+</Steps>
+
+On Polymarket the same idea works with a batch of limit orders:
+
+```text
+On that Polymarket market, place 4 limit buys for Yes at 0.38, 0.36, 0.34 and 0.32, 10 dollars each. Show the batch first.
+```
+
+Every order needs your confirmation, and nothing here is financial advice.
+
+## Check it worked
+
+- For a TWAP: the fills add up to the total size by the end, or to what filled before you stopped it.
+- For a ladder: every level shows in your open orders at the price you approved.
+
+## Common mistakes
+
+- **Sizes that do not match the market's precision.** Hyperliquid rejects sizes with too many decimals. Let the agent round to the market's size step.
+- **Prices off the tick.** On Polymarket each price must sit on the market's tick size.
+- **Levels too far from the market.** Hyperliquid rejects prices too far from the current price. Keep the ladder within a sensible range.
+- **Forgetting a ladder is live.** Resting orders can fill days later. Cancel what you no longer want.
+- **Treating TWAP as a price guarantee.** Each slice fills at the market at that moment.
+
+## Next guides
+
+<CardGroup cols={2}>
+  <Card title="Perp with take-profit and stop-loss" icon="chart-line" href="/guides/hyperliquid-perp-with-tp-sl">
+    Attach exits once you are in.
+  </Card>
+  <Card title="Hyperliquid tool" icon="wrench" href="/mcp/tools-hyperliquid">
+    TWAP and order parameters for your own code.
+  </Card>
+</CardGroup>

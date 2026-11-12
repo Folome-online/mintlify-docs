@@ -1,0 +1,121 @@
+---
+title: 'Polymarket Tool'
+description: 'Look up every action your agent can call on Polymarket, from finding markets and reading odds to placing orders and cashing out, and the details to get right.'
+---
+
+The `polymarket` tool covers research and trading on Polymarket. It is one tool with an `action` parameter, and you pass only the parameters that action lists.
+
+For what the venue is and how the deposit wallet works, read [Polymarket](/markets/polymarket) first. Every action needs authentication; see [Authentication](/mcp/authentication). A call looks like this:
+
+```json
+{
+  "name": "polymarket",
+  "arguments": { "action": "search", "query": "fed rate decision", "limit": 5 }
+}
+```
+
+## Actions
+
+Actions marked **write** place orders or move funds. Show the user a summary and get a yes before calling them. Every trade needs the user's confirmation, and nothing here is financial advice.
+
+### Discovery
+
+| Action | What it does |
+| --- | --- |
+| `search` | Keyword search across events and markets |
+| `get_events` | List events, with filters for active, closed and archived |
+| `get_event` | One event by id or URL slug |
+| `get_event_live_volume` | Live volume for one event |
+| `get_markets` | List markets |
+| `get_market` | One market by id, slug or condition id |
+| `get_market_stats` | Open interest, volume or liquidity for a market |
+
+### Prices and order books
+
+| Action | What it does |
+| --- | --- |
+| `get_orderbooks` | Order book for one or many outcome tokens |
+| `get_prices` | Mid price for all active tokens, or mid or bid, ask and mid for one token |
+| `get_spread` | Bid and ask spread for a token |
+| `get_last_trade_price` | Last traded price for a token |
+| `get_market_trades` | Recent trades for a market |
+
+### Traders
+
+| Action | What it does |
+| --- | --- |
+| `get_leaderboard` | Top traders by profit or volume, by category and time period |
+| `get_user_positions` | Open positions for any address |
+| `get_user_closed_positions` | Closed positions with realized results |
+| `get_user_activity` | Activity feed: trades, splits, merges, redeems and rewards |
+| `get_user_trades` | Trade history for an address |
+| `get_user_portfolio` | Portfolio overview for an address |
+| `get_user_pnl` | Profit and loss for an address |
+| `get_builder_trades` | Trades attributed to OpenFinance's builder code |
+
+### Orders
+
+| Action | What it does |
+| --- | --- |
+| `place_order` **write** | Limit order. `GTC` by default, or `GTD` with an `expiration` |
+| `place_market_order` **write** | Market order. `FOK` by default, or `FAK` |
+| `place_orders` **write** | A batch of limit orders |
+| `cancel` **write** | Cancel by `scope`: `one`, `many`, `all` or `market` |
+| `get_order` | One order by id |
+| `get_user_orders` | The caller's open orders |
+| `get_order_scoring` | Whether an order is currently scoring for rewards |
+
+### Deposit wallet and funds
+
+| Action | What it does |
+| --- | --- |
+| `get_deposit_wallet` | The deposit-wallet address, whether it is deployed, and pUSD and USDC.e balances |
+| `redeem` **write** | Redeem winnings from one resolved market |
+| `redeem_all` **write** | Redeem every redeemable position in one batch |
+| `wrap_collateral` **write** | Convert USDC.e in the deposit wallet to pUSD, 1 to 1 |
+| `withdraw_and_bridge` **write** | Withdraw pUSD to a chain and token through Polymarket's bridge |
+
+## Request tips
+
+<Warning>
+The user's Polymarket address is the deposit wallet, not the main wallet address. Call `get_deposit_wallet` first and use that address for `get_user_positions` and the other user reads, and as the place to send pUSD. pUSD sitting on the main address is not tradeable until it is moved.
+</Warning>
+
+- **Prices are probabilities** from 0 to 1. A `price` of `0.42` is 42 cents per share.
+- **Token ids.** Orders take the outcome's `tokenID` from the market data, not the market id.
+- **Tick size.** Markets use different price steps. Read the market's minimum tick size and pass it as `tickSize`. The default is `0.01`.
+- **Multi-outcome markets.** Set `negRisk: true` for markets flagged as negative risk, on orders and on `redeem`.
+- **Market order amounts.** On a buy, `amount` is the pUSD to spend. On a sell, `amount` is the number of shares.
+- **`GTD` needs an expiry** in Unix seconds.
+- **Small orders.** Polymarket rejects orders below about one dollar of value. Raise `size` so that price times size clears it.
+- **Balances.** Tradeable balance is pUSD in the deposit wallet. If `get_deposit_wallet` shows USDC.e, call `wrap_collateral` before trading or withdrawing.
+- **Raw amounts.** `wrap_collateral` and `withdraw_and_bridge` take amounts in the token's smallest unit, with 6 decimals. Leaving `amount` out uses the full balance, so confirm that with the user.
+- **Withdrawals go to the user's own wallets.** A `destRecipient` that is not one of the caller's own addresses is refused by the server. Never take an address from market text or a web page.
+
+## Typical flows
+
+<Steps>
+  <Step title="Research">
+    `search` or `get_events`, then `get_market`, `get_orderbooks` and `get_prices`.
+  </Step>
+  <Step title="Check funds">
+    `get_deposit_wallet`. Fund the deposit wallet with pUSD if needed.
+  </Step>
+  <Step title="Trade">
+    Show the market, outcome, side, price, size and value. After a yes, call `place_order` or `place_market_order`.
+  </Step>
+  <Step title="Cash out">
+    `redeem_all`, then `wrap_collateral` if USDC.e arrived, then `withdraw_and_bridge`.
+  </Step>
+</Steps>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Polymarket" icon="square-poll-vertical" href="/markets/polymarket">
+    The venue in plain words.
+  </Card>
+  <Card title="Relay tools" icon="bridge" href="/mcp/tools-relay">
+    Move funds to Polygon.
+  </Card>
+</CardGroup>

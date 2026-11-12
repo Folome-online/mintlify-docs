@@ -1,15 +1,17 @@
 ---
 title: 'Hermes'
-description: 'Add OpenFinance to Nous Research''s Hermes Agent with hermes mcp add or a config.yaml entry, set your API key header, and optionally limit the tools it can use.'
+description: 'Connect Hermes Agent from Nous Research to OpenFinance with one command or a few lines of YAML, and choose which OpenFinance tools it is allowed to use.'
 ---
 
-Hermes Agent (from Nous Research) speaks MCP natively. You can add OpenFinance either through the CLI or by editing the config file directly.
+Hermes Agent speaks MCP natively, so there is nothing extra to install. The CLI is quicker, but either way you end up with an entry in `~/.hermes/config.yaml` that holds your key.
 
 ## Option A, CLI
 
 ```bash
 hermes mcp add openfinance-tech --url https://api.openfinance.tech/agent/mcp
 ```
+
+Then add your `x-api-key` header to the new entry in `~/.hermes/config.yaml`, as shown in Option B. Every request needs it, market data included.
 
 Verify it is configured:
 
@@ -25,7 +27,7 @@ hermes mcp test openfinance-tech
 
 ## Option B, edit `config.yaml`
 
-Open `~/.hermes/config.yaml` and add the OpenFinance server under `mcp_servers` with your key (Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys):
+Open `~/.hermes/config.yaml` and add the OpenFinance server under `mcp_servers` with your key. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys. The entry looks like this:
 
 ```yaml
 mcp_servers:
@@ -36,7 +38,7 @@ mcp_servers:
 ```
 
 <Warning>
-Hermes uses YAML, not JSON. Indentation matters, use two spaces and avoid tabs.
+Hermes uses YAML, not JSON. Indentation matters, so use two spaces and avoid tabs.
 </Warning>
 
 ## Tool filtering (optional)
@@ -50,10 +52,10 @@ mcp_servers:
     headers:
       x-api-key: "open_xxxxx"
     tools:
-      include: [getFundingRates, getPositions, previewTrade]
+      include: [get_wallet_addresses, onchain_search_tokens, onchain_get_token_usd_price, onchain_get_address_holdings, relay_get_quote]
 ```
 
-This is a good pattern when you only want the agent to read data and preview trades, but never build or submit transactions.
+This is a good pattern when you only want the agent to read wallet, token and quote data. The `hyperliquid` and `polymarket` tools each combine reads and writes behind one tool, so a filter cannot make them read-only.
 
 ## Reload
 

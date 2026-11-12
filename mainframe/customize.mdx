@@ -1,0 +1,126 @@
+---
+title: 'Customize a template'
+sidebarTitle: 'Customize'
+description: 'Make a template your own, either by editing its prompt before the build or by asking for changes once it runs, with ready-made requests you can paste.'
+---
+
+Both routes end in the same place, code and a site that you own, so the real question is timing. A few changes are easier to make in the prompt, before anything exists; most are quicker to ask for once you can see the app in the preview.
+
+## Pick the right moment
+
+As a rule of thumb, change what shapes the whole app before the build, and everything else after:
+
+| Change | Best moment | Why |
+| --- | --- | --- |
+| Brand name, copy, colours, fonts | After the build | Quick, and you can see each change in the preview |
+| A different data source or market list | Before the build | The whole app is shaped around its data; changing it early avoids rework |
+| A new feature, such as alerts or a new order type | After the build | Add one feature at a time on top of a working app |
+| Removing a large part of the app | Before the build | Leaving it out of the prompt is cleaner than deleting it later |
+| Key handling, safety rules, allowed trading routes | Do not loosen them | These rules protect your funds; see [Keys and safety](/mainframe/safety) |
+
+## Edit the prompt before you build
+
+Use this route for the changes the table marks as before the build.
+
+<Steps>
+  <Step title="Copy the prompt">
+    Open the card's **Prompt** window and click **Copy prompt**.
+  </Step>
+  <Step title="Edit it in any text editor">
+    Change the names, copy or lists you care about. Keep the structure, the exact URLs and the acceptance check: they are what makes the result predictable.
+  </Step>
+  <Step title="Paste it into Build mode">
+    Open [Chat](/product/chat), switch to **Build**, paste the edited prompt and send it.
+  </Step>
+</Steps>
+
+<Tip>
+Change words and values, not the engineering. Prompts such as Pair Trader Dex contain every file of a tested app and ask the builder not to rewrite anything; editing that code by hand in the prompt is the easiest way to break it. Ask for changes after the build instead.
+</Tip>
+
+## Ask for changes after the build
+
+For everything else, stay in the chat where the template was built. Describe one change at a time, look at the preview, then push and redeploy. Name the part of the screen you mean and the result you want.
+
+### Ten change requests you can paste
+
+Each of these works as a message on its own. Swap in your own names, colours and links.
+
+```text
+Rename the site to "Northwind Studio" everywhere, including the page title and the logo text.
+```
+
+```text
+Change the accent colour to #ff7a1a and use it for every primary button.
+```
+
+```text
+Replace the background video with this file URL: https://example.com/my-video.mp4. Keep the same crop and loop.
+```
+
+```text
+Make the headline 20% smaller on phones and keep it on two lines.
+```
+
+```text
+Add a fourth nav link called "Pricing" that scrolls to a new pricing section with three plans.
+```
+
+```text
+Set the default chart basket to BTC, ETH, SOL, HYPE and the stocks NVDA and TSLA.
+```
+
+```text
+Make 15 minutes the default lookback and remember the last one I picked.
+```
+
+```text
+Add a Limit tab to the trade ticket with a price field and a Mid button, and list resting orders in Open Orders.
+```
+
+```text
+Send me a browser notification when a funding rate in the table goes above 30% APR.
+```
+
+```text
+The preview shows an error on load. Find the cause and fix it, then run the acceptance check again.
+```
+
+When the change looks right, ship it:
+
+```text
+Push these changes to GitHub and redeploy to Vercel.
+```
+
+## Tips for good results
+
+- **One change per message.** Small steps are easier to check and easier to undo.
+- **Point at the screen.** "The green button under the ticket" works better than "the button".
+- **Keep the acceptance check.** After a big change, ask the builder to run the template's acceptance checks again.
+- **Keep keys out of code.** Never paste your OpenFinance key into the chat or ask for it to be put in a file or an environment variable. Trading templates take the key in the browser only.
+- **Test trading changes with small sizes**, and check that every send still asks you to confirm.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I use parts of two templates together?">
+    Yes. Build one template, then ask for a feature from the other in plain words, for example "add a ratio chart like Pair Trader Dex below the main chart". Paste the relevant part of the other prompt if you want it exact.
+  </Accordion>
+  <Accordion title="Can I change a template after it is deployed?">
+    Yes. Ask for the change in the same chat, then push and redeploy. The address stays the same.
+  </Accordion>
+  <Accordion title="Do my changes affect the template in the gallery?">
+    No. Your copy is separate. The gallery template and other people's copies do not change.
+  </Accordion>
+</AccordionGroup>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="How it works" icon="diagram-project" href="/mainframe/how-it-works">
+    The full flow from demo to deployed site.
+  </Card>
+  <Card title="Build mode" icon="hammer" href="/product/build-mode">
+    Preview, Push, Deploy and the Build panel.
+  </Card>
+</CardGroup>

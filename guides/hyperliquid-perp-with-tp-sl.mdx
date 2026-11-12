@@ -1,0 +1,97 @@
+---
+title: 'Open a Hyperliquid Perp With Take-Profit and Stop-Loss'
+sidebarTitle: 'Perp with TP and SL'
+description: 'Decide where you will take profit and where you will cut a loss before you open the trade, then let your agent place the entry and both exits together.'
+---
+
+By the end of this guide you will have opened a perp position on Hyperliquid with its take-profit and stop-loss attached, and checked that both exit orders are resting on the book.
+
+A perp tracks a price with no expiry. You can go long or short with leverage, and you pay or receive funding while the position is open. A **take-profit** closes the position when the price reaches your target; a **stop-loss** closes it when the price moves against you by the amount you chose. Hyperliquid can group both with the entry in one order. See [Hyperliquid](/markets/hyperliquid).
+
+## What you need
+
+- USDC in your Hyperliquid account. See [Fund each venue](/guides/fund-each-venue).
+- A plan: market, direction, size, leverage, and the two exit prices. Decide these before you open the chat.
+
+## Steps
+
+<Steps>
+  <Step title="Read your balance and the market">
+    ```text
+    What is my Hyperliquid balance and do I have open positions? Then show ETH's mid price, funding rate, open interest and maximum leverage.
+    ```
+
+    You should get one USDC balance. If the agent mentions it switched your account to unified mode, that is a one-time setup step that lets spot and perp USDC count as one balance.
+  </Step>
+  <Step title="Set leverage and margin mode (changes your account)">
+    ```text
+    Set ETH leverage to 3x, isolated margin. Show me the change first.
+    ```
+
+    Isolated margin limits a loss to the margin set aside for this one position. Cross margin shares your whole balance across positions. Changing leverage alters the liquidation risk of an existing position, so the agent asks first.
+  </Step>
+  <Step title="Ask for the order with its exits">
+    ```text
+    Long 0.1 ETH at market on Hyperliquid, with a take-profit 5% above entry and a stop-loss 3% below entry, grouped with the entry. Show me the full order, including the estimated liquidation price, before placing it.
+    ```
+
+    Read the summary: market, side, size in ETH and in dollars, order type, leverage and margin mode, take-profit and stop-loss trigger prices, and the liquidation price. The stop-loss must sit between your entry and the liquidation price, or it will never get the chance to fire.
+
+    <Frame caption="A perp order summary with take-profit and stop-loss, waiting for confirmation">
+      <img src="/images/screens/guide-hl-perp-tp-sl-summary.png" alt="OpenFinance chat showing a Hyperliquid ETH long order summary with size, leverage, take-profit and stop-loss trigger prices, estimated liquidation price and a Confirm this action card" />
+    </Frame>
+  </Step>
+  <Step title="Place it (moves money)">
+    Reply yes if every number matches your plan.
+  </Step>
+  <Step title="Verify the position and the exits">
+    ```text
+    Show my ETH position, and list my open orders with trigger prices and reduce-only flags.
+    ```
+
+    You should see the position plus two trigger orders, one take-profit and one stop-loss, both reduce-only.
+  </Step>
+  <Step title="Add exits to a position you already hold (moves money)">
+    If you opened a position earlier without exits, attach them now:
+
+    ```text
+    Attach a stop-loss at 2900 and a take-profit at 3400 to my existing ETH position. Show me the orders first.
+    ```
+  </Step>
+  <Step title="Close or adjust later (moves money)">
+    ```text
+    Move my ETH stop-loss to my entry price.
+    ```
+
+    ```text
+    Close half of my ETH position at market, reduce-only.
+    ```
+  </Step>
+</Steps>
+
+Every order needs your confirmation, and nothing here is financial advice. Leverage can lose your whole margin.
+
+## Check it worked
+
+- The position size and entry match the fill.
+- Both trigger orders show in open orders with the prices you approved.
+- Ask "what are my fills in the last hour?" to see exactly what executed.
+
+## Common mistakes
+
+- **Stops past the liquidation price.** At high leverage the liquidation price can sit closer than your stop. Lower leverage or tighten the stop.
+- **Size in dollars sent as units.** Say "0.1 ETH" or "300 dollars of ETH" clearly. The agent converts dollars to the right size.
+- **Forgetting the exits on a manual close.** If you close a position some other way, ask the agent to cancel any exit orders still resting.
+- **Prices too far from the market.** Hyperliquid rejects them. Ask for a fresh mid price and retry.
+- **Ignoring funding.** A position held for days pays or receives funding. Ask for your funding history to see the effect.
+
+## Next guides
+
+<CardGroup cols={2}>
+  <Card title="Stock and FX perps on Hyperliquid" icon="building-columns" href="/guides/hyperliquid-stock-perps">
+    The same flow on HIP-3 markets.
+  </Card>
+  <Card title="Work a large order" icon="layer-group" href="/guides/twap-and-limit-ladders">
+    TWAP and limit ladders for bigger entries.
+  </Card>
+</CardGroup>

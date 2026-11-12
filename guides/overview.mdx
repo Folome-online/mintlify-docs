@@ -1,0 +1,100 @@
+---
+title: 'Agent Guides'
+sidebarTitle: 'Overview'
+description: 'Pick a real job, such as funding a venue or placing your first trade, and follow one guide all the way from the setup through to checking that it worked.'
+---
+
+Each guide gives you the exact prompts to paste into your agent, tells you what a good answer looks like, and shows you how to confirm the result yourself. The reference pages explain each venue and tool on its own; the guides show how to put them together.
+
+## How a guide works
+
+Every guide follows the same shape:
+
+1. **Goal.** What you will have done by the end.
+2. **What you need.** Accounts, funds and connections to have ready.
+3. **Steps.** Prompts to paste, in order, with what a good answer looks like. Steps that move money are marked **(moves money)**.
+4. **Check it worked.** How to confirm the result yourself.
+5. **Common mistakes.** What usually goes wrong and how to avoid it.
+
+The prompts work in the [OpenFinance app chat](/product/chat) and in any AI client connected to the [MCP server](/mcp/overview), such as Claude, ChatGPT, Cursor, Codex, Hermes or OpenClaw. If you have not connected an agent yet, start with [Quick install](/getting-started/quick-install) or the page for your client.
+
+## Pick a guide
+
+If you are new, read the two setup guides first, then pick the market you care about.
+
+### Get set up well
+
+<CardGroup cols={2}>
+  <Card title="Set up a safe trading agent" icon="shield-halved" href="/guides/safe-trading-agent">
+    Confirmation habits, small first trades, tool filtering and key handling.
+  </Card>
+  <Card title="Fund each venue" icon="wallet" href="/guides/fund-each-venue">
+    What each venue needs, where to send it, and the INR route.
+  </Card>
+  <Card title="Move funds between chains" icon="bridge" href="/guides/move-funds-between-chains">
+    Quote, bridge and check a transfer before you trade.
+  </Card>
+</CardGroup>
+
+### Trade
+
+<CardGroup cols={2}>
+  <Card title="Polymarket from research to redeem" icon="square-poll-vertical" href="/guides/polymarket-research-to-redeem">
+    Find a market, read the book, place an order and cash out.
+  </Card>
+  <Card title="Hyperliquid perp with take-profit and stop-loss" icon="chart-line" href="/guides/hyperliquid-perp-with-tp-sl">
+    Open a position with its exits attached.
+  </Card>
+  <Card title="Stock and FX perps on Hyperliquid" icon="building-columns" href="/guides/hyperliquid-stock-perps">
+    Find a HIP-3 market, check it and trade it.
+  </Card>
+  <Card title="Hyperliquid outcome markets" icon="circle-half-stroke" href="/guides/hyperliquid-outcome-markets">
+    Read a HIP-4 market correctly and buy whole shares.
+  </Card>
+  <Card title="Find, check and swap a Solana memecoin" icon="coins" href="/guides/solana-memecoin-swap">
+    Resolve the right token and respect the thin-liquidity checks.
+  </Card>
+  <Card title="Tokenized stocks and FX tokens" icon="landmark" href="/guides/tokenized-stocks-and-fx">
+    Buy a token that tracks a share or a currency, onchain.
+  </Card>
+  <Card title="Work a large order" icon="layer-group" href="/guides/twap-and-limit-ladders">
+    TWAP orders and limit ladders on Hyperliquid and Polymarket.
+  </Card>
+  <Card title="Track other traders" icon="binoculars" href="/guides/track-other-traders">
+    Watch Hyperliquid wallets and Polymarket traders, then decide for yourself.
+  </Card>
+</CardGroup>
+
+### Build
+
+<CardGroup cols={2}>
+  <Card title="Build a trading dashboard or bot" icon="hammer" href="/guides/build-trading-dashboard">
+    From a prompt or a Mainframe template to a deployed app.
+  </Card>
+  <Card title="Use the inference API in your code" icon="microchip" href="/guides/inference-api-in-your-code">
+    Combine read-only market data with a model in a small script.
+  </Card>
+</CardGroup>
+
+## Safe-agent basics
+
+Keep these five habits in every guide:
+
+- **Read first, trade second.** Ask for the balance, the price or the quote before you ask for the order.
+- **Read the summary before you say yes.** Every trade needs your confirmation. Check the market, side, size and price.
+- **Start small.** There is no practice mode, so your first trade on any venue should be one you would not mind losing.
+- **Keep approvals on.** Do not put OpenFinance tools on an auto-approve list in your client.
+- **Guard your key.** It acts as your whole account. Never paste it into a chat, a repository or a screenshot.
+
+Nothing in these guides is financial advice. Trading carries a high risk of loss.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Markets overview" icon="globe" href="/markets/overview">
+    Which venue each trade goes through.
+  </Card>
+  <Card title="MCP tool reference" icon="wrench" href="/mcp/overview">
+    Every tool and action your agent can call.
+  </Card>
+</CardGroup>

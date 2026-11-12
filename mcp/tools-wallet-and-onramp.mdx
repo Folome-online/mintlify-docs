@@ -1,0 +1,106 @@
+---
+title: 'Wallet and Onramp Tools'
+description: 'Most agent sessions start with these two small tools. One tells you where the user''s funds live, and the other gives the user a link to buy crypto with fiat.'
+---
+
+Both need authentication; see [Authentication](/mcp/authentication). Neither one moves funds, so they are safe to call early in a session.
+
+## get_wallet_addresses
+
+This tool returns the user's embedded wallet addresses. It takes no arguments:
+
+```json
+{
+  "name": "get_wallet_addresses",
+  "arguments": {}
+}
+```
+
+The response has two fields:
+
+| Field | Meaning |
+| --- | --- |
+| `ethereum` | The EVM address. It is the same address on every EVM chain, including Ethereum, Base, Arbitrum, Polygon, Optimism and Robinhood Chain |
+| `solana` | The Solana address |
+
+Either field can be empty if that wallet is not set up yet. In that case, send the user to [openfinance.tech](https://openfinance.tech) to finish setup.
+
+Use it to:
+
+- **Check the connection.** One call confirms the credentials and the wallet. See [Verifying the connection](/reference/verifying-connection).
+- **Start a balance check.** Take the addresses, then read holdings one chain at a time with `onchain_get_address_holdings`.
+- **Decide whether a transfer is external.** Compare a recipient with these addresses and with the Polymarket deposit wallet from the `polymarket` action `get_deposit_wallet`.
+
+<Note>
+Hyperliquid and Polymarket have their own funding addresses. Use the `hyperliquid` action `get_deposit_address` and the `polymarket` action `get_deposit_wallet` for those.
+</Note>
+
+## get_onramp_url
+
+This tool returns a checkout link where the user buys crypto with fiat. The crypto is delivered to the user's own wallet. The agent never signs anything and never sees payment details. Here is a request to buy 100 dollars of USDC on Base:
+
+```json
+{
+  "name": "get_onramp_url",
+  "arguments": {
+    "baseCurrency": "usd",
+    "chain": "base",
+    "currency": "usdc",
+    "amount": 100
+  }
+}
+```
+
+The request takes these fields:
+
+| Field | Meaning |
+| --- | --- |
+| `baseCurrency` | The fiat currency the user pays in. It also selects the provider |
+| `chain` | The chain to deliver on, for example `ethereum`, `polygon`, `base`, `arbitrum`, `optimism`, `bsc`, `tron` or `solana` |
+| `currency` | The token to buy, for example `usdc`, `usdt`, `eth` or `sol` |
+| `amount` | The fiat amount to spend |
+| `walletAddress` | Optional. Defaults to the user's own wallet for the chosen chain |
+
+The response includes the `provider` and a `url`. Give the URL to the user to open.
+
+### Provider routing
+
+| `baseCurrency` | Provider | Ways to pay |
+| --- | --- | --- |
+| `inr` | Onramp.money | UPI, IMPS and bank transfer |
+| Anything else | Moonpay | Card, Apple Pay, Google Pay and bank transfer |
+
+You do not choose the provider. Set `baseCurrency` and the server routes the request.
+
+### INR pairs
+
+With `baseCurrency: 'inr'`, the token and chain must be one of these pairs or the call is rejected:
+
+| Token | Chains |
+| --- | --- |
+| `usdt` | `ethereum`, `polygon`, `bsc`, `tron` |
+| `usdc` | `polygon`, `bsc` |
+| `eth` | `ethereum`, `polygon` |
+| `sol` | `solana` |
+| `matic` | `polygon` |
+| `bnb`, `busd` | `bsc` |
+
+If the user asks for a pair outside the list, propose a supported one. For example, for USDC with INR on Ethereum, suggest Polygon.
+
+## Tips
+
+- **Do not ask for card or bank details.** The provider collects them on its own page, along with any identity check it requires.
+- **Do not poll for payment status.** Confirm delivery by reading the wallet's holdings on the destination chain.
+- **Plan the next step.** Funds land in the wallet, not on a venue. For Hyperliquid from INR: buy USDC on Polygon or BNB Chain, bridge to Arbitrum with the [Relay tools](/mcp/tools-relay), then deposit.
+- **Check other wallets first.** Before suggesting an onramp, check whether the user already holds funds on another chain that could be bridged.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Fund with card or bank" icon="credit-card" href="/markets/fund-with-card-or-bank">
+    The plain-language guide.
+  </Card>
+  <Card title="Onchain tools" icon="coins" href="/mcp/tools-onchain">
+    Read holdings and send tokens.
+  </Card>
+</CardGroup>

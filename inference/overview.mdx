@@ -1,0 +1,135 @@
+---
+title: 'Inference API Overview'
+description: 'Call AI models from your own code with the key you already use for trading. Here is how the API works, how to make a first request and how it is billed.'
+---
+
+The inference API follows the OpenAI API shape, so any OpenAI-compatible client works after you change two settings: the base URL and the key.
+
+## What it is
+
+- **Base URL:** `https://api.openfinance.tech/agent/v1`
+- **Key:** the same `open_` key you use for the MCP server. One key covers trading and inference.
+- **Billing:** each request is paid for from your account's AI credits.
+
+Use it when you are building something that needs a language model, such as a bot, a dashboard or an agent, and you would rather not manage a separate model provider account. It is separate from the [MCP server](/mcp/overview): MCP lets an AI client trade through OpenFinance, and the inference API lets your code talk to a model.
+
+## Endpoints
+
+The API has two endpoints:
+
+| Method and path | What it does |
+| --- | --- |
+| `GET /models` | Lists the models you can call |
+| `POST /chat/completions` | Sends a chat request and returns the model's reply, with optional streaming |
+
+Both paths are relative to the base URL.
+
+## Authentication
+
+Send your key in either header:
+
+```bash
+Authorization: Bearer open_...
+```
+
+```bash
+x-api-key: open_...
+```
+
+Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys. The key is on the **External AI** page in the app; see [Authentication](/mcp/authentication) for where to find it and how to store it.
+
+<Warning>
+The key that calls a model is the same key that can place trades and move funds from your wallet. Keep it on your server, in an environment variable. Never build it into a browser app, a mobile app or a public repository.
+</Warning>
+
+## Quick start
+
+<Steps>
+  <Step title="Get your key">
+    Copy the `open_` key from **External AI** and export it:
+
+    ```bash
+    export OPENFINANCE_API_KEY="open_..."
+    ```
+  </Step>
+  <Step title="Pick a model">
+    List the models and choose an id:
+
+    ```bash
+    curl https://api.openfinance.tech/agent/v1/models \
+      -H "Authorization: Bearer $OPENFINANCE_API_KEY"
+    ```
+
+    Model ids use a `provider/model` form, for example `anthropic/claude-fable-5.1`. The list changes as models are added, so read it from the API instead of hard-coding a long list.
+  </Step>
+  <Step title="Send a request">
+    ```bash
+    curl https://api.openfinance.tech/agent/v1/chat/completions \
+      -H "Authorization: Bearer $OPENFINANCE_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "model": "anthropic/claude-fable-5.1",
+        "messages": [{ "role": "user", "content": "Say hello in five words." }]
+      }'
+    ```
+  </Step>
+</Steps>
+
+More examples, including the OpenAI SDK, are on the [Examples](/inference/examples) page.
+
+## AI credits
+
+Inference is billed in AI credits. These are the same credits the OpenFinance chat uses, so API calls and in-app chat draw on one balance.
+
+Check your balance:
+
+```bash
+curl https://api.openfinance.tech/agent/chat/credits \
+  -H "x-api-key: $OPENFINANCE_API_KEY"
+```
+
+The response reports your available credits, your limit and your usage so far:
+
+| Field | Meaning |
+| --- | --- |
+| `availableCredits` | Credits you can still spend |
+| `limitCredits` | Your credit limit |
+| `usageCredits` | Credits used so far |
+
+To add credits, top up in the OpenFinance app. The app shows how many credits a deposit buys before you confirm. See [Models and AI credits](/product/models-and-credits).
+
+How many credits a request uses depends on the model and on the length of the input and output. Larger models cost more per request.
+
+## Tips
+
+- **Start with a small model** to test your integration, then switch the model id.
+- **Check the balance before a long job** and stop cleanly if a request is rejected for insufficient credits.
+- **Keep trading and inference apart in your code.** An app that only needs a model should never pass the key to anything that calls trading tools.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need a different key for inference?">
+    No. The `open_` key from External AI works for both the MCP server and the inference API.
+  </Accordion>
+  <Accordion title="Which models are available?">
+    Call `GET /models` for the live list. It is the source of truth.
+  </Accordion>
+  <Accordion title="Can a model called through this API trade for me?">
+    Not by itself. The inference API returns text. To let a model trade, connect an AI client to the [MCP server](/mcp/overview), where every trade needs your confirmation.
+  </Accordion>
+  <Accordion title="Is there a keyless or free endpoint?">
+    No. Every request needs your key and uses credits.
+  </Accordion>
+</AccordionGroup>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Examples" icon="code" href="/inference/examples">
+    curl, the OpenAI SDK and streaming.
+  </Card>
+  <Card title="Authentication" icon="key" href="/mcp/authentication">
+    Where the key lives and how to keep it safe.
+  </Card>
+</CardGroup>

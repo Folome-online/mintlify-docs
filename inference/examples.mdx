@@ -1,0 +1,150 @@
+---
+title: 'Inference API Examples'
+description: 'Copy these examples to make your first inference request, stream a reply, list the models and check your credits, with curl or the OpenAI SDK you already use.'
+---
+
+Every example below uses the base URL `https://api.openfinance.tech/agent/v1` and reads your key from an environment variable. For what the API is and how billing works, see the [overview](/inference/overview). Set the key once in your shell:
+
+```bash
+export OPENFINANCE_API_KEY="open_..."
+```
+
+## A first request
+
+Here is the same request in curl, Python and TypeScript:
+
+<CodeGroup>
+
+```bash curl
+curl https://api.openfinance.tech/agent/v1/chat/completions \
+  -H "Authorization: Bearer $OPENFINANCE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "anthropic/claude-fable-5.1",
+    "messages": [{ "role": "user", "content": "Say hello in five words." }]
+  }'
+```
+
+```python Python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["OPENFINANCE_API_KEY"],
+    base_url="https://api.openfinance.tech/agent/v1",
+)
+
+res = client.chat.completions.create(
+    model="anthropic/claude-fable-5.1",
+    messages=[{"role": "user", "content": "Say hello in five words."}],
+)
+print(res.choices[0].message.content)
+```
+
+```ts TypeScript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.OPENFINANCE_API_KEY,
+  baseURL: "https://api.openfinance.tech/agent/v1",
+});
+
+const res = await client.chat.completions.create({
+  model: "anthropic/claude-fable-5.1",
+  messages: [{ role: "user", content: "Say hello in five words." }],
+});
+console.log(res.choices[0].message.content);
+```
+
+</CodeGroup>
+
+The only differences from a stock OpenAI setup are the key and the base URL. Request and response shapes stay the same.
+
+## Streaming
+
+Set `stream` to `true` to receive the reply as it is written.
+
+<CodeGroup>
+
+```python Python
+stream = client.chat.completions.create(
+    model="anthropic/claude-fable-5.1",
+    messages=[{"role": "user", "content": "Explain funding rates in two sentences."}],
+    stream=True,
+)
+for chunk in stream:
+    print(chunk.choices[0].delta.content or "", end="")
+```
+
+```ts TypeScript
+const stream = await client.chat.completions.create({
+  model: "anthropic/claude-fable-5.1",
+  messages: [{ role: "user", content: "Explain funding rates in two sentences." }],
+  stream: true,
+});
+
+for await (const chunk of stream) {
+  process.stdout.write(chunk.choices[0]?.delta?.content ?? "");
+}
+```
+
+</CodeGroup>
+
+## List the models
+
+<CodeGroup>
+
+```bash curl
+curl https://api.openfinance.tech/agent/v1/models \
+  -H "Authorization: Bearer $OPENFINANCE_API_KEY"
+```
+
+```python Python
+for model in client.models.list():
+    print(model.id)
+```
+
+</CodeGroup>
+
+Use an id from this list as the `model` value. Ids use a `provider/model` form.
+
+## Check your credits
+
+```bash
+curl https://api.openfinance.tech/agent/chat/credits \
+  -H "x-api-key: $OPENFINANCE_API_KEY"
+```
+
+Look at `availableCredits` in the response. Top up in the OpenFinance app when it runs low; see [Models and AI credits](/product/models-and-credits).
+
+## Switching from another provider
+
+If your code already uses an OpenAI-compatible client, change two lines:
+
+```diff
+  const client = new OpenAI({
+-   apiKey: process.env.OTHER_PROVIDER_API_KEY,
+-   baseURL: "https://api.other-provider.com/v1",
++   apiKey: process.env.OPENFINANCE_API_KEY,
++   baseURL: "https://api.openfinance.tech/agent/v1",
+  });
+```
+
+Then replace the model name with an id from `GET /models`.
+
+## Tips
+
+- **Either header works.** `Authorization: Bearer open_...` suits OpenAI-style clients. `x-api-key: open_...` matches what you already send to the MCP server.
+- **Run it server-side.** The key can also trade and move funds, so it must never reach a browser or a mobile app.
+- **Handle rejected requests.** If a request is rejected for an invalid key, check that the key starts with `open_`. If it is rejected for insufficient credits, top up and retry.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Inference overview" icon="microchip" href="/inference/overview">
+    Endpoints, auth and credits.
+  </Card>
+  <Card title="MCP overview" icon="plug" href="/mcp/overview">
+    Let an AI client trade through OpenFinance.
+  </Card>
+</CardGroup>

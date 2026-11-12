@@ -1,9 +1,44 @@
 ---
 title: 'Claude Desktop (macOS)'
-description: 'Add OpenFinance to Claude Desktop on macOS: edit claude_desktop_config.json with the MCP server URL and your API key, then restart Claude and start trading.'
+description: 'Connect Claude Desktop on your Mac to your OpenFinance account in a few clicks, so Claude can check markets and your wallet right from any conversation.'
 ---
 
-Claude Desktop supports remote MCP servers either through the Connectors UI or by editing the config file directly. The config file approach is shown here for parity with other editors.
+Claude Desktop can reach remote MCP servers in two ways: through its Connectors screen, or through its config file. Option A is quicker and the one we recommend; Option B suits you if you would rather manage the server by hand.
+
+## Option A, custom connector (recommended)
+
+These are the same steps the OpenFinance app shows on its External AI page. No API key is needed: Claude signs in to your OpenFinance account.
+
+<Steps>
+  <Step title="Add custom connector">
+    In Claude Desktop, go to **Settings** → **Connectors** and click **Add custom connector**.
+  </Step>
+  <Step title="Configure connector">
+    Name it `OpenFinance` and paste the MCP server URL:
+
+    ```text
+    https://api.openfinance.tech/agent/mcp
+    ```
+  </Step>
+  <Step title="Connect to OpenFinance">
+    Click **Connect** on the OpenFinance connector.
+  </Step>
+  <Step title="Authorize access">
+    When Claude first uses the MCP server, you are sent to OpenFinance. Sign in and click **Authorize** to give Claude access.
+  </Step>
+  <Step title="Try it out">
+    Start a new conversation and ask, for example:
+
+    - "Get the price-implied odds of the Golden State Warriors winning the 2026 NBA playoffs using OpenFinance"
+    - "Check my OpenFinance Wallet balance"
+  </Step>
+</Steps>
+
+Custom connectors are set up once per Claude account, so the same connector also appears on [Claude.ai](/installation/chat-clients/claude-ai-web).
+
+## Option B, edit the config file
+
+Prefer a config file? Add the server to `claude_desktop_config.json` with your API key instead.
 
 <Steps>
   <Step title="Open Developer settings">
@@ -55,5 +90,5 @@ Claude Desktop supports remote MCP servers either through the Connectors UI or b
 </Steps>
 
 <Warning>
-Closing the window is not enough, you must fully quit the app for Claude Desktop to pick up the new config.
+Closing the window is not enough; you must fully quit the app for Claude Desktop to pick up the new config.
 </Warning>

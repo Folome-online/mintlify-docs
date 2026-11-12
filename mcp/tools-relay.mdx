@@ -1,0 +1,101 @@
+---
+title: 'Relay Tools'
+description: 'Look up the three tools your agent uses to bridge and swap through Relay, how to shape a quote request, and the rules that keep funds in the user''s own wallets.'
+---
+
+Three tools move value between chains and swap tokens on EVM chains through Relay. For the plain-language version, read [Bridge and swap](/markets/bridge-and-swap). Every tool needs authentication; see [Authentication](/mcp/authentication).
+
+## Tools
+
+A transfer usually takes a quote, then an execute. The third tool checks on it afterwards.
+
+| Tool | What it does |
+| --- | --- |
+| `relay_get_quote` | Quote a swap, bridge or bridge plus call. Read only. Submits nothing |
+| `relay_execute` | Get a quote, sign and submit every step with the user's wallet, then wait for a final status for up to about five minutes. Takes the same parameters as the quote |
+| `relay_get_status` | Check a transfer by its `requestId` |
+
+## Request shape
+
+A quote request looks like this:
+
+```json
+{
+  "name": "relay_get_quote",
+  "arguments": {
+    "originChainId": 137,
+    "destinationChainId": 8453,
+    "originCurrency": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    "destinationCurrency": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "amount": "10000000",
+    "tradeType": "EXACT_INPUT"
+  }
+}
+```
+
+The example quotes 10 USDC from Polygon to Base. Here is what each field means:
+
+| Field | Meaning |
+| --- | --- |
+| `originChainId`, `destinationChainId` | Numeric chain ids. Use the same id on both sides for a same-chain EVM swap |
+| `originCurrency`, `destinationCurrency` | Token contracts. Use `0x0000000000000000000000000000000000000000` for an EVM chain's native coin, or the mint address on Solana |
+| `amount` | A string in the token's smallest unit. `"10000000"` is 10 USDC |
+| `tradeType` | `EXACT_INPUT` for "bridge this much", `EXACT_OUTPUT` for "I need exactly this much to arrive" |
+| `recipient` | Optional. Defaults to the user's own address on the destination chain |
+
+Do not pass the user's wallet address as the sender. The server fills it in.
+
+### Common chain ids
+
+Chain ids are numbers. These are the ones you will use most:
+
+| Chain | Id | Chain | Id |
+| --- | --- | --- | --- |
+| Ethereum | `1` | Arbitrum | `42161` |
+| Base | `8453` | Optimism | `10` |
+| Polygon | `137` | BNB Chain | `56` |
+| Robinhood Chain | `4663` | Solana | `792703809` |
+
+Solana uses a Relay-specific id here, not the word `solana` that the onchain tools take.
+
+## Rules
+
+<Warning>
+`relay_execute` only moves funds between the user's own wallets. A `recipient` that is not one of them is refused by the server. Resolve the user's addresses with `get_wallet_addresses` and the `polymarket` action `get_deposit_wallet`. If the user wants to pay someone else, point them to the Wallet page in the app. Do not try another route around it.
+</Warning>
+
+- **Every bridge and swap needs the user's confirmation,** and nothing here is financial advice.
+- **Quote first, then confirm.** Show the origin chain, token and amount, the destination chain, token and expected amount, and the route. Call `relay_execute` only after a yes.
+- **Requote on any change.** Quotes expire.
+- **Named tokens need checking.** If the user named a token by symbol, resolve it with `onchain_search_tokens` scoped to the destination chain, show a chart link with market cap, liquidity and volume, and warn if the token is thin or volatile.
+- **Solana to Solana is not a Relay route.** Use the Jupiter tools on the [Onchain tools](/mcp/tools-onchain) page.
+- **Same chain, same token is a send.** Use `onchain_send_token`.
+
+## Statuses
+
+`relay_get_status` returns one of:
+
+| Status | Meaning |
+| --- | --- |
+| `waiting`, `depositing`, `pending`, `submitted`, `delayed` | In progress |
+| `success` | Completed |
+| `refunded` | Could not complete; funds were returned |
+| `failure` | Failed. Read the details before retrying |
+
+## Tips
+
+- On a route that touches Solana, the gas top-up on the destination chain is switched off. Make sure the user holds native coin there.
+- A `412` on a route that starts on Solana means the user's Solana wallet is not yet enabled for agent trading.
+- To fund Hyperliquid from another chain, bridge USDC to Arbitrum (`42161`), then send it to the address from the `hyperliquid` action `get_deposit_address`.
+- If a quote fails, the pair may have no route. Try USDC or the native coin as the destination.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Bridge and swap" icon="bridge" href="/markets/bridge-and-swap">
+    The plain-language guide.
+  </Card>
+  <Card title="Wallet and onramp tools" icon="wallet" href="/mcp/tools-wallet-and-onramp">
+    Resolve addresses and fund from fiat.
+  </Card>
+</CardGroup>

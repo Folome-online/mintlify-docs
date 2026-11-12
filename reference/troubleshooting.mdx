@@ -1,7 +1,9 @@
 ---
 title: 'Troubleshooting'
-description: 'Fix common OpenFinance MCP errors: 401 Unauthorized from a missing or wrong API key, tools missing after a config edit, skills not loading and 429 rate limits.'
+description: 'When your agent cannot reach OpenFinance or the tools go missing, the cause is usually one of a few common setup problems, and each one has a quick fix.'
 ---
+
+Find the message or symptom you are seeing below and open it for the fix. Most problems come down to the key, a client that has not reloaded its config, or sending requests too fast.
 
 <AccordionGroup>
   <Accordion title="401 Unauthorized" icon="lock">
@@ -17,10 +19,10 @@ description: 'Fix common OpenFinance MCP errors: 401 Unauthorized from a missing
   </Accordion>
 
   <Accordion title="429 Too Many Requests" icon="gauge-high">
-    You hit the rate limit, which is per key. Throttle your agent or request a higher tier from the dashboard.
+    You hit the rate limit, which is per key. Slow your agent down, then retry.
   </Accordion>
 </AccordionGroup>
 
 ## Still stuck?
 
-Full tool reference and changelog: [docs.openfinance.tech](https://docs.openfinance.tech).
+If none of these match, look up the tool you are calling in the [MCP server overview](/mcp/overview), which covers every tool the server offers.
