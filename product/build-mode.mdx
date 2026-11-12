@@ -35,10 +35,6 @@ People use it for things like a Telegram bot that tracks posts, a live crypto da
   </Step>
 </Steps>
 
-<Frame caption="Build mode: the chat with its progress checklist on the left, the live preview on the right">
-  <img src="/images/screens/build-mode-preview.png" alt="Build mode showing a chat reply with the build progress checklist next to an open app preview panel with the Preview and Code dropdown and the Push and Deploy buttons" />
-</Frame>
-
 ## The preview panel
 
 The panel header has everything you need to inspect and ship the app:
@@ -80,10 +76,6 @@ A deploy gives the app a permanent address on your own Vercel account. The previ
 ### When a deploy fails
 
 If a Vercel deploy does not go through, the chat shows a card in place of a dead end:
-
-<Frame caption="The card shown under a reply whose Vercel deploy failed">
-  <img src="/images/screens/build-vercel-reconnect-card.png" alt="Card under a chat reply reading Vercel deploy did not go through, your app is kept, with a Reconnect Vercel button" />
-</Frame>
 
 1. If Vercel was never connected, the card reads **Connect Vercel to deploy**. Click **Connect Vercel** and sign in.
 2. If it was connected and the deploy still failed, the card reads "Vercel deploy didn't go through". Your app is kept. Click **Reconnect Vercel**; reconnecting fixes most failed deploys.

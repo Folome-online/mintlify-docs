@@ -6,8 +6,6 @@
 drafts/
 *.draft.mdx
 
-# Internal checklist of screenshots still to supply
-IMAGES-TODO.md
 
 # Legacy GitBook export, superseded by the .mdx pages (still says market data is keyless)
 openfinance-docs/
