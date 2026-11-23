@@ -135,7 +135,7 @@ Then replace the model name with an id from `GET /models`.
 ## Tips
 
 - **Either header works.** `Authorization: Bearer open_...` suits OpenAI-style clients. `x-api-key: open_...` matches what you already send to the MCP server.
-- **Run it server-side.** The key can also trade and move funds, so it must never reach a browser or a mobile app.
+- **Run it server-side.** The key can also trade and move funds between your own wallets, so it must never reach a browser or a mobile app.
 - **Handle rejected requests.** If a request is rejected for an invalid key, check that the key starts with `open_`. If it is rejected for insufficient credits, top up and retry.
 
 ## Next

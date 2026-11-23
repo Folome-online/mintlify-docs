@@ -72,7 +72,7 @@ Hyperliquid works differently. To fund it, hold USDC on Arbitrum and ask the cha
 
 ## Send and withdraw
 
-**Send** moves a token from your wallet to another address on the same chain.
+**Send** moves a token from your wallet to another address on the same chain. This is the only place to send funds to someone else: agents and API keys can only move funds between your own wallets.
 
 <Steps>
   <Step title="Open Send">
@@ -85,9 +85,13 @@ Hyperliquid works differently. To fund it, hold USDC on Arbitrum and ask the cha
     The **Review transfer** step shows the details. If the address is not one of your own wallets, you must tick a box confirming that you checked the full address.
   </Step>
   <Step title="Confirm">
-    A final check asks you to read the address end to end. Click **Yes, send it**.
+    A final check asks you to read the address end to end. If the address is not one of your own wallets, enter the current code from your authenticator app. Click **Yes, send it**.
   </Step>
 </Steps>
+
+<Note>
+Sending to an address that is not yours needs two-factor authentication. Set up an authenticator app in **Settings**, under **Security**, **Two-factor authentication**, before your first outside send. One code approves one transfer: that address, chain, token and amount.
+</Note>
 
 What Send does not do:
 

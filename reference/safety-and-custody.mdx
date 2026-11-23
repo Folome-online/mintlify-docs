@@ -3,7 +3,7 @@ title: 'Safety and Custody'
 description: 'Before you let an AI trade for you, it helps to know who holds the money, what has to happen before anything is sent, and how to keep your keys out of reach.'
 ---
 
-OpenFinance lets an AI place real orders and move real funds, so the design keeps the important decisions with you. The wallet is yours, nothing is sent until you say yes, and you decide where your keys go. The sections below take each of those in turn, starting with the money itself.
+OpenFinance lets an AI place real orders and move funds between your own wallets, so the design keeps the important decisions with you. The wallet is yours, nothing is sent until you say yes, an agent can't send your money to anyone else, and you decide where your keys go. The sections below take each of those in turn, starting with the money itself.
 
 ## Who holds your funds
 
@@ -32,17 +32,24 @@ Every trade needs your confirmation. So does every transfer, bridge, withdrawal 
 Whether an outside agent follows its instructions depends on the model and the client. Stay in the loop for anything that moves money, and read the summary before you say yes. Onchain transactions cannot be reversed.
 </Warning>
 
-## Extra checks on where money goes
+## Where money can go
 
-- **Bridges and Polymarket withdrawals from an agent go to your own wallets only.** A recipient that is not one of your addresses is refused by the server.
-- **Same-chain sends to an outside address get a clear warning.** The agent must show the amount, token, address and chain, state that funds cannot be recovered if the address is wrong, and wait for an explicit yes.
+**An agent or API key can only move money between your own wallets.** Your own wallets are your EVM address, your Solana address and your Polymarket deposit wallet. The server checks every payout before anything is signed and refuses any other address, so a fooled agent or a leaked key cannot send your funds to another address.
+
+- **Transfers, bridges and swaps** from an agent must pay one of your own wallets. This covers `onchain_send_token`, Relay bridges and swaps, Jupiter swaps and Polymarket withdrawals.
 - **Hyperliquid withdrawals go to your own address on Arbitrum.**
+- **Sending to someone else happens only on the [Wallet](/product/wallet) page.** It needs a code from your authenticator app. Set one up first in **Settings**, under **Security**, **Two-factor authentication**.
+- **One code approves one outside transfer.** It lasts at most 15 minutes and cannot be reused.
+
+This stops transfers to other addresses. It does not judge trades: an agent or a leaked key can still place a bad trade in your account, including buying a token or pool that someone else controls, which moves value to them. Keep confirmations on and fund only what you are willing to risk.
+
+## Other checks
 - **Thin or volatile tokens are flagged** before a swap, with market cap, liquidity and the one-day move.
 - **Launches are simulated or previewed first**, because they cannot be undone.
 
 ## What an API key can do
 
-An `open_` API key acts as your account. Anyone who has it can read your balances, place trades and move funds through the tools, and call models on your credits.
+An `open_` API key acts as your account. Anyone who has it can read your balances, place trades, move funds between your own wallets and call models on your credits. It cannot send funds to anyone else's address.
 
 - Prefer OAuth sign-in over a key where your client supports it.
 - Keep a key in an environment variable or your client's secret prompt. Never commit it. Never paste it into a chat, an issue or a screenshot.
@@ -78,6 +85,9 @@ Trading crypto, perps, prediction markets and new tokens carries a high risk of 
 <AccordionGroup>
   <Accordion title="Can my agent trade without asking me?">
     It is instructed not to. Every write tool asks for confirmation, and in the app the chat stops on a confirmation card. With an outside client, keep its tool-approval prompts on as a second check.
+  </Accordion>
+  <Accordion title="Can my agent send money to someone else?">
+    No. An agent or API key can only move funds between your own wallets, and the server refuses any other address. To send to another person, use the [Wallet](/product/wallet) page with a code from your authenticator app.
   </Accordion>
   <Accordion title="Is there a practice mode?">
     No. You can ask the agent to simulate or quote a trade without placing it.

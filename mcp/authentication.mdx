@@ -29,7 +29,7 @@ Use OAuth when your client supports it, because no long-lived secret has to be p
     The first time the client uses the server, it opens an OpenFinance page. Sign in. If you are new, signing in creates your account.
   </Step>
   <Step title="Approve the connection">
-    A consent page names the client that is asking. Approve it, then confirm a second time. The second screen reminds you that the client will be able to place orders and move funds from your wallet.
+    A consent page names the client that is asking. Approve it, then confirm a second time. The second screen reminds you that the client will be able to place orders and move funds from your wallet. Moving funds means between your own wallets: sending to anyone else needs the Wallet page and your authenticator code.
   </Step>
 </Steps>
 
@@ -105,7 +105,7 @@ A `401` applies to every tool, read-only ones included. If a guide elsewhere say
     Use one per client. A client that sends the `x-api-key` header does not need the sign-in page.
   </Accordion>
   <Accordion title="Does an API key limit what an agent can do?">
-    No. A key acts as your account. Control comes from confirmations: the agent is instructed to ask before every write, and your client can ask for tool approval. See [Safety and custody](/reference/safety-and-custody).
+    Partly. A key acts as your account for trading, but it can't send funds to anyone else's address: the server refuses that, and outside transfers need the Wallet page and your authenticator code. Everything else is controlled by confirmations: the agent is instructed to ask before every write, and your client can ask for tool approval. See [Safety and custody](/reference/safety-and-custody).
   </Accordion>
   <Accordion title="The sign-in page says there is no API key on my account">
     Open [openfinance.tech](https://openfinance.tech) once while signed in so the key is created, then retry.

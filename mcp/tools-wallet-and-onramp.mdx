@@ -29,7 +29,7 @@ Use it to:
 
 - **Check the connection.** One call confirms the credentials and the wallet. See [Verifying the connection](/reference/verifying-connection).
 - **Start a balance check.** Take the addresses, then read holdings one chain at a time with `onchain_get_address_holdings`.
-- **Decide whether a transfer is external.** Compare a recipient with these addresses and with the Polymarket deposit wallet from the `polymarket` action `get_deposit_wallet`.
+- **Check a recipient before any transfer.** Every send, bridge or withdrawal must pay one of these addresses or the Polymarket deposit wallet from the `polymarket` action `get_deposit_wallet`. Any other address is refused by the server; to pay someone else, the user goes to the Wallet page.
 
 <Note>
 Hyperliquid and Polymarket have their own funding addresses. Use the `hyperliquid` action `get_deposit_address` and the `polymarket` action `get_deposit_wallet` for those.

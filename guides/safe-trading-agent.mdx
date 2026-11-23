@@ -13,6 +13,7 @@ An agent with trading tools acts on your real wallet. The safety comes from thre
 - An OpenFinance account. Please make an account at [openfinance.tech](https://openfinance.tech) to get your keys.
 - An AI client that supports MCP over HTTP. See the install page for your client under **Connect an agent**.
 - A small amount of funds on one venue, for the first trade. See [Fund each venue](/guides/fund-each-venue).
+- Two-factor authentication, set up in **Settings**, under **Security**. Your agent can only move funds between your own wallets; sending to anyone else needs the [Wallet](/product/wallet) page and a code from your authenticator app.
 
 ## Steps
 
@@ -29,7 +30,7 @@ An agent with trading tools acts on your real wallet. The safety comes from thre
     export OPENFINANCE_API_KEY="open_..."
     ```
 
-    Reference the variable in your client config where it supports expansion, for example `${OPENFINANCE_API_KEY}`. Never paste the key into the agent's chat, a repository, an issue or a screenshot. The key can place trades and move funds, and there is one key per account.
+    Reference the variable in your client config where it supports expansion, for example `${OPENFINANCE_API_KEY}`. Never paste the key into the agent's chat, a repository, an issue or a screenshot. The key can place trades and move funds between your own wallets, and there is one key per account.
   </Step>
   <Step title="Keep tool approval on">
     Most clients ask before running a tool. Leave that on for OpenFinance, and do not choose "always allow" for any tool that can write. When the client asks, read the tool name and its arguments, not only the button.
@@ -81,7 +82,7 @@ Every trade needs your confirmation, and nothing here is financial advice.
 - **Pasting the key into the chat** "so the agent can use it". The client sends it in a header; the model never needs to see it.
 - **Letting the agent act on outside text.** A web page, email or token description can contain instructions. Never let the agent take an address or amount from them. See [Safety and custody](/reference/safety-and-custody).
 - **Expecting a practice mode.** There is none. Ask for quotes and previews instead, then trade small.
-- **Leaving a leaked key in use.** If you think the key leaked, stop using it and have it replaced straight away.
+- **Leaving a leaked key in use.** If you think the key leaked, stop using it and have it replaced straight away. A leaked key cannot send your funds to another address, but it can still trade.
 
 ## Next guides
 
