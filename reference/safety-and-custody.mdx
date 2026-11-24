@@ -11,7 +11,7 @@ Your wallet is **self-custodial and embedded**. It is created when you sign up a
 
 - You get one EVM address, the same on every EVM chain, and one Solana address.
 - The same wallet is used in the OpenFinance app and over MCP.
-- You can export the private keys at any time from **Settings**, under **Export Keys**, and use the wallet elsewhere.
+- You can export the private keys at any time from **Settings**, under **Export Keys**, and use the wallet elsewhere. Exporting needs two-factor authentication and a code from your authenticator app.
 
 Funds you deposit to a venue sit at that venue under your account: USDC on Hyperliquid, pUSD in your Polymarket deposit wallet. Options positions sit in your own broker account.
 
@@ -54,7 +54,8 @@ An `open_` API key acts as your account. Anyone who has it can read your balance
 - Prefer OAuth sign-in over a key where your client supports it.
 - Keep a key in an environment variable or your client's secret prompt. Never commit it. Never paste it into a chat, an issue or a screenshot.
 - Never build it into a browser or mobile app. Some Mainframe trading templates ask a visitor to paste their own key into the open tab at runtime; only do that on an app you deployed yourself and trust.
-- If you think a key has leaked, stop using it and have it replaced straight away.
+- If you think a key has leaked, click **Rotate key** on [External AI](/product/external-ai) straight away. The old key stops working at once. **Revoke** switches it off and disconnects every connected AI app.
+- Turn on two-factor under **Settings > Security**. It is needed to send to anyone else and to export your wallet keys.
 - Approve an OAuth consent page only for a connection you started yourself.
 
 See [Authentication](/mcp/authentication).
@@ -93,7 +94,7 @@ Trading crypto, perps, prediction markets and new tokens carries a high risk of 
     No. You can ask the agent to simulate or quote a trade without placing it.
   </Accordion>
   <Accordion title="Can I take my wallet somewhere else?">
-    Yes. Export the EVM key or the Solana key from Settings, under Export Keys. Keep exported keys offline and private.
+    Yes. Turn on two-factor under Settings, Security, then export the EVM key or the Solana key from Settings, under Export Keys. Keep exported keys offline and private.
   </Accordion>
   <Accordion title="How do I report a security problem?">
     Use the private "Report a vulnerability" option on the Security tab of the [OpenFinance MCP repository](https://github.com/openfinance-tech/mcp). Do not open a public issue.

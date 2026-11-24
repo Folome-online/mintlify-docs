@@ -4,7 +4,7 @@ sidebarTitle: 'How it works'
 description: 'Follow a template from its card in the gallery to a site you own, and see what each button does along the way, from the first preview to the later edits.'
 ---
 
-It takes five steps, and you can stop after any of them. The first two need no account and cost nothing, **Deploy** starts the build, and the last two put the result in your own GitHub and Vercel. The diagram shows the whole path; the sections below take each step in turn.
+It takes five steps, and you can stop after any of them. The first two need no account and cost nothing, **Deploy** sets up the build for you to start, and the last two put the result in your own GitHub and Vercel. The diagram shows the whole path; the sections below take each step in turn.
 
 ```mermaid
 flowchart LR
@@ -21,6 +21,7 @@ Click a card's picture, or hover it and click **Open demo**. The demo opens full
 
 - Website templates show a **Live demo**: the actual page running in the viewer, video and animations included.
 - Trading templates show **Demo · captured**: a screen of the finished app recorded with live data. It is a picture, so nothing in it is connected to an account.
+- Templates with a deployed copy show **Live Demo** in place of **New tab**. It opens that copy in a new tab, for example The Monitor, AI assisted Perps dex and Portfolio Risk Tool. A live demo of a trading tool is locked: it shows fixed data and accepts no key.
 
 <Frame caption="The demo viewer, with New tab, Prompt and Deploy in the header">
   <img src="/images/mainframe/mainframe-demo-viewer.png" alt="Demo viewer over the Mainframe gallery showing the Meadowbell hero with the buttons New tab, Prompt and Deploy at the top" />
@@ -41,11 +42,13 @@ Reading the prompt is the best way to know what you will get. Most prompts follo
 **Deploy** is on the card, in the demo viewer and in the prompt window. Clicking it:
 
 1. Loads the template's prompt and keeps it in your browser tab.
-2. Opens Chat. If you are not signed in, you are asked to sign in; the prompt waits and is not lost.
-3. Switches Chat to **Build mode**, whatever mode it was in, so the build runs on Build mode's coding model.
-4. Sends one message, "Build this exactly as specified:" plus the template's name, with the whole prompt attached.
+2. Opens a fresh chat. If you are not signed in, you are asked to sign in; the prompt waits and is not lost.
+3. Switches Chat to **Build mode**, whatever mode it was in, so the build runs on Build mode's coding model, Claude Sonnet 5.5 by default.
+4. Puts the whole prompt in the message box as a paste card, with the line "Build me this prompt, feel free to ask any questions". The send button shakes to show it is ready.
 
-The prompt is used once. If you go back to the gallery and click Deploy again, a new build starts in a new chat.
+Nothing is sent yet. A build spends AI credits, so it starts only when you press Enter. Before that you can add your own notes or files, or pick another template to swap the brief; your own notes stay.
+
+The prompt is used once. If you go back to the gallery and click Deploy again, it fills a new chat.
 
 ## 4. Connect GitHub and Vercel
 

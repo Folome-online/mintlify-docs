@@ -36,8 +36,11 @@ The list is served by OpenFinance and changes over time. At the time of writing 
 | **IBKR** | Brokerage | Read your Interactive Brokers portfolio, positions and market data, and place orders |
 | **Base** | Onchain | Run wallet actions and transactions on Base through your connected account |
 | **Centaur** | Signals | Trading intelligence delivered to your agent |
-| **Bitquery** | Onchain data | Onchain market data, wallets and traders across many chains |
-| **Coinbase** | Crypto | Listed as **Coming soon** |
+| **Bitquery** | Onchain data | Onchain market data across 40+ chains: token discovery, candles, trader and wallet profiles, address labels, plus Polymarket and Hyperliquid tools |
+| **Coinbase** | Crypto | Check balances, portfolios, orders and trades on your Coinbase account, read-only |
+| **Financial Datasets** | Stock data | US stock financial statements, prices, insider and politician trades, institutional holdings, SEC filings, news and a stock screener. Needs a Financial Datasets account |
+| **Hyperdash** | Hyperliquid data | Liquidation heatmaps, large positions, candles, funding and any wallet's live state. Listed as **Coming soon** |
+| **FomoScan Docs** | Docs | Searches FomoScan's API documentation. Docs only: it returns no live FomoScan data |
 
 A connector marked **Coming soon** cannot be connected yet. The **Skills** tab at the top of the page is also marked Soon.
 
@@ -56,7 +59,7 @@ If you want to trade options, this is the way in: options trade through your own
     A new tab opens at the provider. Sign in and approve access. Some connectors ask you to paste an API token instead.
   </Step>
   <Step title="Come back">
-    The tab closes by itself and the card shows **Connected**. For a connected MCP server, the card's details list the tools it gives the agent.
+    When you finish signing in, you land back on Connectors with a notice that the account is connected, and the card shows **Connected**. For a connected MCP server, the card's details list the tools it gives the agent.
   </Step>
 </Steps>
 
@@ -91,6 +94,16 @@ Show my IBKR portfolio and open positions.
 
 ```text
 Show the NVDA option chain for the nearest monthly expiry in my Robinhood account.
+```
+
+```text
+What are my Coinbase balances, and which orders did I fill this week?
+```
+
+After connecting a data source, ask in Chat:
+
+```text
+Using Financial Datasets, show NVDA's revenue and gross margin for the last eight quarters, and any insider sales this year.
 ```
 
 After connecting GitHub and Vercel, ask in Build mode:

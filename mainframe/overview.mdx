@@ -17,14 +17,14 @@ Every card in the gallery is made of two things:
 - **A prompt.** A long, precise brief that tells the builder exactly what to make: the layout, the data sources, the copy, the safety rules and a list of checks to run before calling the job done. You can read every prompt before you use it.
 - **A demo.** A preview of what the prompt produces. Website templates show a live page you can click around in. Trading tools show a screen captured with live data, so the gallery never needs your key.
 
-When you click **Deploy**, the prompt goes into [Build mode](/product/build-mode) as your first message. The result is a fresh copy of the app that belongs to you: code you can push to your own GitHub repository and a site you can deploy to your own Vercel account. Nothing is shared with other people who use the same template.
+When you click **Deploy**, the prompt goes into the [Build mode](/product/build-mode) message box, and the build starts when you press Enter. The result is a fresh copy of the app that belongs to you: code you can push to your own GitHub repository and a site you can deploy to your own Vercel account. Nothing is shared with other people who use the same template.
 
 ## How the gallery is organised
 
 Tabs above the grid filter the cards. A search box beside them matches template names, sections, descriptions, tech stacks and tags.
 
 <Frame caption="Section tabs and search">
-  <img src="/images/mainframe/mainframe-section-tabs.png" alt="Tabs reading All, Prediction Markets, Perp Dexes, Trading, Websites and Animated, with a search box reading Search templates, stacks or tags" />
+  <img src="/images/mainframe/mainframe-section-tabs.png" alt="Tabs reading All, Prediction Markets, Perp Dexes, Trading, Websites, Animated and External Tools, with a search box reading Search templates, stacks or tags" />
 </Frame>
 
 Each tab holds one kind of template:
@@ -34,11 +34,12 @@ Each tab holds one kind of template:
 | **All** | Every template |
 | **Prediction Markets** | Helpers for short BTC and ETH up-or-down windows |
 | **Perp Dexes** | Your own trading terminals for Hyperliquid perpetuals |
-| **Trading** | Strategy desks, such as funding carry |
+| **Trading** | Strategy desks and dashboards, such as funding carry and portfolio risk |
 | **Websites** | Landing pages, heroes and footers |
 | **Animated** | Sites built around video and motion |
+| **External Tools** | Templates made by outside teams, such as The Monitor by Centaur |
 
-Each card shows the demo, the title, a one-line description, tags, the output (for example "Next.js app" or "Single index.html") and the prompt's length. Hover a card for three buttons: **Prompt**, **Open demo** and **Deploy**. The Mainframe card also has a **Live** link to a deployed copy.
+Each card shows the demo, the title, a one-line description, tags, the output (for example "Next.js app" or "Single index.html") and the prompt's length. Hover a card for three buttons: **Prompt**, **Open demo** and **Deploy**. Templates with a deployed copy also have a **Live Demo** button in the demo viewer.
 
 ## Every template
 
@@ -75,6 +76,9 @@ Here is every template in the gallery today, grouped the same way as the tabs. C
   <Card title="Arb Funding" img="/images/mainframe/card-carry-bot.jpg" href="/mainframe/templates/carry-bot">
     A funding-carry desk: hold spot, short the perp on Hyperliquid, keep the funding.
   </Card>
+  <Card title="Portfolio Risk Tool" img="/images/mainframe/card-portfolio-risk-tool.jpg" href="/mainframe/templates/portfolio-risk-tool">
+    One read-only screen for your whole book, with exposure, returns and risk against BTC, QQQ and SPY.
+  </Card>
 </CardGroup>
 
 ### Websites
@@ -102,6 +106,14 @@ Here is every template in the gallery today, grouped the same way as the tabs. C
   </Card>
   <Card title="Meadowbell" img="/images/mainframe/card-meadowbell.jpg" href="/mainframe/templates/meadowbell">
     A kids' series hero: a boy and his beagle on a rippling painted hillside.
+  </Card>
+</CardGroup>
+
+### External tools
+
+<CardGroup cols={2}>
+  <Card title="The Monitor" img="/images/mainframe/card-the-monitor.jpg" href="/mainframe/templates/the-monitor">
+    Every Hyperliquid perp with Centaur's tracked traders on the chart. By Centaur.
   </Card>
 </CardGroup>
 

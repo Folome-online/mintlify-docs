@@ -79,7 +79,7 @@ Hyperliquid works differently. To fund it, hold USDC on Arbitrum and ask the cha
     Click **Send** on the Wallet page, **Send** on a token's row, or **Withdraw** in the top bar panel.
   </Step>
   <Step title="Fill in the transfer">
-    Choose the venue and token, paste the recipient address and enter an amount. Leave a little of the chain's own coin for gas.
+    Choose the venue and token, paste the recipient address and enter an amount. Leave a little of the chain's own coin for gas. If the wallet has none on that chain, the button reads **Add ETH to pay gas** (or **Add SOL to pay gas**) and stays off until you add some.
   </Step>
   <Step title="Review">
     The **Review transfer** step shows the details. If the address is not one of your own wallets, you must tick a box confirming that you checked the full address.
@@ -96,19 +96,19 @@ Sending to an address that is not yours needs two-factor authentication. Set up 
 What Send does not do:
 
 - **Bridging and swaps run through chat.** The **Swap** button on the Wallet page is disabled for now; ask the chat to swap or bridge instead.
-- **Hyperliquid and Polymarket balances** have no plain Send. Their rows say **via chat**. Ask the chat to withdraw; Hyperliquid withdrawals go to your address on Arbitrum for a flat \$1 and take about 5 minutes.
+- **Hyperliquid and Polymarket balances** have no plain Send. Their rows say **via chat**. Ask the chat to withdraw; Hyperliquid withdrawals go to your address on Arbitrum and take about 5 minutes.
 
 ## Export your keys
 
 <Steps>
   <Step title="Open Settings">
-    Open the account menu and click **Settings**, then **Export Keys**.
+    Open the account menu and click **Settings**, then **Export Keys**. Exporting needs two-factor authentication, so set it up first under **Security** if the page says it is off.
   </Step>
   <Step title="Choose a key">
     Click **Export EVM Key** or **Export Solana Key**. All EVM chains share one key; Solana has its own.
   </Step>
   <Step title="Store it safely">
-    The key is shown in a secure Privy window. Keep it offline.
+    Enter the code from your authenticator app when asked. The key is shown in a secure Privy window. Keep it offline.
   </Step>
 </Steps>
 

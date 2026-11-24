@@ -20,21 +20,22 @@ The picker sits in the chat message box and shows the model in use. Click it to 
 What you see inside:
 
 - **Category tabs.** In Chat mode the picker lists **Reasoning** models; in Build mode it lists **Coding** models. Both modes also have a **Free** tab.
-- **Companies.** Models are grouped by the company that makes them, for example Anthropic, OpenAI, xAI, DeepSeek and Moonshot. Hover or click a company to see its models.
+- **Companies.** Models are grouped by the company that makes them, for example Anthropic, OpenAI, xAI, DeepSeek and Moonshot. Hover or click a company to see its models. Within a company, models sit together by family, such as all the Claude Opus models, under a small family heading.
 - **Price tier.** Each model shows one to three dollar signs: low, mid or premium. Hover the tier to see its price per million output tokens. Free models show **Free**.
 - **Strength tags.** Short labels such as Coding, Research, General, Fast & cheap or Reads images tell you what a model is good at.
 - **A one-line description** of when to use it.
 
-The default in both modes is Claude Haiku 5.5, marked **Recommended**. The list changes as new models come out, so treat any names here as examples and check the picker for what is available today.
+Chat mode starts on Claude Haiku 5.5, marked **Recommended**. Build mode starts on Claude Sonnet 5.5, a stronger coding model. The list changes as new models come out, so treat any names here as examples and check the picker for what is available today.
 
 ### "Latest" entries
 
-Some families have an entry tagged **Latest**, for example the newest Claude Opus or the newest Grok. A Latest entry always points at the newest model of that family and switches by itself when a new one is released. Pick it when you want to stay current without checking back; pick a fixed version when you want the same model every time.
+Some families have an entry tagged **Latest**, for example the newest Claude Opus or the newest Grok. It is one row at the top of its family, showing the model it points to today. A Latest entry always follows the newest model of that family and switches by itself when a new one is released. Pick it when you want to stay current without checking back; pick a fixed version when you want the same model every time.
 
 ### How model choice behaves
 
 - A model you pick stays for that chat. A new chat starts on the default again.
-- When you switch between Chat and Build, your model comes along if the other list has it.
+- Picking a different model in a chat that already has messages asks **Start a new chat instead?** Choose a new chat on that model, or switch in the chat you are in.
+- When you switch between Chat and Build, a model you picked comes along if the other list has it. If you were on the default, you move to the other mode's default.
 - If a model is retired, older chats that used it move to its replacement.
 - [Alchemy](/alchemy/overview) and [Studio](/product/studio) have their own shorter pickers, with models suited to those jobs.
 
@@ -63,6 +64,18 @@ Two things to know:
 | Chat and Build replies | Depends on the model's price tier and how long the reply is |
 | Studio images | The cost in credits is shown before you generate |
 | Alchemy runs | Charged for live runs; sample runs marked **Try me** are free |
+
+### When credits run low
+
+The chat warns you before you run out, and tells you plainly when you have.
+
+| Your balance | What you see |
+| --- | --- |
+| **50 credits or less** | A **Your balance is low** popup when you send, once per chat, with **Buy AI credits**. A new account's first small deposit does not trigger it |
+| **20 credits or less** | The premium models, marked with three dollar signs, are locked and tagged **Needs credits**. A chat on one moves to the mode's default model, with a note |
+| **Out of credits** | A popup with **Buy AI credits**. A reply cut off by the balance says "The last reply stopped because your AI credits ran out"; add credits, then press **Retry** to carry on from there |
+
+Before a big build, Build mode may warn that it can use more credits than you have left. Add credits first, or click **Continue anyway**.
 
 ### Top up
 
@@ -104,10 +117,10 @@ Credits are bought with stablecoins that are already in your OpenFinance wallet.
 
 <AccordionGroup>
   <Accordion title="The chat says I am out of credits. What now?">
-    Click **Buy AI credits** on the message and fund from your wallet. Your chat stays as it is, and you can retry the message afterward.
+    Click **Buy AI credits** on the popup and fund from your wallet. Your chat stays as it is; press **Retry** afterward to carry on from where the reply stopped.
   </Accordion>
   <Accordion title="My transfer went out but credits did not appear">
-    Solana deposits are picked up automatically within a few minutes. For other networks, keep the transaction hash the app shows and send it to support at dev@openfinance.tech so the credits can be applied.
+    Credits are usually added within a few minutes on every network. Open Fund AI credits again and expand **Recent deposits**: each payment shows whether it is credited, still being added, or not credited, and why. If one is not credited within the hour, email dev@openfinance.tech with the transaction ID the sheet shows. See [Buy with crypto](/funding/buy-credits-with-crypto).
   </Accordion>
   <Accordion title="Do credits pay for trades?">
     No. Credits pay for AI work only. Your trades use the funds in your wallet and on each venue; see [Deposit funds](/funding/deposit-funds).

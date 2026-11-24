@@ -19,13 +19,13 @@ People use it for things like a Telegram bot that tracks posts, a live crypto da
 
 <Steps>
   <Step title="Switch to Build">
-    Click **Build** in the toggle at the top of Chat. You can also type a build request in Chat mode and click **Switch to Build** on the hint, or pick a prompt from the **Build** starter tab.
+    Click **Build** in the toggle at the top of Chat. You can also type a build request in Chat mode and click **Switch to Build** on the hint, or pick an app from the **Build** starter tab.
   </Step>
   <Step title="Describe the app">
-    Say what it does, what data it shows, and how it should look. The message box reads "Describe what you want to build or fix…".
+    Say what it does, what data it shows, and how it should look. The message box reads "Describe what you want to build or fix…". If you picked a starter or a [Mainframe](/mainframe/overview) template, its brief is already in the box as a paste card. Builds spend AI credits, so nothing starts until you press Enter.
   </Step>
   <Step title="Watch the checklist">
-    A progress card tracks the build stage by stage: **Start the sandbox**, **Write the files**, **Install packages**, **Build the preview**, and **Write a summary**. A build error shows on its row while the agent fixes it.
+    A progress card tracks the build stage by stage: **Start the sandbox**, **Write the files**, **Install packages**, **Build the preview**, and **Write a summary**. A build error shows on its row while the agent fixes it. When the agent changes a file it already wrote, it edits only the lines that change, shown as "Editing" and the file's path.
   </Step>
   <Step title="Open the preview">
     When the build is done, the preview opens beside the chat by itself. It does not open midway, so you never look at a half-built app.
@@ -34,6 +34,12 @@ People use it for things like a Telegram bot that tracks posts, a live crypto da
     Keep chatting: "make the chart taller", "add a dark theme", "fix the error on the settings page". The agent updates the files and rebuilds.
   </Step>
 </Steps>
+
+## Long builds
+
+A big build can take several minutes, and you do not have to watch it. You can leave the page and come back; the build keeps going on the server and the result shows in the chat when it is done. Tick **Notify me when it's done** to get a browser notification, as long as the tab stays open.
+
+If the connection drops mid-build, the chat checks with the server before offering **Retry** or **Continue**. While the build is still running it shows "Still building on the server", keeps the steps already on screen and holds new messages, so you never start a second, double-billed build on top of the first. After about 20 minutes **Stop waiting** unlocks the chat.
 
 ## The preview panel
 
@@ -120,11 +126,14 @@ Build a one-page dashboard that shows Hyperliquid funding rates for the top 20 p
   <Accordion title="Can I see and copy the code?">
     Yes. Switch the preview panel to **Code** to browse the files, and use the copy button for the open file.
   </Accordion>
+  <Accordion title="Which model builds my app?">
+    Build mode starts on Claude Sonnet 5.5, a strong coding model. You can pick another coding model in the message box before you send. Some models that write code well in Chat are left out of Build because they do not use the build tools reliably.
+  </Accordion>
   <Accordion title="I started a build in Chat mode. Where is my app?">
     The reply shows an **Open in Build** card. Click it to see the code, the preview and the Build panel.
   </Accordion>
   <Accordion title="Is there a faster way to start?">
-    Yes. [Mainframe](/mainframe/overview) has ready-made templates that open in Build mode with one click.
+    Yes. [Mainframe](/mainframe/overview) has ready-made templates. Click **Deploy** on one and its brief lands in the Build message box; press Enter to start.
   </Accordion>
 </AccordionGroup>
 

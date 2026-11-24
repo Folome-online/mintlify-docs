@@ -32,11 +32,11 @@ Every new chat starts in Chat mode. If you type something that reads like a buil
 
 ## Starter tabs
 
-A new chat shows four tabs of ready-made prompts. Click one to send it.
+A new chat shows four tabs of ready-made prompts. Every pick starts a fresh chat, so nothing left in the message box goes with it.
 
-- **Trending**: what is moving markets today and what is coming up.
-- **Trading**: questions about specific stocks, crypto and perp funding.
-- **Build**: app ideas. Picking one switches to Build mode before it sends.
+- **Trending**: what is moving markets today and what is coming up. One click sends it.
+- **Trading**: questions about specific stocks, crypto and perp funding. One click sends it.
+- **Build**: four apps you can build from a [Mainframe](/mainframe/overview) template: Squiggly, an AI perp dex, Polymarket up/down markets and a SaaS website. A pick does not send on its own. It switches to Build mode and puts the template's brief in the message box as a paste card, and the build starts when you press Enter.
 - **Alchemy**: event questions. Picking one opens [Alchemy](/alchemy/overview) instead of the chat.
 
 ## The message box
@@ -47,7 +47,8 @@ Besides typing, the message box takes files, long pastes and your voice.
 - **Paste long text.** A long paste (roughly six lines or more) becomes a card above the box instead of a wall of text. Up to 5 pasted texts per message.
 - **Dictate.** In browsers that support speech recognition, a microphone button turns speech into text.
 - **Pick a model.** The model picker sits in the message box. See [Models and AI credits](/product/models-and-credits).
-- **Stop.** While a reply is being written, the send button becomes a stop button.
+- **Stop.** While a reply is being written, the send button becomes a stop button. Stop ends the reply on the server too, so nothing keeps running after you press it.
+- **Send while it works.** You can type the next message while a reply is still running. It waits and is read at the agent's next step. Edit the waiting message to add to it, or press Stop to send it right away.
 
 ## Confirming a trade
 
@@ -75,7 +76,15 @@ If a reply is cut off, the chat does not go quiet:
 - **Try again** appears when no reply came back.
 - **Retry** sits on every error message.
 
-A reply keeps being written on the server even if you close the tab. Reopen the chat and you see "Still writing this reply" until it lands. While a reply is streaming, sidebar links offer to open in a new tab so the reply keeps going.
+A reply keeps being written on the server even if you close the tab, reload the page or lose your connection. Reopen the chat, in this tab or another, and it picks the reply up where it is, with "Still writing this reply on the server" until it lands. If you would rather not wait, **Stop waiting** appears after a few minutes and unlocks the chat.
+
+A few other notes can appear above the message box:
+
+- **Not sent. Nothing was charged.** The message never reached the server, even after one automatic retry. Click **Retry** to send it again or **Remove** to drop it.
+- **Still working on the last reply.** You pressed Enter while a reply was running. Wait for it, or press Stop.
+- **Your balance is low.** Your AI credits are running low. It shows once per chat; see [Models and AI credits](/product/models-and-credits).
+
+Every reply also has a limit on how much it can spend and how many steps it can take. A reply that reaches one stops cleanly and says which limit it hit, with a summary of what it did. Ask a follow-up to carry on.
 
 ## Example prompts
 
@@ -102,6 +111,10 @@ What are the live prediction markets on the 2028 election? Show the odds and vol
 ```text
 Open a $50 long on ETH perps on Hyperliquid with 3x leverage. Show me the order before you place it.
 ```
+
+## Changing model mid-chat
+
+Picking a different model in a chat that already has messages asks **Start a new chat instead?** You can open a new chat on that model, or switch the model in the chat you are in.
 
 ## Tips
 

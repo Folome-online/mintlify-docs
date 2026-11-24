@@ -200,7 +200,8 @@
               {
                 "group": "Trading",
                 "pages": [
-                  "mainframe/templates/carry-bot"
+                  "mainframe/templates/carry-bot",
+                  "mainframe/templates/portfolio-risk-tool"
                 ]
               },
               {
@@ -217,6 +218,12 @@
                   "mainframe/templates/mainframe",
                   "mainframe/templates/orbis-nft",
                   "mainframe/templates/meadowbell"
+                ]
+              },
+              {
+                "group": "External tools",
+                "pages": [
+                  "mainframe/templates/the-monitor"
                 ]
               }
             ]

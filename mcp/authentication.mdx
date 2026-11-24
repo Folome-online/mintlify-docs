@@ -86,7 +86,7 @@ When a call is not authenticated, the response tells you what went wrong and how
 | Response | Meaning | Fix |
 | --- | --- | --- |
 | `401` with no key and no sign-in | Expected. The server points OAuth clients to the sign-in page | Sign in, or add the `x-api-key` header |
-| `401` with a key | The key is wrong or malformed | Copy it again from External AI and check that it starts with `open_` |
+| `401` with a key | The key is wrong, malformed, rotated or revoked | Copy the current key from External AI and check that it starts with `open_` |
 | `412` | You are signed in, but account setup is incomplete for this action | Open [openfinance.tech](https://openfinance.tech), finish setup, and follow the instructions in the error |
 
 A `401` applies to every tool, read-only ones included. If a guide elsewhere says market data works without a key, it is out of date.
@@ -106,6 +106,9 @@ A `401` applies to every tool, read-only ones included. If a guide elsewhere say
   </Accordion>
   <Accordion title="Does an API key limit what an agent can do?">
     Partly. A key acts as your account for trading, but it can't send funds to anyone else's address: the server refuses that, and outside transfers need the Wallet page and your authenticator code. Everything else is controlled by confirmations: the agent is instructed to ask before every write, and your client can ask for tool approval. See [Safety and custody](/reference/safety-and-custody).
+  </Accordion>
+  <Accordion title="How do I replace or switch off my key?">
+    Sign in at [openfinance.tech](https://openfinance.tech) and open External AI. **Rotate key** issues a new key and stops the old one at once; clients that signed in with OAuth move to the new key and keep working, while anything with the old key pasted into a header needs the new one. **Revoke** stops the key and disconnects every OAuth client. Calls with a rotated or revoked key return `401`. See [External AI](/product/external-ai).
   </Accordion>
   <Accordion title="The sign-in page says there is no API key on my account">
     Open [openfinance.tech](https://openfinance.tech) once while signed in so the key is created, then retry.

@@ -34,9 +34,13 @@ Not funded yet? [Deposit](/funding/deposit-funds) to your EVM address for Base o
     Type the dollar amount. Below it you see roughly how many credits it buys, and the **From your wallet** line shows the address it is paid from.
   </Step>
   <Step title="Fund">
-    Click **Fund** and approve in your wallet. The sheet shows **Adding your credits** while the network confirms; your balance updates in a moment.
+    Click **Fund** and approve in your wallet. One status box then follows the payment, with a short transaction ID, a copy button and a link to the block explorer. It reads **Adding your credits** while the network confirms, and your balance updates in a few minutes at most.
   </Step>
 </Steps>
+
+<Note>
+Credits are added only for payments sent from your own OpenFinance wallet through this sheet. A transfer from an exchange or another wallet to the same address is not credited automatically.
+</Note>
 
 <Frame caption="The Fund AI credits sheet">
   <img src="/images/screens/fund-ai-credits.png" alt="Fund AI credits sheet with the available credits, a network switch for Solana, Base and Robinhood, an amount field with the estimated credits, the token menu, the From address and the Fund button" />
@@ -55,10 +59,22 @@ The Fund button tells you what is missing instead of failing silently:
 | **Enter an amount** | Type how much you want to spend. |
 | **Minimum is ...** | Raise the amount to at least the minimum shown. |
 | **Not enough USDC** (or USDT, USDG) | Deposit more of that coin, or pick another coin or network. |
-| **Add SOL (or ETH) for the network fee** | Send a small amount of the gas token to that network. |
+| **Add SOL to pay gas** (or **Add ETH to pay gas**) | Your wallet has none of that network's gas coin. Send a little to it, then come back. |
 | **Set up your ... wallet first** | Finish setting up your account so the wallet for that network exists. |
 
-If a payment is sent but the credits have not shown up after a minute or two, keep the transaction hash the sheet shows and email [dev@openfinance.tech](mailto:dev@openfinance.tech).
+If the sheet says **Deposits are paused for now**, nothing can be sent until they are back. Try again later.
+
+## Recent deposits
+
+Under the form, **Recent deposits** keeps track of what you have paid. It starts folded into one row with a count, and a payment that is still in progress or was not credited shows as a tag on that row, so you never miss it. Click the row to see each deposit, when it was made and its status.
+
+| Status | What it means |
+| - | - |
+| **Credited** | The credits are in your balance. |
+| **Being added** or **Processing** | The payment arrived and is being added. It usually settles by itself. |
+| **Not credited** | It could not be credited automatically. The row says why, for example that it was below the minimum or did not come from your wallet. |
+
+If a payment is not credited within the hour, email [dev@openfinance.tech](mailto:dev@openfinance.tech) with the transaction ID the sheet shows.
 
 ## Next
 

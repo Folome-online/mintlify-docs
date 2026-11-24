@@ -1,6 +1,6 @@
 ---
 title: 'Settings and account'
-description: 'Everything about your account, from credits and billing to connected apps and exported keys, is a click or two away. Here is where each control lives.'
+description: 'Everything about your account, from credits and two-factor to connected apps and exported keys, is a click or two away. Here is where each control lives.'
 ---
 
 There are three ways in: the **Deposit** panel in the top bar, the account row at the bottom of the sidebar, and the **Settings** window. Before the tour, it helps to know what one account covers.
@@ -35,22 +35,48 @@ The avatar at the far right of the top bar has a shorter menu: **Purchase OpenFi
 
 ## The Settings window
 
-Settings opens as a window over the page you are on, with a search box and six sections.
+Settings opens as a window over the page you are on, with a search box and seven sections.
 
-<Frame caption="Settings, with its six sections on the left">
+<Frame caption="Settings, with its sections on the left">
   <img src="/images/screens/settings-window.png" alt="Settings window listing General, Billing, Integrations, MCP Servers, Free Subscription and Export Keys on the left, with the General profile section open" />
 </Frame>
 
 | Section | What is there |
 | --- | --- |
 | **General** | Your profile: avatar, name and the email you signed in with, with a copy button |
+| **Security** | **Two-factor authentication** with an authenticator app, with **Set up** or **Turn off** |
 | **Billing** | Your plan and the ways to pay. **Stablecoin** has a **Fund it** button that opens Fund AI credits; **Credit / Debit card** is marked Coming soon |
 | **Integrations** | GitHub and Vercel, with **Connect**, **Reconnect** and **Disconnect** |
 | **MCP Servers** | Brokerage and data connectors, with a search box and Connect and Disconnect per server |
 | **Free Subscription** | The **Free Compute** reward card |
-| **Export Keys** | **Export EVM Key** and **Export Solana Key** for your embedded wallet |
+| **Export Keys** | **Export EVM Key** and **Export Solana Key** for your embedded wallet. Needs two-factor to be on |
 
 Integrations and MCP Servers show the same connections as the [Connectors](/product/connectors) page, so use whichever is closer to hand.
+
+## Two-factor authentication
+
+Two-factor adds a code from an authenticator app, such as Google Authenticator, 1Password or Authy, to the actions that move money out of your control. Once it is on, you need a fresh code to:
+
+- **Send funds to an address that is not yours**, from the [Wallet](/product/wallet) page.
+- **Export your wallet keys**, from **Export Keys**.
+
+Without two-factor, both stay blocked. Signing in still uses your email code, and chat and API-key trading work as before: they can only move funds between your own wallets anyway.
+
+<Steps>
+  <Step title="Open Security">
+    Open **Settings** and click **Security**. The **Two-factor authentication** card says whether it is on.
+  </Step>
+  <Step title="Set up">
+    Click **Set up**. Scan the QR code with your authenticator app.
+  </Step>
+  <Step title="Enter the first code">
+    Type the six-digit code the app shows. The card switches to on.
+  </Step>
+</Steps>
+
+<Warning>
+Use an authenticator app that backs up its codes, so a lost phone does not lock you out of sending and exporting. Turning two-factor off asks you to confirm first, because it leaves sends and exports blocked until you turn it back on.
+</Warning>
 
 ## Common tasks
 
@@ -64,13 +90,13 @@ If you came here to do one thing, it is probably one of these.
     Go to **Settings > Integrations**. Disconnecting here forgets the connection on the OpenFinance side; to fully revoke access, also remove it in GitHub or Vercel.
   </Accordion>
   <Accordion title="Export my wallet keys">
-    Go to **Settings > Export Keys**. All EVM chains share one key and Solana has its own. Anyone with these keys can move everything in the wallet, so never paste them into a chat, an email or a site you do not fully trust.
+    Turn on two-factor under **Settings > Security** first, then go to **Settings > Export Keys**. All EVM chains share one key and Solana has its own. Anyone with these keys can move everything in the wallet, so never paste them into a chat, an email or a site you do not fully trust.
   </Accordion>
   <Accordion title="Check my Free Compute progress">
     Go to **Settings > Free Subscription**. The card shows this month's perpetuals volume against the threshold, the reward, and the date it resets.
   </Accordion>
-  <Accordion title="Find my API key">
-    It is not in Settings. Open [External AI](/product/external-ai) in the sidebar.
+  <Accordion title="Find, rotate or revoke my API key">
+    It is not in Settings. Open [External AI](/product/external-ai) in the sidebar, where you can also rotate or revoke it.
   </Accordion>
   <Accordion title="Get help">
     Click your name at the bottom of the sidebar, then **Help & feedback > Contact support**. You can also reach OpenFinance on X at [@openfinancelabs](https://x.com/openfinancelabs).

@@ -39,6 +39,19 @@ The page has two parts: one that walks you through your tool, and one that holds
 
 Your key is created automatically when you first sign in. There is one key per account, and it is the same key the in-app chat uses.
 
+## Rotate or revoke your key
+
+Two buttons next to the key let you replace it or switch it off. Both ask you to confirm first and take effect at once.
+
+| Button | What happens | What keeps working |
+| --- | --- | --- |
+| **Rotate key** | A new key is issued and the old one stops working immediately | Apps you connected by signing in, such as Claude.ai, ChatGPT and Cursor. Scripts, config files (for example Claude Desktop) and apps you built with the old key need the new one |
+| **Revoke** | The key stops working immediately, and every AI app you connected to OpenFinance is disconnected | Chat on openfinance.tech. The key field then reads **Key revoked** |
+
+After a revoke, **Create new key** turns a fresh key on. Apps you connected before the revoke need to be connected again.
+
+Use **Rotate key** if you think the key leaked, and **Revoke** if you want every outside connection cut right away. Both work only while you are signed in to the website, so a leaked key cannot rotate itself and lock you out.
+
 ## Connect a tool
 
 <Steps>
@@ -73,6 +86,7 @@ You only see it once per account in that browser. If you have not accepted the w
 - Anyone with your key can trade on your behalf. Treat it like a password.
 - Do not commit it to a repository or paste it into shared chats. The setup snippets on this page contain your full key, so keep them out of screenshots and screen shares.
 - Prefer OAuth sign-in where the tool supports it, so the key never leaves OpenFinance.
+- If the key may have leaked, click **Rotate key** straight away.
 - When a tool lets you, store the key in an environment variable instead of a config file.
 
 ## Example prompts
