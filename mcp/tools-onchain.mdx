@@ -35,7 +35,7 @@ These four tools only read data and never move funds.
 
 ## Write tools
 
-Each of these moves funds. Show the user a summary and get a yes before calling. Every trade needs the user's confirmation, and nothing here is financial advice.
+Each of these moves funds. Show the user a summary and wait for them to reply "confirm" before calling. Every trade needs the user's confirmation, and nothing here is financial advice.
 
 | Tool | What it does |
 | --- | --- |
@@ -100,7 +100,7 @@ Before any swap where the user named a token by symbol:
     If the market cap or liquidity is low, or the one-day move is large, say so plainly before asking for confirmation.
   </Step>
   <Step title="Confirm">
-    Show input, estimated output, price impact, slippage and route. Execute only after a yes.
+    Show input, estimated output, price impact, slippage and route. Execute only after the user replies "confirm".
   </Step>
 </Steps>
 

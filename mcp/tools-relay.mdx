@@ -65,7 +65,7 @@ Solana uses a Relay-specific id here, not the word `solana` that the onchain too
 </Warning>
 
 - **Every bridge and swap needs the user's confirmation,** and nothing here is financial advice.
-- **Quote first, then confirm.** Show the origin chain, token and amount, the destination chain, token and expected amount, and the route. Call `relay_execute` only after a yes.
+- **Quote first, then confirm.** Show the origin chain, token and amount, the destination chain, token and expected amount, and the route. Call `relay_execute` only after the user replies "confirm".
 - **Requote on any change.** Quotes expire.
 - **Named tokens need checking.** If the user named a token by symbol, resolve it with `onchain_search_tokens` scoped to the destination chain, show a chart link with market cap, liquidity and volume, and warn if the token is thin or volatile.
 - **Solana to Solana is not a Relay route.** Use the Jupiter tools on the [Onchain tools](/mcp/tools-onchain) page.

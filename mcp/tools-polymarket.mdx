@@ -16,7 +16,7 @@ For what the venue is and how the deposit wallet works, read [Polymarket](/marke
 
 ## Actions
 
-Actions marked **write** place orders or move funds. Show the user a summary and get a yes before calling them. Every trade needs the user's confirmation, and nothing here is financial advice.
+Actions marked **write** place orders or move funds. Show the user a summary and wait for them to reply "confirm" before calling them. Every trade needs the user's confirmation, and nothing here is financial advice.
 
 ### Discovery
 
@@ -102,7 +102,7 @@ The user's Polymarket address is the deposit wallet, not the main wallet address
     `get_deposit_wallet`. Fund the deposit wallet with pUSD if needed.
   </Step>
   <Step title="Trade">
-    Show the market, outcome, side, price, size and value. After a yes, call `place_order` or `place_market_order`.
+    Show the market, outcome, side, price, size and value. After the user replies "confirm", call `place_order` or `place_market_order`.
   </Step>
   <Step title="Cash out">
     `redeem_all`, then `wrap_collateral` if USDC.e arrived, then `withdraw_and_bridge`.

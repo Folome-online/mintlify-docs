@@ -3,7 +3,7 @@ title: 'Safety and Custody'
 description: 'Before you let an AI trade for you, it helps to know who holds the money, what has to happen before anything is sent, and how to keep your keys out of reach.'
 ---
 
-OpenFinance lets an AI place real orders and move funds between your own wallets, so the design keeps the important decisions with you. The wallet is yours, nothing is sent until you say yes, an agent can't send your money to anyone else, and you decide where your keys go. The sections below take each of those in turn, starting with the money itself.
+OpenFinance lets an AI place real orders and move funds between your own wallets, so the design keeps the important decisions with you. The wallet is yours, nothing is sent until you confirm, an agent can't send your money to anyone else, and you decide where your keys go. The sections below take each of those in turn, starting with the money itself.
 
 ## Who holds your funds
 
@@ -17,19 +17,19 @@ Funds you deposit to a venue sit at that venue under your account: USDC on Hyper
 
 ## Confirmation before every action
 
-Every trade needs your confirmation. So does every transfer, bridge, withdrawal and token launch.
+The AI agent confirms every order and action with you before it acts: trades, transfers, bridges, withdrawals and token launches. We recommend you always keep this step and use it.
 
 <Tabs>
   <Tab title="In the OpenFinance app">
-    When the agent wants to run an action that can move funds or place an order, the chat pauses and shows a **Confirm this action** card with the details. Choose **Approve & run** or **Deny**. Nothing is sent until you approve.
+    Before an action that can move funds or place an order, the agent shows you a summary with the details and waits for you to reply **confirm**. Nothing is placed until you confirm.
   </Tab>
   <Tab title="From your own AI agent">
-    Each write tool tells the agent to show you a summary (what, how much, where) and wait for your explicit yes in the current conversation. Your AI client can add a second check by asking you to approve each tool call. Keep that on, and do not add OpenFinance tools to an auto-approve list.
+    OpenFinance tells your agent to show you a summary (what, how much, where) and wait for you to reply "confirm" in the current conversation. Your AI client can add a second check by asking you to approve each tool call. Keep that on, and do not add OpenFinance tools to an auto-approve list.
   </Tab>
 </Tabs>
 
 <Warning>
-Whether an outside agent follows its instructions depends on the model and the client. Stay in the loop for anything that moves money, and read the summary before you say yes. Onchain transactions cannot be reversed.
+Whether an outside agent follows its instructions depends on the model and the client. Stay in the loop for anything that moves money, and read the summary before you reply "confirm". Onchain transactions cannot be reversed.
 </Warning>
 
 ## Where money can go
@@ -84,7 +84,7 @@ Trading crypto, perps, prediction markets and new tokens carries a high risk of 
 
 <AccordionGroup>
   <Accordion title="Can my agent trade without asking me?">
-    It is instructed not to. Every write tool asks for confirmation, and in the app the chat stops on a confirmation card. With an outside client, keep its tool-approval prompts on as a second check.
+    No. The AI agent confirms every order and action with you before it acts: it shows a summary and waits for you to reply "confirm". With an outside client, also keep its tool-approval prompts on as a second check.
   </Accordion>
   <Accordion title="Can my agent send money to someone else?">
     No. An agent or API key can only move funds between your own wallets, and the server refuses any other address. To send to another person, use the [Wallet](/product/wallet) page with a code from your authenticator app.

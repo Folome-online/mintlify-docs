@@ -46,7 +46,7 @@ sequenceDiagram
 1. Your client connects and authenticates as your OpenFinance account.
 2. The model reads the tool list. Each tool description tells the model which action to pick, what to check first and when to ask you.
 3. Read calls fetch prices, balances and positions.
-4. Before a write call, the agent shows you a summary and waits for your yes. Your client may also ask you to approve the tool call.
+4. Before a write call, the agent shows you a summary and waits for you to reply "confirm". Your client may also ask you to approve the tool call.
 5. OpenFinance signs the action with your embedded wallet and sends it to the venue.
 
 Every trade needs your confirmation. Nothing here is financial advice.
