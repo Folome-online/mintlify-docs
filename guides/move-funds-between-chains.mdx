@@ -39,7 +39,7 @@ A bridge moves value from one blockchain to another. OpenFinance routes bridges 
 
     - **The destination is your own wallet.** Bridges from an agent can only go to your own addresses; the server refuses anything else.
     - **The amount that arrives** is what your trade needs.
-    - **The token on arrival** is the one the venue accepts, for example USDC on Arbitrum for Hyperliquid.
+    - **The token on arrival** is the one the venue accepts, for example pUSD on Polygon for Polymarket. For Hyperliquid, ask for the move into Hyperliquid itself.
   </Step>
   <Step title="Confirm the bridge (moves money)">
     Reply **confirm**, or ask for a fresh quote if you waited a while or changed the amount. Quotes expire.
@@ -54,10 +54,10 @@ A bridge moves value from one blockchain to another. OpenFinance routes bridges 
     A transfer ends as **success**, **refunded** or **failure**. While it is in progress you may see waiting, pending or submitted.
   </Step>
   <Step title="Continue to the trade (moves money)">
-    Bridging and depositing can be chained, with a confirmation at each step:
+    For Hyperliquid you don't need a separate bridge first: the agent moves USDC into Hyperliquid in one step from most chains.
 
     ```text
-    Now deposit the USDC that arrived on Arbitrum to my Hyperliquid account.
+    Move the USDC that arrived into my Hyperliquid account. Quote first.
     ```
   </Step>
 </Steps>
@@ -70,7 +70,7 @@ Most trips follow one of a few patterns, and you can paste the Ask column as it 
 
 | You have | You need | Ask |
 | --- | --- | --- |
-| USDC on Base or Polygon | Hyperliquid | "Bridge my USDC to Arbitrum, then deposit it to Hyperliquid." |
+| USDC on Base or Polygon | Hyperliquid | "Move my USDC on Base into Hyperliquid. Quote first." |
 | USDC on Solana | An EVM chain | "Move 50 USDC from Solana to Base. Quote first." |
 | ETH on Arbitrum | SOL for Solana swaps | "Swap 0.05 ETH on Arbitrum for SOL on Solana. Quote first." |
 | ETH on Base | USDC on Base | "Swap 0.05 ETH for USDC on Base." |

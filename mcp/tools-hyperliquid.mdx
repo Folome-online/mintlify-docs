@@ -38,7 +38,7 @@ Actions marked **write** place orders, move funds or change account settings. Sh
 | --- | --- |
 | `get_account_summary` | Positions on the main dex and every HIP-3 dex, spot balances and account mode, in one call. `view: 'all'` returns the equity curve over time instead |
 | `get_batch_portfolio_states` | The same snapshot for a list of other addresses |
-| `get_deposit_address` | The address on Arbitrum that funds this account with USDC |
+| `get_deposit_address` | The user's own OpenFinance wallet address (the same on every EVM chain). Not a bridge: USDC sent to it on Arbitrum stays in the wallet until moved in with Relay to chain `1337`. Only a transfer from another Hyperliquid account lands on Hyperliquid directly. |
 | `get_user_fills` | Recent fills, optionally by time range |
 | `get_user_funding_history` | Funding payments |
 | `get_rate_limit` | Current rate-limit window |
