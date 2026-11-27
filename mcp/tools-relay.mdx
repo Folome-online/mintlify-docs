@@ -86,7 +86,7 @@ Solana uses a Relay-specific id here, not the word `solana` that the onchain too
 
 - On a route that touches Solana, the gas top-up on the destination chain is switched off. Make sure the user holds native coin there.
 - A `412` on a route that starts on Solana means the user's Solana wallet is not yet enabled for agent trading.
-- To fund Hyperliquid from another chain, bridge USDC to Arbitrum (`42161`), then send it to the address from the `hyperliquid` action `get_deposit_address`.
+- To fund Hyperliquid, call `relay_get_quote` then `relay_execute` with `destinationChainId` `1337` and `destinationCurrency` `0x00000000000000000000000000000000` (Perps USDC, 32 zeros), leaving `recipient` empty so it lands in the user's own Hyperliquid account. Pass `usePermit: true` when the wallet has no gas token on an EVM origin chain. Never send USDC to the `get_deposit_address` address expecting a deposit: it is the user's own wallet, and the USDC stays there.
 - If a quote fails, the pair may have no route. Try USDC or the native coin as the destination.
 
 ## Next

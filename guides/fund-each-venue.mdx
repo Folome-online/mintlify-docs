@@ -14,7 +14,7 @@ Here is the balance each kind of trade draws from, and what to send there:
 
 | You want to trade | It trades from | Send this | Where |
 | --- | --- | --- | --- |
-| Hyperliquid perps, spot, stock perps, outcome markets | Your Hyperliquid account | USDC on Arbitrum only | Your Hyperliquid deposit address |
+| Hyperliquid perps, spot, stock perps, outcome markets | Your Hyperliquid account | USDC only (on Arbitrum, Base, Polygon, Ethereum, BNB Chain or Solana) | Your OpenFinance address, then the agent moves it into Hyperliquid |
 | Polymarket | Your Polymarket deposit wallet | pUSD on Polygon only | Your Polymarket deposit address |
 | Solana tokens | Your Solana address | SOL or the token you pay with | Your Solana address |
 | EVM tokens on Ethereum, Base and others | Your EVM address on that chain | The token you pay with, plus gas | Your EVM address |
@@ -25,7 +25,7 @@ You also need a little of each chain's native coin (ETH, SOL and so on) for gas 
 flowchart LR
   A[Card or bank] --> W[Your wallet]
   B[Another wallet or exchange] --> W
-  W -->|USDC on Arbitrum| H[Hyperliquid]
+  W -->|USDC, moved in by the agent| H[Hyperliquid]
   W -->|pUSD on Polygon| P[Polymarket]
   W -->|same chain| S[Onchain swaps]
 ```
@@ -50,11 +50,9 @@ flowchart LR
     </Frame>
   </Step>
   <Step title="Get the right address">
-    Ask for the address of the venue you want, never reuse one from memory:
+    For Hyperliquid, the address is your own OpenFinance EVM address (the **EVM** tab in Deposit). USDC sent there stays in your wallet until the agent moves it in, which is the last step below.
 
-    ```text
-    What is my Hyperliquid deposit address, and which token and network does it accept?
-    ```
+    For Polymarket, ask for its deposit address, never reuse one from memory:
 
     ```text
     What is my Polymarket deposit address?
@@ -93,14 +91,9 @@ Onramp.money handles INR through UPI, IMPS and bank transfer, and supports a fix
     Give me a link to buy 5000 rupees of USDC on Polygon with UPI.
     ```
   </Step>
-  <Step title="Bridge to Arbitrum (moves money)">
+  <Step title="Move it into Hyperliquid (moves money)">
     ```text
-    Bridge all my USDC on Polygon to Arbitrum. Show the quote first.
-    ```
-  </Step>
-  <Step title="Deposit to Hyperliquid (moves money)">
-    ```text
-    Deposit that USDC to my Hyperliquid account.
+    Move all my USDC on Polygon into my Hyperliquid account. Show the quote first.
     ```
   </Step>
 </Steps>
@@ -119,7 +112,8 @@ Hyperliquid should show one USDC figure. Polymarket should show pUSD that is rea
 
 ## Common mistakes
 
-- **USDT or USDC.e to Hyperliquid.** Hyperliquid accepts USDC only, deposited from Arbitrum.
+- **USDT or USDC.e to Hyperliquid.** Hyperliquid accepts USDC only, and the agent moves it in from your wallet.
+- **Expecting USDC on Arbitrum to show on Hyperliquid by itself.** It stays in your wallet until the agent moves it in.
 - **pUSD to your main wallet address.** It is not tradeable on Polymarket until it is moved to the deposit wallet.
 - **No gas on the chain you swap or bridge from.** Keep a little native coin there.
 - **Expecting the onramp to fund a venue directly.** It delivers to your wallet. Depositing is a second step.

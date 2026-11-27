@@ -17,14 +17,14 @@ As on every venue, each order needs your confirmation before it is sent, and not
 
 ## Before you trade
 
-Hyperliquid accepts **USDC only**, not USDT and not USDC.e, so funding comes down to getting USDC onto Arbitrum and depositing it.
+Hyperliquid accepts **USDC only**, not USDT and not USDC.e. Funding means getting USDC **into** your Hyperliquid account, not just onto Arbitrum.
 
 <Steps>
-  <Step title="Get USDC on Arbitrum">
-    Deposits come from Arbitrum. If your USDC is on another chain, [bridge it](/markets/bridge-and-swap). If you have no crypto yet, [buy some with a card or bank](/markets/fund-with-card-or-bank).
+  <Step title="Get USDC into your wallet">
+    Have USDC in your OpenFinance wallet, on Arbitrum or another supported chain. The agent moves it in from there. If you have no crypto yet, [buy some with a card or bank](/markets/fund-with-card-or-bank).
   </Step>
   <Step title="Deposit to Hyperliquid">
-    Ask for your Hyperliquid deposit address and send USDC on Arbitrum to it. The address lives on Arbitrum. Your Hyperliquid balance is credited within minutes.
+    Ask the agent to move it in, for example "Move 50 USDC from my Arbitrum wallet into Hyperliquid." It shows a summary first, works even if you have no ETH for gas (Relay then takes a small fee from the amount), and usually lands within a few minutes. From another Hyperliquid trading account (not HyperEVM), send USDC straight to your OpenFinance address instead; it arrives at once.
   </Step>
   <Step title="Check your balance">
     Ask "what is my Hyperliquid balance?". You should get one USDC figure, plus any other tokens and open positions.
@@ -36,7 +36,7 @@ Hyperliquid can treat your spot USDC and perp USDC as one pool, called a unified
 </Note>
 
 <Warning>
-Send only USDC, and only on Arbitrum, to your Hyperliquid deposit address. Hyperliquid does not accept other tokens or other networks.
+Hyperliquid accepts USDC only. Your OpenFinance address is your own wallet, not a bridge: USDC sent to it on Arbitrum stays in your wallet until the agent moves it into Hyperliquid. Don't use HyperEVM for trading funds.
 </Warning>
 
 ## Ask in the app
@@ -92,7 +92,7 @@ From your own agent, the same trades go through the `hyperliquid` tool, where yo
     Yes. Ask "what is wallet 0x... holding on Hyperliquid?". Account reads work for any address, and you can compare several wallets in one request.
   </Accordion>
   <Accordion title="My balance shows zero but I deposited">
-    Check that you sent USDC from Arbitrum to the Hyperliquid deposit address, then ask for the full balance again. Spot and perp USDC are reported as one figure.
+    If you sent USDC on Arbitrum, it is in your wallet, not on Hyperliquid yet. Ask the agent to move it into Hyperliquid, then ask for the full balance again. Spot and perp USDC are reported as one figure.
   </Accordion>
   <Accordion title="Can I trade options on Hyperliquid here?">
     No. Options go through your own broker account. See [Options](/markets/options).

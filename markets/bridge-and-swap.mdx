@@ -15,7 +15,7 @@ Relay does three related jobs:
 | Cross-chain swap | ETH on Arbitrum to SOL on Solana |
 | Same-chain swap on an EVM chain | ETH to USDC on Base |
 
-It covers a wide set of EVM chains plus Solana and Bitcoin. You will use it most often to get funds to where a venue needs them: USDC to Arbitrum for [Hyperliquid](/markets/hyperliquid), or funds to Polygon for [Polymarket](/markets/polymarket).
+It covers a wide set of EVM chains plus Solana and Bitcoin. You will use it most often to get funds to where a venue needs them: USDC into [Hyperliquid](/markets/hyperliquid), or funds to Polygon for [Polymarket](/markets/polymarket).
 
 Two cases do not use Relay. A swap between two Solana tokens goes through Jupiter, and a plain send on one chain with no token change is a normal transfer. Both are covered in [Onchain tokens](/markets/onchain-tokens). The agent picks the route for you.
 
@@ -71,7 +71,7 @@ Your own agent uses three tools: `relay_get_quote` (read only), `relay_execute` 
 
 <AccordionGroup>
   <Accordion title="How do I get funds onto Hyperliquid from another chain?">
-    Bridge USDC to Arbitrum, then send it to your Hyperliquid deposit address. You can ask for both in one sentence and confirm each step.
+    Ask the agent to move your USDC into Hyperliquid. It goes straight in from Arbitrum, Base, Polygon, Ethereum, BNB Chain or Solana. From the EVM chains it works even if you have no gas token there; from Solana you need a little SOL for fees. You confirm a summary first.
   </Accordion>
   <Accordion title="My bridge says refunded. Did I lose money?">
     Refunded means the route could not complete and the funds were returned. Ask for the status to see the details, then request a new quote.
